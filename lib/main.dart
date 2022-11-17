@@ -98,6 +98,21 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
+            TextButton(
+                onPressed: () {},
+                child: Text(
+                  "MY TEXT BUTTON",
+                  style: TextStyle(fontSize: 24),
+                )),
+
+            /* Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TrainingDetails(
+                    myInfos: myTraining,
+                    myInfosIndex: trainings.values.toList().indexOf(myTraining),
+                  ),
+                )); */
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
