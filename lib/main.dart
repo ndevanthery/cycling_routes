@@ -1,7 +1,7 @@
-
 import 'package:cycling_routes/Screens/wrapper.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:cycling_routes/Shared/components/loading.dart';
+import 'package:cycling_routes/themes/customTheme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,7 +11,7 @@ import 'Models/user_m.dart';
 import 'Shared/firebase_options.dart';
 
 void main() {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -49,7 +49,9 @@ class MyApp extends StatelessWidget {
           return StreamProvider<UserM?>.value(
             value: AuthService().user,
             initialData: null,
-            child: const MaterialApp(
+            child: MaterialApp(
+              theme: CustomTheme(),
+              darkTheme: CustomNightTheme(),
               debugShowCheckedModeBanner: false,
               home: Wrapper(),
             ),
@@ -62,7 +64,6 @@ class MyApp extends StatelessWidget {
             ),
           );
         }
-
       }),
     );
   }

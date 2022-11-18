@@ -3,14 +3,14 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-class MapView extends StatefulWidget {
-  const MapView({Key? key}) : super(key: key);
+class MapPage extends StatefulWidget {
+  const MapPage({Key? key}) : super(key: key);
 
   @override
-  State<MapView> createState() => _MapViewState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _MapViewState extends State<MapView> {
+class _MapPageState extends State<MapPage> {
   Position? _position;
 
   void _getCurrentLocation() async {
@@ -52,69 +52,66 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("map display"),
-        ),
         body: FlutterMap(
-          options: MapOptions(
-              minZoom: 7,
-              maxZoom: 18,
-              zoom: 8,
-              center: LatLng(46.5480234, 6.4022017),
-              maxBounds: LatLngBounds(
-                  LatLng(45.398181, 5.140242), LatLng(48.230651, 11.47757))),
-          layers: [
-            TileLayerOptions(
-              urlTemplate:
-                  'https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg',
-            ),
-            PolylineLayerOptions(
-              polylines: [
-                Polyline(
-                  strokeWidth: 3,
-                  color: Colors.black,
-                  points: [
-                    LatLng(46.3808464, 6.8059153),
-                    LatLng(46.4174536, 7.1895558),
-                    LatLng(46.1855684, 7.3205926),
-                  ],
-                ),
+      options: MapOptions(
+          minZoom: 7,
+          maxZoom: 18,
+          zoom: 8,
+          center: LatLng(46.5480234, 6.4022017),
+          maxBounds: LatLngBounds(
+              LatLng(45.398181, 5.140242), LatLng(48.230651, 11.47757))),
+      layers: [
+        TileLayerOptions(
+          urlTemplate:
+              'https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg',
+        ),
+        PolylineLayerOptions(
+          polylines: [
+            Polyline(
+              strokeWidth: 3,
+              color: Colors.black,
+              points: [
+                LatLng(46.3808464, 6.8059153),
+                LatLng(46.4174536, 7.1895558),
+                LatLng(46.1855684, 7.3205926),
               ],
             ),
-            MarkerLayerOptions(markers: [
-              //retrieve user position (if he accepts to give it) and display a bike on the map
-              Marker(
-                point: LatLng(_position == null ? 0 : _position!.latitude,
-                    _position == null ? 0 : _position!.longitude),
-                width: 80,
-                height: 80,
-                builder: (context) => Icon(
-                  Icons.place,
-                  color: Colors.red,
-                ),
-              ),
-
-              //canvas/attempt to make start/end point
-              Marker(
-                point: LatLng(46.3808464, 6.8059153),
-                width: 80,
-                height: 80,
-                builder: (context) => Icon(Icons.directions_bike),
-              ),
-
-              Marker(
-                point: LatLng(46.1855684, 7.3205926),
-                width: 80,
-                height: 80,
-                builder: (context) => Icon(
-                  Icons.flag,
-                  color: Colors.green,
-                ),
-              ),
-            ]),
-
-            // canvas/attempt to make a route
           ],
-        ));
+        ),
+        MarkerLayerOptions(markers: [
+          //retrieve user position (if he accepts to give it) and display a bike on the map
+          Marker(
+            point: LatLng(_position == null ? 0 : _position!.latitude,
+                _position == null ? 0 : _position!.longitude),
+            width: 80,
+            height: 80,
+            builder: (context) => Icon(
+              Icons.place,
+              color: Colors.red,
+            ),
+          ),
+
+          //canvas/attempt to make start/end point
+          Marker(
+            point: LatLng(46.3808464, 6.8059153),
+            width: 80,
+            height: 80,
+            builder: (context) => Icon(Icons.directions_bike),
+          ),
+
+          Marker(
+            point: LatLng(46.1855684, 7.3205926),
+            width: 80,
+            height: 80,
+            builder: (context) => Icon(
+              Icons.flag,
+              color: Colors.green,
+            ),
+          ),
+        ]),
+
+        // canvas/attempt to make a route
+      ],
+    ));
   }
 }
