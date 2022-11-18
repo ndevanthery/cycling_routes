@@ -2,18 +2,19 @@ import 'package:cycling_routes/Services/auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-   Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.yellow[100],
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        automaticallyImplyLeading :false,
+        backgroundColor: Colors.yellow[100],
         elevation: 0.0,
-        title: const Text('RideOn'),
+        title: const Text('RideOn', style: TextStyle(color: Colors.black),),
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () async {
@@ -24,7 +25,6 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      
     );
   }
 }

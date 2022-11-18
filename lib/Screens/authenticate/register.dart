@@ -5,9 +5,7 @@ import '../../Shared/components/loading.dart';
 import '../../Shared/constants.dart';
 
 class Register extends StatefulWidget {
-  final Function toggleView;
-
-  const Register({Key? key, required this.toggleView}) : super(key: key);
+  const Register({Key? key}) : super(key: key);
   @override
   State<Register> createState() => _RegisterState();
 }
@@ -26,90 +24,92 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return isLoading
         ? const Loading()
-        : Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0.0,
-              title: const Text('Register'),
-              actions: <Widget>[
-                FlatButton.icon(
-                  onPressed: () async {
-                    widget.toggleView();
-                  },
-                  icon: const Icon(Icons.person),
-                  label: const Text('Sign In'),
-                )
-              ],
+        : Stack(children: <Widget>[
+            Image.asset(
+              "assets/img/bkg_signin.jpg",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
             ),
-            body: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      decoration: textInputDecoration.copyWith(
-                        hintText: 'Email',
+            Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+                title: const Text('Register'),
+              ),
+              body: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 20.0,
                       ),
-                      validator: (value) =>
-                          value == '' ? 'Enter an Email' : null,
-                      onChanged: (value) {
-                        setState(() => email = value);
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      decoration: textInputDecoration.copyWith(
-                        hintText: 'Password',
-                      ),
-                      validator: (value) => value!.length < 6
-                          ? 'Enter a 6+ chars password'
-                          : null,
-                      obscureText: true,
-                      onChanged: ((value) {
-                        setState(() => pwd = value);
-                      }),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    RaisedButton(
-                        color: Colors.amberAccent,
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(color: Colors.white),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                          hintText: 'Email',
                         ),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() => isLoading = true);
-
-                            dynamic res =
-                                await _auth.registerWithEmail(email, pwd);
-                            if (res == null) {
-                              setState(() {
-                                error =
-                                    'Please check information entered and try again';
-                                isLoading = false;
-                              });
-                            }
-                          }
+                        validator: (value) =>
+                            value == '' ? 'Enter an Email' : null,
+                        onChanged: (value) {
+                          setState(() => email = value);
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                          hintText: 'Password',
+                        ),
+                        validator: (value) => value!.length < 6
+                            ? 'Enter a 6+ chars password'
+                            : null,
+                        obscureText: true,
+                        onChanged: ((value) {
+                          setState(() => pwd = value);
                         }),
-                    const SizedBox(
-                      height: 12.0,
-                    ),
-                    Text(
-                      error,
-                      style: const TextStyle(color: Colors.red, fontSize: 14.0),
-                    )
-                  ],
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      RaisedButton(
+                          color: Colors.amberAccent,
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() => isLoading = true);
+
+                              dynamic res =
+                                  await _auth.registerWithEmail(email, pwd);
+                              if (res == null) {
+                                setState(() {
+                                  error =
+                                      'Please check information entered and try again';
+                                  isLoading = false;
+                                });
+                              }
+                            }
+                          }),
+                      const SizedBox(
+                        height: 12.0,
+                      ),
+                      Text(
+                        error,
+                        style:
+                            const TextStyle(color: Colors.red, fontSize: 14.0),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          );
+          ]);
   }
 }
