@@ -1,8 +1,9 @@
+import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-   Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
   final AuthService _auth = AuthService();
 
@@ -24,7 +25,12 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      
+      body: TextButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MapView()));
+          },
+          child: Text("MAP")),
     );
   }
 }
