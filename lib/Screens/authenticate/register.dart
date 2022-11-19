@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 
 import '../../Services/auth.dart';
@@ -5,9 +6,7 @@ import '../../Shared/components/loading.dart';
 import '../../Shared/constants.dart';
 
 class Register extends StatefulWidget {
-  final Function toggleView;
-
-  const Register({Key? key, required this.toggleView}) : super(key: key);
+  const Register({Key? key}) : super(key: key);
   @override
   State<Register> createState() => _RegisterState();
 }
@@ -33,8 +32,12 @@ class _RegisterState extends State<Register> {
               title: const Text('Register'),
               actions: <Widget>[
                 FlatButton.icon(
-                  onPressed: () async {
-                    widget.toggleView();
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ));
                   },
                   icon: const Icon(Icons.person),
                   label: const Text('Sign In'),
@@ -96,6 +99,8 @@ class _RegisterState extends State<Register> {
                                     'Please check information entered and try again';
                                 isLoading = false;
                               });
+                            } else {
+                              Navigator.pop(context);
                             }
                           }
                         }),

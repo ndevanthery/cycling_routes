@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../Models/user_m.dart';
+import 'authenticate/Welcome.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({Key? key}) : super(key: key);
@@ -14,7 +15,8 @@ class Wrapper extends StatelessWidget {
 
     //If logged return Home Otherwise return Authenticate
     if (user == null) {
-      return const Authenticate();
+      return Welcome();
+      //return const Authenticate();
     } else {
       return Home();
     }
