@@ -3,6 +3,8 @@ import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/Screens/wrapper.dart';
 import 'package:flutter/material.dart';
 
+import 'Screens/home/home.dart';
+
 class RouteGenerator {
 
 
@@ -16,8 +18,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SignIn());
       case '/register':
         return MaterialPageRoute(builder: (_) => const Register());
-      // case '/home':
-      //   return MaterialPageRoute(builder: (_) =>  Home());
+      case '/home':
+        return MaterialPageRoute(builder: (_) =>  Home());
 
       default:
         return _errorRoute();

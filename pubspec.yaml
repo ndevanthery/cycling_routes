@@ -66,6 +66,8 @@ flutter:
   assets:
     - assets/img/
     - assets/img/logo_removebg.png
+    - assets/icons/back.png
+    - assets/icons/back_white.png
     - assets/icons/signup_black.png
     - assets/icons/login.png
 

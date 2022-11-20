@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         if (snapshot.hasError) {
           print('Error ; firebase connexion');
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Container(
                 color: Colors.amber[100],
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           );
         } else if (snapshot.hasData) {
           //if has data show normal
+          print('firebase connected');
           return StreamProvider<UserM?>.value(
             value: AuthService().user,
             initialData: null,
@@ -57,7 +59,9 @@ class MyApp extends StatelessWidget {
           );
         } else {
           //else show loading
+          print('Loading ; firebase connexion');
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Loading(),
             ),

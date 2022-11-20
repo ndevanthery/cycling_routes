@@ -71,7 +71,7 @@ class _AuthenticateState extends State<Authenticate> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              Navigator.of(context).pushNamed('/signIn');
+                              Navigator.pushNamed(context, '/signIn');
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
