@@ -1,5 +1,6 @@
 import 'package:cycling_routes/Models/user_m.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -15,12 +16,14 @@ class AuthService {
   }
 
   //Sign In
-  Future signIn(email, password) async {
+  Future signIn(context, email, password) async {
     try {
       UserCredential res = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+      UserM? myUser = _userFromFirebase(res.user);
 
-      return _userFromFirebase(res.user);
+      Navigator.pop(context, true);
+      return myUser;
     } catch (e) {
       print(e.toString());
       return null;
@@ -28,15 +31,18 @@ class AuthService {
   }
 
   //Register
-  Future registerWithEmail(String email, String pwd) async {
+  Future registerWithEmail( context,email, pwd) async {
     try {
       UserCredential res = await _auth.createUserWithEmailAndPassword(
           email: email, password: pwd);
-      return _userFromFirebase(res.user);
 
+          UserM? myUser = _userFromFirebase(res.user);
+
+      Navigator.pop(context, true);
+      return myUser;
     } catch (e) {
       print(e.toString());
-      return null;      
+      return null;
     }
   }
 

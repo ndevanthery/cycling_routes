@@ -2,9 +2,9 @@ import 'package:cycling_routes/Screens/wrapper.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/themes/customTheme.dart';
+import 'package:cycling_routes/route_generator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import 'Models/user_m.dart';
@@ -32,20 +32,24 @@ class MyApp extends StatelessWidget {
         if (snapshot.hasError) {
           print('Error ; firebase connexion');
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Container(
-                color: Colors.amber[200],
+                color: Colors.amber[100],
                 child: const Center(
-                  child: SpinKitChasingDots(
-                    color: Colors.amberAccent,
-                    size: 50.0,
-                  ),
-                ),
+                    child: Text(
+                  'An error occured, please try again later',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 212, 166, 0),
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold),
+                )),
               ),
             ),
           );
         } else if (snapshot.hasData) {
           //if has data show normal
+          print('firebase connected');
           return StreamProvider<UserM?>.value(
             value: AuthService().user,
             initialData: null,
@@ -53,12 +57,15 @@ class MyApp extends StatelessWidget {
               theme: CustomTheme(),
               darkTheme: CustomNightTheme(),
               debugShowCheckedModeBanner: false,
-              home: Wrapper(),
+              initialRoute: '/',
+              onGenerateRoute: RouteGenerator.generateRoute,
             ),
           );
         } else {
           //else show loading
+          print('Loading ; firebase connexion');
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Loading(),
             ),
