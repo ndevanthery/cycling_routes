@@ -1,13 +1,14 @@
+import 'dart:js';
+
 import 'package:cycling_routes/Screens/authenticate/register.dart';
 import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/Screens/wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'Screens/home/home.dart';
 
 class RouteGenerator {
-
-
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
@@ -18,8 +19,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SignIn());
       case '/register':
         return MaterialPageRoute(builder: (_) => const Register());
-      case '/home':
-        return MaterialPageRoute(builder: (_) =>  Home());
 
       default:
         return _errorRoute();
@@ -40,11 +39,48 @@ class RouteGenerator {
   static Route<dynamic> _errorRoute() {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Error'),
         ),
-        body: const Center(
-          child: Text('You seem to be lost'),
+        body: Center(
+          child: Column(
+            children: [
+              SizedBox(
+                  width: 300.0,
+                  height: 300.0,
+                  child: Image.asset(
+                    'assets/img/not_found.png',
+                    height: MediaQuery.of(_).size.height,
+                    width: MediaQuery.of(_).size.width,
+                    fit: BoxFit.cover,
+                  )),
+              const SizedBox(
+                height: 30.0,
+              ),
+              const Text(
+                'You seem to be lost...',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(239, 83, 80, 1)),
+              ),
+              const SizedBox(
+                height: 30.0,
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.of(_).pushNamed('/');
+                },
+                color: Colors.grey[300],
+                child: const Text(
+                  'Go Back Home',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 1, 0, 0)),
+                ),
+              ),
+            ],
+          ),
         ),
       );
     });

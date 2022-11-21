@@ -66,8 +66,8 @@ class _AuthenticateState extends State<Authenticate> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 padding: const EdgeInsets.fromLTRB(3, 8, 3, 8),
-                                minimumSize: const Size(95.0, 95.0),
-                                maximumSize: const Size(95.0, 95.0),
+                                minimumSize: const Size(98.0, 98.0),
+                                maximumSize: const Size(98.0, 98.0),
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
@@ -107,8 +107,8 @@ class _AuthenticateState extends State<Authenticate> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 padding: const EdgeInsets.fromLTRB(3, 8, 3, 8),
-                                minimumSize: const Size(95.0, 95.0),
-                                maximumSize: const Size(95.0, 95.0),
+                                minimumSize: const Size(97.0, 95.0),
+                                maximumSize: const Size(97.0, 95.0),
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
@@ -123,8 +123,8 @@ class _AuthenticateState extends State<Authenticate> {
                                       const EdgeInsets.fromLTRB(0, 0, 0, 8),
                                   child: Image.asset(
                                     "assets/icons/signup_black.png",
-                                    height: 28.0,
-                                    width: 28.0,
+                                    height: 25.0,
+                                    width: 25.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),

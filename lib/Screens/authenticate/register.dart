@@ -17,9 +17,26 @@ class _RegisterState extends State<Register> {
   bool isLoading = false;
 
   //Fields State
-  String email = '';
-  String pwd = '';
-  String error = '';
+  late String email;
+  late String pwd;
+  late String error;
+  late String firstname;
+  late String lastname;
+  late String address;
+  late String npa;
+  late DateTime birthdate;
+  @override
+  initState() {
+    super.initState();
+    email = '';
+    pwd = '';
+    error = '';
+    firstname = '';
+    lastname = '';
+    address = '';
+    npa = '';
+    birthdate = DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +90,10 @@ class _RegisterState extends State<Register> {
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
-                          const SizedBox(
-                            height: 20.0,
-                          ),
                           TextFormField(
                             decoration: textInputDecoration.copyWith(
-                              hintText: 'Email',
-                            ),
+                                hintText: 'Email',
+                                prefixIcon: const Icon(Icons.mail_outline)),
                             validator: (value) =>
                                 value == '' ? 'Enter an Email' : null,
                             onChanged: (value) {
@@ -87,12 +101,66 @@ class _RegisterState extends State<Register> {
                             },
                           ),
                           const SizedBox(
-                            height: 20.0,
+                            height: 10.0,
                           ),
                           TextFormField(
                             decoration: textInputDecoration.copyWith(
-                              hintText: 'Password',
-                            ),
+                                hintText: 'Firstname',
+                                prefixIcon: const Icon(Icons.person_outline_rounded)),
+                            validator: (value) =>
+                                value == '' ? 'Enter your firstname' : null,
+                            onChanged: (value) {
+                              setState(() => firstname = value);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          TextFormField(
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'Lastname',
+                                prefixIcon: const Icon(Icons.person_outline_rounded)),
+                            validator: (value) =>
+                                value == '' ? 'Enter your Lastname' : null,
+                            onChanged: (value) {
+                              setState(() => lastname = value);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          TextFormField(
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'Main Street, 13',
+                                prefixIcon: const Icon(Icons.location_on_outlined)),
+                            validator: (value) =>
+                                value == '' ? 'Enter your address' : null,
+                            onChanged: (value) {
+                              setState(() => address = value);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          TextFormField(
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'NPA, Locality',
+                                prefixIcon: const Icon(Icons.mail_outline)),
+                            validator: (value) => value == ''
+                                ? 'Enter your NPA And locality'
+                                : null,
+                            onChanged: (value) {
+                              setState(() => npa = value);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          TextFormField(
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'Password',
+                                prefixIcon:
+                                    const Icon(Icons.lock_outline_rounded)),
                             validator: (value) => value!.length < 6
                                 ? 'Enter a 6+ chars password'
                                 : null,
@@ -102,13 +170,67 @@ class _RegisterState extends State<Register> {
                             }),
                           ),
                           const SizedBox(
+                            height: 10.0,
+                          ),
+                          // InputDatePickerFormField(
+                          //   firstDate: DateTime(
+                          //     2019,
+                          //     1,
+                          //     30,
+                          //   ),
+                          //   lastDate: DateTime.now(),
+                          //   initialDate: birthdate,
+                          //   onDateSubmitted: (date) {
+                          //     setState(() {
+                          //       birthdate = date;
+                          //     });
+                          //   },
+                          // ),
+                          InkWell(
+                            onTap: () {
+                              showDatePicker(
+                                      context: context,
+                                      initialDate: birthdate == null
+                                          ? DateTime.now()
+                                          : birthdate,
+                                      firstDate: DateTime(2001),
+                                      lastDate: DateTime(2021))
+                                  .then((date) {
+                                setState(() {
+                                  birthdate = date!;
+                                });
+                              }); // Call Function that has showDatePicker()
+                            },
+                            child: IgnorePointer(
+                              // ignore: unnecessary_new
+                              child: new TextFormField(
+                                decoration: textInputDecoration.copyWith(
+                                    hintText: '15/07/97',
+                                    prefixIcon: const Icon(Icons.mail_outline)),
+                                validator: (value) =>
+                                    value == '' ? 'Enter your Birthdate' : null,
+
+                                maxLength: 10,
+                                // validator: validateDob,
+                                onSaved: (val) {
+                                  setState(() {
+                                    birthdate = val as DateTime;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(
                             height: 20.0,
                           ),
-                          RaisedButton(
-                              color: Colors.amberAccent,
+                          ElevatedButton(
+                              style: btnDecoration,
                               child: const Text(
                                 'Register',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                               ),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
