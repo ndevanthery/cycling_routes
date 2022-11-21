@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 
 import '../../Services/auth.dart';
@@ -42,6 +43,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return isLoading
         ? const Loading()
+
         : Stack(children: <Widget>[
             Image.asset(
               "assets/img/bkg_signin.jpg",
@@ -220,6 +222,7 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
+
 
                           const SizedBox(
                             height: 20.0,

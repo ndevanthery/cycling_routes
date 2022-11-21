@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Screens/authenticate/register.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/Shared/components/powered_by.dart';
@@ -35,6 +36,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return isLoading
         ? const Loading()
+
         : Stack(children: <Widget>[
             Image.asset(
               "assets/img/bkg_signin.jpg",

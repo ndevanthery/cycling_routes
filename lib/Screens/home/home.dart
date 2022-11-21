@@ -1,16 +1,32 @@
 import 'package:cycling_routes/Screens/map/mapView.dart';
+import 'package:cycling_routes/Screens/profile/Profile.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-   Home({Key? key}) : super(key: key);
 
+class Home extends StatefulWidget {
+  Home({Key? key}) : super(key: key);
+
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
+
+  int _selectedIndex = 0;
+  List<Widget> _pages = <Widget>[
+    Container(child: Center(child: Text("list of routes"))),
+    MapPage(),
+    ProfilePage(),
+    Container(child: Center(child: Text("Settings"))),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[100],
+
       appBar: AppBar(
         automaticallyImplyLeading :false,
         backgroundColor: Colors.yellow[100],
@@ -26,12 +42,37 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      body: TextButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MapView()));
-          },
-          child: Text("MAP")),
+      body: Center(
+        child: _pages.elementAt(_selectedIndex), //New
+      ),
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+        child: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              label: "Search",
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.browse_gallery), label: "Map"),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Profile"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings), label: "Settings"),
+          ],
+          onTap: _onItemTapped,
+          currentIndex: _selectedIndex,
+        ),
+      ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

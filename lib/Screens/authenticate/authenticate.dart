@@ -10,6 +10,7 @@ class Authenticate extends StatefulWidget {
 class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
+
     return Stack(children: <Widget>[
       Image.asset(
         "assets/img/bkg_authenticate.jpg",

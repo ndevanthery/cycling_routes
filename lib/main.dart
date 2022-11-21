@@ -1,5 +1,7 @@
+import 'package:cycling_routes/Screens/wrapper.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:cycling_routes/Shared/components/loading.dart';
+import 'package:cycling_routes/themes/customTheme.dart';
 import 'package:cycling_routes/route_generator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +53,9 @@ class MyApp extends StatelessWidget {
           return StreamProvider<UserM?>.value(
             value: AuthService().user,
             initialData: null,
-            child: const MaterialApp(
+            child: MaterialApp(
+              theme: CustomTheme(),
+              darkTheme: CustomNightTheme(),
               debugShowCheckedModeBanner: false,
               initialRoute: '/',
               onGenerateRoute: RouteGenerator.generateRoute,
