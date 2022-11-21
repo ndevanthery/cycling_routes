@@ -3,10 +3,8 @@ import 'package:cycling_routes/Screens/profile/Profile.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:flutter/material.dart';
 
-
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
-
 
   @override
   State<Home> createState() => _HomeState();
@@ -26,12 +24,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
-        automaticallyImplyLeading :false,
-        backgroundColor: Colors.yellow[100],
+        automaticallyImplyLeading: false,
         elevation: 0.0,
-        title: const Text('RideOn', style: TextStyle(color: Colors.black),),
+        title: const Text(
+          'RideOn',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () async {
