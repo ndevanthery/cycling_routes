@@ -1,5 +1,6 @@
 import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../Services/auth.dart';
 import '../../Shared/components/loading.dart';
@@ -13,6 +14,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  TextEditingController dateInput = TextEditingController();
+
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
@@ -25,7 +28,6 @@ class _RegisterState extends State<Register> {
   late String lastname;
   late String address;
   late String npa;
-  late DateTime birthdate;
   @override
   initState() {
     super.initState();
@@ -36,14 +38,13 @@ class _RegisterState extends State<Register> {
     lastname = '';
     address = '';
     npa = '';
-    birthdate = DateTime.now();
+    dateInput.text = "";
   }
 
   @override
   Widget build(BuildContext context) {
     return isLoading
         ? const Loading()
-
         : Stack(children: <Widget>[
             Image.asset(
               "assets/img/bkg_signin.jpg",
@@ -93,9 +94,13 @@ class _RegisterState extends State<Register> {
                       child: Column(
                         children: <Widget>[
                           TextFormField(
+                            style: const TextStyle(color: Colors.black),
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Email',
-                                prefixIcon: const Icon(Icons.mail_outline)),
+                                prefixIcon: const Icon(
+                                  Icons.mail_outline,
+                                  color: Colors.black,
+                                )),
                             validator: (value) =>
                                 value == '' ? 'Enter an Email' : null,
                             onChanged: (value) {
@@ -106,9 +111,13 @@ class _RegisterState extends State<Register> {
                             height: 10.0,
                           ),
                           TextFormField(
+                            style: const TextStyle(color: Colors.black),
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Firstname',
-                                prefixIcon: const Icon(Icons.person_outline_rounded)),
+                                prefixIcon: const Icon(
+                                  Icons.person_outline_rounded,
+                                  color: Colors.black,
+                                )),
                             validator: (value) =>
                                 value == '' ? 'Enter your firstname' : null,
                             onChanged: (value) {
@@ -119,9 +128,13 @@ class _RegisterState extends State<Register> {
                             height: 10.0,
                           ),
                           TextFormField(
+                            style: const TextStyle(color: Colors.black),
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Lastname',
-                                prefixIcon: const Icon(Icons.person_outline_rounded)),
+                                prefixIcon: const Icon(
+                                  Icons.person_outline_rounded,
+                                  color: Colors.black,
+                                )),
                             validator: (value) =>
                                 value == '' ? 'Enter your Lastname' : null,
                             onChanged: (value) {
@@ -132,9 +145,13 @@ class _RegisterState extends State<Register> {
                             height: 10.0,
                           ),
                           TextFormField(
+                            style: const TextStyle(color: Colors.black),
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Main Street, 13',
-                                prefixIcon: const Icon(Icons.location_on_outlined)),
+                                prefixIcon: const Icon(
+                                  Icons.location_on_outlined,
+                                  color: Colors.black,
+                                )),
                             validator: (value) =>
                                 value == '' ? 'Enter your address' : null,
                             onChanged: (value) {
@@ -145,9 +162,13 @@ class _RegisterState extends State<Register> {
                             height: 10.0,
                           ),
                           TextFormField(
+                            style: const TextStyle(color: Colors.black),
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'NPA, Locality',
-                                prefixIcon: const Icon(Icons.mail_outline)),
+                                prefixIcon: const Icon(
+                                  Icons.mail_outline,
+                                  color: Colors.black,
+                                )),
                             validator: (value) => value == ''
                                 ? 'Enter your NPA And locality'
                                 : null,
@@ -159,10 +180,13 @@ class _RegisterState extends State<Register> {
                             height: 10.0,
                           ),
                           TextFormField(
+                            style: const TextStyle(color: Colors.black),
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Password',
-                                prefixIcon:
-                                    const Icon(Icons.lock_outline_rounded)),
+                                prefixIcon: const Icon(
+                                  Icons.lock_outline_rounded,
+                                  color: Colors.black,
+                                )),
                             validator: (value) => value!.length < 6
                                 ? 'Enter a 6+ chars password'
                                 : null,
@@ -174,56 +198,43 @@ class _RegisterState extends State<Register> {
                           const SizedBox(
                             height: 10.0,
                           ),
-                          // InputDatePickerFormField(
-                          //   firstDate: DateTime(
-                          //     2019,
-                          //     1,
-                          //     30,
-                          //   ),
-                          //   lastDate: DateTime.now(),
-                          //   initialDate: birthdate,
-                          //   onDateSubmitted: (date) {
-                          //     setState(() {
-                          //       birthdate = date;
-                          //     });
-                          //   },
-                          // ),
-                          InkWell(
-                            onTap: () {
-                              showDatePicker(
-                                      context: context,
-                                      initialDate: birthdate == null
-                                          ? DateTime.now()
-                                          : birthdate,
-                                      firstDate: DateTime(2001),
-                                      lastDate: DateTime(2021))
-                                  .then((date) {
+                          TextFormField(
+                            style: const TextStyle(color: Colors.black),
+                            controller: dateInput,
+                            validator: (value) =>
+                                value!.length < 6 ? 'Select a Date' : null,
+                            //editing controller of this TextField
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'Select your Birthday',
+                                prefixIcon: const Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.black,
+                                )),
+
+                            readOnly: true,
+                            //set it true, so that user will not able to edit text
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1950),
+                                  //DateTime.now() - not to allow to choose before today.
+                                  lastDate: DateTime(2100));
+
+                              if (pickedDate != null) {
+                                print(
+                                    pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                String formattedDate =
+                                    DateFormat('dd-MM-yyyy').format(pickedDate);
+                                print(
+                                    formattedDate); //formatted date output using intl package =>  2021-03-16
                                 setState(() {
-                                  birthdate = date!;
+                                  dateInput.text =
+                                      formattedDate; //set output date to TextField value.
                                 });
-                              }); // Call Function that has showDatePicker()
+                              } else {}
                             },
-                            child: IgnorePointer(
-                              // ignore: unnecessary_new
-                              child: new TextFormField(
-                                decoration: textInputDecoration.copyWith(
-                                    hintText: '15/07/97',
-                                    prefixIcon: const Icon(Icons.mail_outline)),
-                                validator: (value) =>
-                                    value == '' ? 'Enter your Birthdate' : null,
-
-                                maxLength: 10,
-                                // validator: validateDob,
-                                onSaved: (val) {
-                                  setState(() {
-                                    birthdate = val as DateTime;
-                                  });
-                                },
-                              ),
-                            ),
                           ),
-
-
                           const SizedBox(
                             height: 20.0,
                           ),
@@ -269,7 +280,7 @@ class _RegisterState extends State<Register> {
                                 }
                               }),
                           const SizedBox(
-                            height: 12.0,
+                            height: 5.0,
                           ),
                           Text(
                             error,
@@ -281,7 +292,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   const SizedBox(
-                    height: 40.0,
+                    height: 10.0,
                   ),
                   const PoweredBy(),
                 ],

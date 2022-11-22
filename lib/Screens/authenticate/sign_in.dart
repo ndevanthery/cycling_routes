@@ -30,13 +30,10 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
-  
-
   @override
   Widget build(BuildContext context) {
     return isLoading
         ? const Loading()
-
         : Stack(children: <Widget>[
             Image.asset(
               "assets/img/bkg_signin.jpg",
@@ -102,10 +99,15 @@ class _SignInState extends State<SignIn> {
                                 height: 20.0,
                               ),
                               TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                style: TextStyle(color: Colors.black),
                                 decoration: textInputDecoration.copyWith(
                                     alignLabelWithHint: true,
                                     hintText: 'Email',
-                                    prefixIcon: const Icon(Icons.mail_outline)),
+                                    prefixIcon: const Icon(
+                                      Icons.mail_outline,
+                                      color: Colors.black,
+                                    )),
                                 validator: (value) =>
                                     value == '' ? 'Enter an Email' : null,
                                 onChanged: ((value) {
@@ -116,10 +118,14 @@ class _SignInState extends State<SignIn> {
                                 height: 20.0,
                               ),
                               TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                style: TextStyle(color: Colors.black),
                                 decoration: textInputDecoration.copyWith(
                                     hintText: 'Password',
-                                    prefixIcon:
-                                        const Icon(Icons.lock_outline_rounded)),
+                                    prefixIcon: const Icon(
+                                      Icons.lock_outline_rounded,
+                                      color: Colors.black,
+                                    )),
                                 validator: (value) => value!.length < 6
                                     ? 'Enter a 6+ chars password'
                                     : null,
@@ -146,7 +152,6 @@ class _SignInState extends State<SignIn> {
                                           .signIn(context, email, pwd)
                                           .then((value) {
                                         if (value == null) {
-                                          print('Result is Null');
                                           setState(() {
                                             error =
                                                 'Could not sign in with those credentials';
@@ -154,7 +159,6 @@ class _SignInState extends State<SignIn> {
                                           });
                                         }
                                         if (value != null) {
-                                          print('Result :' + value);
                                           setState(() {
                                             error = '';
                                             isLoading = false;
@@ -162,8 +166,6 @@ class _SignInState extends State<SignIn> {
                                         }
                                       }).onError((error, stackTrace) {
                                         setState(() {
-                                          print('Error' + error.toString());
-
                                           error =
                                               'Could not sign in with those credentials';
                                           isLoading = false;
@@ -186,7 +188,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   const SizedBox(
-                    height: 40.0,
+                    height: 10.0,
                   ),
                   const PoweredBy(),
                 ],

@@ -1,4 +1,3 @@
-import 'package:cycling_routes/Screens/wrapper.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/themes/customTheme.dart';
