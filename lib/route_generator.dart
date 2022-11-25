@@ -1,12 +1,9 @@
-import 'dart:js';
-
 import 'package:cycling_routes/Screens/authenticate/register.dart';
 import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/Screens/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import 'Screens/home/home.dart';
+import 'Shared/constants.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -67,18 +64,16 @@ class RouteGenerator {
               const SizedBox(
                 height: 30.0,
               ),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.of(_).pushNamed('/');
-                },
-                color: Colors.grey[300],
-                child: const Text(
-                  'Go Back Home',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 1, 0, 0)),
-                ),
-              ),
+              ElevatedButton(
+                  style: btnDecoration,
+                  child: const Text(
+                    "Go Back Home",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Navigator.of(_).pushNamed('/');
+                  }),
             ],
           ),
         ),

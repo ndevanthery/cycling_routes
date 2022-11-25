@@ -1,4 +1,3 @@
-import 'package:cycling_routes/Screens/authenticate/register.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/Shared/components/powered_by.dart';
@@ -100,9 +99,8 @@ class _SignInState extends State<SignIn> {
                               ),
                               TextFormField(
                                 keyboardType: TextInputType.emailAddress,
-                                style: TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                                 decoration: textInputDecoration.copyWith(
-                                    alignLabelWithHint: true,
                                     hintText: 'Email',
                                     prefixIcon: const Icon(
                                       Icons.mail_outline,
@@ -119,7 +117,7 @@ class _SignInState extends State<SignIn> {
                               ),
                               TextFormField(
                                 keyboardType: TextInputType.visiblePassword,
-                                style: TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                                 decoration: textInputDecoration.copyWith(
                                     hintText: 'Password',
                                     prefixIcon: const Icon(
@@ -135,7 +133,15 @@ class _SignInState extends State<SignIn> {
                                 }),
                               ),
                               const SizedBox(
-                                height: 20.0,
+                                height: 5.0,
+                              ),
+                              Text(
+                                error,
+                                style: const TextStyle(
+                                    color: Colors.red, fontSize: 14.0),
+                              ),
+                              const SizedBox(
+                                height: 5.0,
                               ),
                               ElevatedButton(
                                   style: btnDecoration,
@@ -173,22 +179,11 @@ class _SignInState extends State<SignIn> {
                                       });
                                     }
                                   }),
-                              const SizedBox(
-                                height: 12.0,
-                              ),
-                              Text(
-                                error,
-                                style: const TextStyle(
-                                    color: Colors.red, fontSize: 14.0),
-                              )
                             ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
                   ),
                   const PoweredBy(),
                 ],

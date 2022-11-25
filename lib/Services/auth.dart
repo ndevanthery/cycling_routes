@@ -1,4 +1,5 @@
 import 'package:cycling_routes/Models/user_m.dart';
+import 'package:cycling_routes/Services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class AuthService {
       UserM? myUser = _userFromFirebase(res.user);
 
       Navigator.pop(context, true);
+      print('New User Connected : $myUser');
       return myUser;
     } catch (e) {
       print(e.toString());
@@ -31,13 +33,21 @@ class AuthService {
   }
 
   //Register
-  Future registerWithEmail( context,email, pwd) async {
+  Future registerWithEmail(context, email, pwd, firstname, lastname, address,
+      npaLocal, birthday) async {
     try {
       UserCredential res = await _auth.createUserWithEmailAndPassword(
           email: email, password: pwd);
 
-          UserM? myUser = _userFromFirebase(res.user);
-
+      UserM? myUser = _userFromFirebase(res.user);
+      myUser!.email = email;
+      myUser.firstname = firstname;
+      myUser.lastname = lastname;
+      myUser.address = address;
+      myUser.npa = npaLocal;
+      myUser.birthday = birthday;
+      await DatabaseService(uid: myUser.uid).updateUserData(myUser);
+      print(myUser);
       Navigator.pop(context, true);
       return myUser;
     } catch (e) {

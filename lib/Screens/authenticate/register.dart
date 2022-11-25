@@ -1,4 +1,3 @@
-import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -81,12 +80,13 @@ class _RegisterState extends State<Register> {
               ),
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     decoration: const BoxDecoration(
                         color: Color.fromRGBO(224, 224, 224, 1),
                         borderRadius: BorderRadius.all(Radius.circular(25))),
-                    margin: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     padding: const EdgeInsets.symmetric(
                         vertical: 20, horizontal: 50),
                     child: Form(
@@ -218,25 +218,24 @@ class _RegisterState extends State<Register> {
                                   context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime(1950),
-                                  //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2100));
 
                               if (pickedDate != null) {
-                                print(
-                                    pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                                 String formattedDate =
                                     DateFormat('dd-MM-yyyy').format(pickedDate);
-                                print(
-                                    formattedDate); //formatted date output using intl package =>  2021-03-16
                                 setState(() {
-                                  dateInput.text =
-                                      formattedDate; //set output date to TextField value.
+                                  dateInput.text = formattedDate;
                                 });
                               } else {}
                             },
                           ),
                           const SizedBox(
-                            height: 20.0,
+                            height: 5.0,
+                          ),
+                          Text(
+                            error,
+                            style: const TextStyle(
+                                color: Colors.red, fontSize: 14.0),
                           ),
                           ElevatedButton(
                               style: btnDecoration,
@@ -251,7 +250,15 @@ class _RegisterState extends State<Register> {
                                   setState(() => isLoading = true);
 
                                   await _auth
-                                      .registerWithEmail(context, email, pwd)
+                                      .registerWithEmail(
+                                          context,
+                                          email,
+                                          pwd,
+                                          firstname,
+                                          lastname,
+                                          address,
+                                          npa,
+                                          dateInput.text)
                                       .then((value) {
                                     if (value == null) {
                                       print('Result is Null');
@@ -270,7 +277,7 @@ class _RegisterState extends State<Register> {
                                     }
                                   }).onError((error, stackTrace) {
                                     setState(() {
-                                      print('Error' + error.toString());
+                                      print('Error $error');
 
                                       error =
                                           'Could not register for the moment try again later';
@@ -279,20 +286,9 @@ class _RegisterState extends State<Register> {
                                   });
                                 }
                               }),
-                          const SizedBox(
-                            height: 5.0,
-                          ),
-                          Text(
-                            error,
-                            style: const TextStyle(
-                                color: Colors.red, fontSize: 14.0),
-                          )
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
                   ),
                   const PoweredBy(),
                 ],

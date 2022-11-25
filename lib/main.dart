@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
       builder: ((context, snapshot) {
         //If has error show something went wrong
         if (snapshot.hasError) {
-          print('Error ; firebase connexion');
+          print('Error with firebase connexion');
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
