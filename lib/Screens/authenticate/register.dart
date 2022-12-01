@@ -1,4 +1,4 @@
-import 'package:cycling_routes/Shared/components/terms_of_use.dart';
+import 'package:cycling_routes/Shared/components/terms_of_use_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -20,6 +20,7 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  bool termAccepted = true;
 
   //Fields State
   late String email;
@@ -45,6 +46,14 @@ class _RegisterState extends State<Register> {
     localite = '';
     dateInput.text = "";
     _pwdVisible = false;
+  }
+
+  toggleTerms(bool isAccepted) {
+    setState(() {
+      termAccepted = isAccepted;
+    });
+
+    print('Update agreement to $termAccepted');
   }
 
   @override
@@ -335,6 +344,9 @@ class _RegisterState extends State<Register> {
                                 style: const TextStyle(
                                     color: Colors.red, fontSize: 14.0),
                               ),
+                              const SizedBox(
+                                height: 5.0,
+                              ),
                               ElevatedButton(
                                   style: btnDecoration,
                                   child: const Text(
@@ -344,6 +356,16 @@ class _RegisterState extends State<Register> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   onPressed: () async {
+                                    if (!termAccepted) {
+                                      setState(() {
+                                        error =
+                                            'You have to accept the terms to continue';
+                                      });
+                                    } else {
+                                      setState(() {
+                                        error = '';
+                                      });
+                                    }
                                     if (_formKey.currentState!.validate()) {
                                       setState(() => isLoading = true);
 
@@ -355,7 +377,8 @@ class _RegisterState extends State<Register> {
                                               firstname,
                                               lastname,
                                               address,
-                                              npa,localite,
+                                              npa,
+                                              localite,
                                               dateInput.text)
                                           .then((value) {
                                         if (value == null) {
@@ -382,7 +405,9 @@ class _RegisterState extends State<Register> {
                                       });
                                     }
                                   }),
-                              const TermOfUse(),
+                              TermOfUseText(
+                                  toggleTerms: toggleTerms,
+                                  isAccepted: termAccepted),
                             ],
                           ),
                         ),
