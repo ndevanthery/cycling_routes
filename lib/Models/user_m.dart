@@ -7,6 +7,7 @@ class UserM {
   dynamic address = '';
   dynamic npa = '';
   dynamic birthday = '';
+  dynamic role = '';
 
   UserM(
       {required this.uid,
@@ -15,7 +16,8 @@ class UserM {
       this.lastname,
       this.address,
       this.npa,
-      this.birthday});
+      this.birthday,
+      this.role});
 
   @override
   String toString() {

@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Screens/admin/admin_home.dart';
 import 'package:cycling_routes/Screens/authenticate/authenticate.dart';
 import 'package:cycling_routes/Screens/home/home.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,12 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return const Authenticate();
     } else {
+      user.role =
+          1; // simulate admin section while the provider isn't working correctly
+      if (user.role == 1) {
+        return AdminHome();
+      }
+
       return Home();
     }
   }
