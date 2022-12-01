@@ -2,29 +2,39 @@
 
 import 'package:flutter/material.dart';
 
-final RegExp emailValidatorRegExp =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    
+final RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-const textInputDecoration = InputDecoration(
+bool isPasswordValid(String password) {
+  if (password.length < 6) return false;
+  if (!password.contains(RegExp(r"[a-z]"))) return false;
+  if (!password.contains(RegExp(r"[A-Z]"))) return false;
+  if (!password.contains(RegExp(r"[0-9]"))) return false;
+  if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) return false;
+  return true;
+}
+
+final textInputDecoration = InputDecoration(
   isDense: true,
-  contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-  labelStyle: TextStyle(color: Colors.black),
-  hintStyle: TextStyle(color: Colors.black),
+  contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+  labelStyle: const TextStyle(color: Colors.black),
+  hintStyle: const TextStyle(color: Color.fromARGB(255, 116, 116, 116)),
   fillColor: Colors.white,
   filled: true,
-  errorStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+  errorStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
   errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
     gapPadding: 0.0,
-    borderSide: BorderSide(color: Colors.red, width: 1.0),
+    borderSide: const BorderSide(color: Colors.red, width: 1.0),
   ),
   focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
     gapPadding: 0.0,
-    borderSide: BorderSide(color: Colors.amberAccent, width: 2.0),
+    borderSide: const BorderSide(color: Colors.amberAccent, width: 2.0),
   ),
   enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
     gapPadding: 0.0,
-    borderSide: BorderSide(color: Colors.white, width: 2.0),
+    borderSide: const BorderSide(color: Colors.white, width: 2.0),
   ),
 );
 
