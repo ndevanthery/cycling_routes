@@ -1,5 +1,6 @@
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Screens/profile/Profile.dart';
+import 'package:cycling_routes/Screens/search/search.dart';
 import 'package:cycling_routes/Services/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _HomeState extends State<Home> {
 
   int _selectedIndex = 0;
   List<Widget> _pages = <Widget>[
-    Container(child: Center(child: Text("list of routes"))),
+    SearchPage(),
     MapPage(),
     ProfilePage(),
     Container(child: Center(child: Text("Settings"))),

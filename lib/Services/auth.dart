@@ -1,3 +1,6 @@
+import 'dart:collection';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycling_routes/Models/user_m.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,10 +8,35 @@ import 'package:flutter/material.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
   //Create user Obj from FirebaseUser
   UserM? _userFromFirebase(User? user) {
-    return user != null ? UserM(uid: user.uid) : null;
+    if (user == null) {
+      return null;
+    } else {
+      var myUser = UserM(uid: user.uid);
+
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc(user.uid)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        if (documentSnapshot.exists) {
+          var myData = documentSnapshot.data()! as Map<String, dynamic>;
+          myUser.address = myData["address"];
+          myUser.email = myData["email"];
+          myUser.birthday = myData["birthday"];
+          myUser.npa = myData["npa"];
+          myUser.firstname = myData["firstname"];
+          myUser.lastname = myData["lastname"];
+          myUser.role = myData["role"];
+        } else {
+          print('Document does not exist on the database');
+        }
+      });
+      //while (myUser.firstname == null) {}
+      return myUser;
+    }
   }
 
   //auth Changes Stream
