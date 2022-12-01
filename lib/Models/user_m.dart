@@ -10,17 +10,17 @@ class UserM {
   dynamic birthday = '';
   dynamic role = '';
 
-
-  UserM(
-      {required this.uid,
-      this.email,
-      this.firstname,
-      this.lastname,
-      this.address,
-      this.npa,
-      this.localite,
-      this.birthday,
-      this.role});
+  UserM({
+    required this.uid,
+    this.email,
+    this.firstname,
+    this.lastname,
+    this.address,
+    this.npa,
+    this.localite,
+    this.birthday,
+    this.role,
+  });
 
   @override
   String toString() {
