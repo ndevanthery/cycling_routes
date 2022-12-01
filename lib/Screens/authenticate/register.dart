@@ -102,17 +102,15 @@ class _RegisterState extends State<Register> {
                     decoration: const BoxDecoration(
                         color: Color.fromRGBO(224, 224, 224, 1),
                         borderRadius: BorderRadius.all(Radius.circular(25))),
-                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 50),
+                        vertical: 10, horizontal: 35),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          margin: const EdgeInsets.fromLTRB(5, 5, 15, 10),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 50),
+                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
                           child: const Text(
                             "Let's join the ride !",
                             style: TextStyle(
@@ -227,7 +225,7 @@ class _RegisterState extends State<Register> {
                                           const TextStyle(color: Colors.black),
                                       decoration: textInputDecoration.copyWith(
                                           hintText: 'NPA',
-                                          counterStyle: TextStyle(
+                                          counterStyle: const TextStyle(
                                             height: double.minPositive,
                                           ),
                                           counterText: "",
@@ -283,7 +281,7 @@ class _RegisterState extends State<Register> {
                                       _pwdVisible
                                           ? Icons.visibility
                                           : Icons.visibility_off,
-                                      color: Theme.of(context).primaryColorDark,
+                                      color: Colors.black,
                                     ),
                                     onPressed: () {
                                       // Update the state i.e. toogle the state of passwordVisible variable

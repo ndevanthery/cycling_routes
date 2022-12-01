@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycling_routes/Models/route_m.dart';
@@ -49,7 +48,7 @@ class DatabaseService {
     var getRoutes = await routeCollect.get();
     var myDocs = getRoutes.docs;
     List<RouteM> myRouteList = [];
-    myDocs.forEach((doc) {
+    for (var doc in myDocs) {
       var myData = doc.data()! as Map<String, dynamic>;
       List<dynamic> myPoints = myData['route'];
       List<LatLng> myLatLng =
@@ -60,7 +59,7 @@ class DatabaseService {
           distance: myData['distance'],
           duration: myData['duration'],
           routePoints: []));
-    });
+    }
 
     return myRouteList;
   }

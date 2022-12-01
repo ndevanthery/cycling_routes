@@ -155,8 +155,7 @@ class _SignInState extends State<SignIn> {
                                           _pwdVisible
                                               ? Icons.visibility
                                               : Icons.visibility_off,
-                                          color: Theme.of(context)
-                                              .primaryColorDark,
+                                          color: Colors.black,
                                         ),
                                         onPressed: () {
                                           // Update the state i.e. toogle the state of passwordVisible variable

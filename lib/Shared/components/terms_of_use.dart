@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class TermOfUse extends StatefulWidget {
@@ -47,7 +46,7 @@ class _TermOfUseState extends State<TermOfUse> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: const Text('Terms & Conditions'),
+        backgroundColor: Colors.grey[800],
         actions: [
           FlatButton(
               onPressed: () {
@@ -77,12 +76,27 @@ class _TermOfUseState extends State<TermOfUse> {
               const SizedBox(
                 height: 15,
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Center(
+                      child: Text(
+                        'Terms & Conditions',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
                     RichText(
                       textAlign: TextAlign.end,
                       text: const TextSpan(
@@ -93,14 +107,15 @@ class _TermOfUseState extends State<TermOfUse> {
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     RichText(
-                      textAlign: TextAlign.end,
+                      textAlign: TextAlign.center,
                       text: const TextSpan(
                         text:
                             'Please read these terms and conditions carefully before using Our Service.',
                         style: TextStyle(
+                          fontStyle: FontStyle.italic,
                           color: Colors.black,
                         ),
                       ),
@@ -146,7 +161,7 @@ class _TermOfUseState extends State<TermOfUse> {
               ),
               const Text(
                 'Definitions',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                 ),
@@ -664,7 +679,7 @@ class _TermOfUseState extends State<TermOfUse> {
               ),
               const Text(
                 'Waiver',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                 ),
@@ -812,10 +827,9 @@ class _TermOfUseState extends State<TermOfUse> {
           ? null
           : FloatingActionButton(
               elevation: 0.5,
-              backgroundColor: Colors.grey[400],
+              backgroundColor: Colors.grey[600],
               onPressed: _scrollToTop,
-              child: const Icon(Icons.arrow_upward),
-            ),
+              child: const Icon(Icons.arrow_upward, color: Colors.black)),
     ));
   }
 }
