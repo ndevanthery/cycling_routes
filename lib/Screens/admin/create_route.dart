@@ -191,9 +191,10 @@ class _CreateRouteState extends State<CreateRoute> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        saveRoute();
-                        myRouteM.routePoints = [];
-                        points = [];
+                        _dialSave();
+                        //saveRoute();
+                        //myRouteM.routePoints = [];
+                        //points = [];
                       });
                     },
                     child: Text("save"),
@@ -250,5 +251,60 @@ class _CreateRouteState extends State<CreateRoute> {
     myRouteM.uidCreator = user!.uid;
 
     dbService.addRoute(myRouteM);
+  }
+
+  Future<void> _dialSave() {
+    TextEditingController myController = TextEditingController();
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Save"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("Enter the name of the route"),
+                TextField(
+                  controller: myController,
+                ),
+              ],
+            ),
+          ),
+          actionsPadding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          contentPadding: const EdgeInsets.fromLTRB(24, 15, 24, 15),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                "cancel",
+                style: const TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                "save",
+                style: const TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                setState(() {
+                  myRouteM.name = myController.text;
+                  print(myRouteM);
+
+                  saveRoute();
+                  myRouteM.routePoints = [];
+                  points = [];
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

@@ -1,10 +1,13 @@
 import 'package:cycling_routes/Services/database.dart';
+import 'package:cycling_routes/Shared/components/route_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
 import '../../Models/route_m.dart';
+import '../../Models/user_m.dart';
 
 class AdminRouteList extends StatefulWidget {
   const AdminRouteList({Key? key}) : super(key: key);
@@ -24,8 +27,8 @@ class _AdminRouteListState extends State<AdminRouteList> {
 
   @override
   void didChangeDependencies() {
-    DatabaseService myService = DatabaseService(uid: null);
-
+    var user = Provider.of<UserM?>(context);
+    DatabaseService myService = DatabaseService(uid: user!.uid);
     myService.getAdminRoutes().then((value) => setState(() {
           myRoutes = value;
         }));
@@ -38,14 +41,18 @@ class _AdminRouteListState extends State<AdminRouteList> {
     if (myRoutes.isEmpty) {
       return Text("You need to create a route first ! ");
     }
-    return ListView(
+    return GridView.count(
+      crossAxisCount: 2,
       children: [
         ...myRoutes
-            .map((e) => Container(
-                  margin: EdgeInsets.all(8),
-                  color: Colors.red,
-                  child: Text(
-                      "ROUTE : ${e.uid} CREATED BY ${e.uidCreator} , Time : ${e.duration} seconds , distance : ${e.distance} m"),
+            .map((e) => RouteCard(
+                  route: e,
+                  isAdmin: true,
+                  remove: (RouteM removed) {
+                    setState(() {
+                      myRoutes.remove(removed);
+                    });
+                  },
                 ))
             .toList()
       ],

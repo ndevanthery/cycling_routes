@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Models/user_m.dart';
@@ -40,13 +39,15 @@ class DatabaseService {
       "route": myPoints,
       "distance": route.distance,
       "duration": route.duration,
+      "name": route.name,
     };
     return await routeCollect.add(myRouteMap);
   }
 
   Future<List<RouteM>> getAdminRoutes() async {
     var getRoutes = await routeCollect.get();
-    var myDocs = getRoutes.docs;
+    var myDocs = getRoutes.docs.where((element) => element['creator'] == uid);
+
     List<RouteM> myRouteList = [];
     for (var doc in myDocs) {
       var myData = doc.data()! as Map<String, dynamic>;
@@ -58,10 +59,37 @@ class DatabaseService {
           uidCreator: myData['creator'],
           distance: myData['distance'],
           duration: myData['duration'],
+          name: myData['name'],
           routePoints: []));
     }
 
     return myRouteList;
+  }
+
+  Future<List<RouteM>> getRoutes() async {
+    var getRoutes = await routeCollect.get();
+    var myDocs = getRoutes.docs;
+
+    List<RouteM> myRouteList = [];
+    for (var doc in myDocs) {
+      var myData = doc.data()! as Map<String, dynamic>;
+      List<dynamic> myPoints = myData['route'];
+      List<LatLng> myLatLng =
+          myPoints.map((point) => LatLng(point['lat'], point['long'])).toList();
+      myRouteList.add(RouteM(
+          uid: doc.id,
+          uidCreator: myData['creator'],
+          distance: myData['distance'],
+          duration: myData['duration'],
+          name: myData['name'],
+          routePoints: []));
+    }
+
+    return myRouteList;
+  }
+
+  Future<void> deleteRoute(RouteM route) async {
+    await routeCollect.doc(route.uid).delete();
   }
 
   //Stream to listen for User Data Changes

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cycling_routes/Models/route_m.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
@@ -6,8 +7,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
 class MapPage extends StatefulWidget {
+  RouteM? route;
   List<LatLng>? points;
-  MapPage({Key? key, this.points}) : super(key: key);
+  MapPage({Key? key, this.points, this.route}) : super(key: key);
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -15,7 +17,6 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   Position? _position;
-  late LatLng _clicked;
   bool switchValue = false;
   List<LatLng> myRoute = [];
 
@@ -51,12 +52,6 @@ class _MapPageState extends State<MapPage> {
 
   @override
   void initState() {
-    _clicked = LatLng(0, 0);
-    widget.points = [
-      LatLng(46.224410, 7.355230),
-      LatLng(46.254379, 6.951690),
-    ];
-
     if (widget.points != null) {
       _getRoute(widget.points!).then((value) => setState(() {
             //print(value);
@@ -78,12 +73,6 @@ class _MapPageState extends State<MapPage> {
         Scaffold(
             body: FlutterMap(
           options: MapOptions(
-              onTap: (tapPosition, point) {
-                setState(() {
-                  _clicked = point;
-                });
-                print(point.toString());
-              },
               minZoom: 9,
               maxZoom: 18,
               zoom: 9,
@@ -123,15 +112,6 @@ class _MapPageState extends State<MapPage> {
                 ),
               ),
 
-              Marker(
-                point: _clicked,
-                width: 200,
-                height: 200,
-                builder: (context) => Icon(
-                  Icons.place,
-                  color: Colors.green,
-                ),
-              ),
               if (myRoute.isNotEmpty)
                 Marker(
                   point: myRoute.first,

@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Text("ADDRESS"),
             Text("NPA/TOWN"),
             Text("EMAIL"),
-            RouteCard(),
+            //RouteCard(),
           ],
         ),
       ),
