@@ -34,7 +34,7 @@ class AuthService {
 
   //Register
   Future registerWithEmail(context, email, pwd, firstname, lastname, address,
-      npaLocal, birthday) async {
+      npa, local, birthday) async {
     try {
       UserCredential res = await _auth.createUserWithEmailAndPassword(
           email: email, password: pwd);
@@ -44,7 +44,8 @@ class AuthService {
       myUser.firstname = firstname;
       myUser.lastname = lastname;
       myUser.address = address;
-      myUser.npa = npaLocal;
+      myUser.npa = npa;
+      myUser.localite = local;
       myUser.birthday = birthday;
       await DatabaseService(uid: myUser.uid).updateUserData(myUser);
       print(myUser);
