@@ -24,6 +24,6 @@ class UserM {
 
   @override
   String toString() {
-    return 'email : $email Full name:$firstname $lastname Full Address: $address $npa Birthday: $birthday';
+    return 'email : $email Full name: $firstname $lastname Full Address: $address $npa $localite Birthday: $birthday, ROLE: $role';
   }
 }

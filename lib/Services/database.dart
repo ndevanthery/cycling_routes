@@ -20,7 +20,9 @@ class DatabaseService {
       'lastname': userM.lastname,
       'address': userM.address,
       'npa': userM.npa,
-      'birthday': userM.birthday
+      'localite': userM.localite,
+      'birthday': userM.birthday,
+      'role': userM.role,
     });
   }
 

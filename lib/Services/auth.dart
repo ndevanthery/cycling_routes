@@ -27,16 +27,19 @@ class AuthService {
           myUser.email = myData["email"];
           myUser.birthday = myData["birthday"];
           myUser.npa = myData["npa"];
+          myUser.localite = myData["localite"];
           myUser.firstname = myData["firstname"];
           myUser.lastname = myData["lastname"];
           myUser.role = myData["role"];
+          print('User Connected : $myUser' );
         } else {
           print('Document does not exist on the database');
-        }
+        }      
+
       });
       //while (myUser.firstname == null) {}
-      return myUser;
-    }
+            return myUser;
+}
   }
 
   //auth Changes Stream
@@ -49,10 +52,9 @@ class AuthService {
     try {
       UserCredential res = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      UserM? myUser = _userFromFirebase(res.user);
+      UserM? myUser =  _userFromFirebase(res.user);
 
       Navigator.pop(context, true);
-      print('New User Connected : $myUser');
       return myUser;
     } catch (e) {
       print(e.toString());
@@ -75,8 +77,8 @@ class AuthService {
       myUser.npa = npa;
       myUser.localite = local;
       myUser.birthday = birthday;
+      myUser.role = 0;
       await DatabaseService(uid: myUser.uid).updateUserData(myUser);
-      print(myUser);
       Navigator.pop(context, true);
       return myUser;
     } catch (e) {

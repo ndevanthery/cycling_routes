@@ -251,7 +251,7 @@ class _RegisterState extends State<Register> {
                                           ? 'Enter your locality'
                                           : null,
                                       onChanged: (value) {
-                                        setState(() => npa = value);
+                                        setState(() => localite = value);
                                       },
                                     ),
                                   ),
