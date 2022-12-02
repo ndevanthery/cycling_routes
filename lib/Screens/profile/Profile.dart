@@ -1,7 +1,13 @@
-import 'package:cycling_routes/Shared/components/route_card.dart';
+// ignore: file_names
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cycling_routes/Shared/components/route_card.dart';
+
+//import 'package:flutter/src/foundation/key.dart';
+//import 'package:flutter/src/widgets/framework.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -11,6 +17,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  PickedFile? imageFile;
+  final ImagePicker _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,22 +32,27 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
+                imageProfile(),
+                const SizedBox(
+                  height: 20,
+                )
+                /*CircleAvatar(
                   radius: 62,
                   backgroundColor: Colors.grey[700],
                   child: CircleAvatar(
                     backgroundImage: AssetImage('assets/profile_pic.png'),
                     radius: 60,
                   ),
-                ),
+                ),*/
+                ,
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                   ),
                   onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.settings,
                       color: Colors.black,
@@ -47,23 +61,94 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "FIRSTNAME",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "LASTNAME",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
-            Text("ADDRESS"),
-            Text("NPA/TOWN"),
-            Text("EMAIL"),
-            RouteCard(),
+            const Text("ADDRESS"),
+            const Text("NPA/TOWN"),
+            const Text("EMAIL"),
+            const RouteCard(),
           ],
         ),
       ),
     );
+  }
+
+  Widget imageProfile() {
+    return Stack(children: <Widget>[
+      CircleAvatar(
+          radius: 62.0,
+          // ignore: unnecessary_null_comparison
+          backgroundImage: imageFile == null
+              ? const AssetImage("assets/profile_pic.png") as ImageProvider
+              : FileImage(File(imageFile!.path))),
+      Positioned(
+        bottom: 20.0,
+        right: 20.0,
+        child: InkWell(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: ((builder) => bottomSheet()),
+            );
+          },
+          child: const Icon(Icons.camera_alt,
+              color: Color.fromARGB(255, 255, 255, 255), size: 28.0),
+        ),
+      ),
+    ]);
+  }
+
+  Widget bottomSheet() {
+    return Container(
+      height: 100.0,
+      width: 200.0,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Column(
+        children: <Widget>[
+          const Text(
+            "Choose Profile picture",
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            ElevatedButton.icon(
+              icon: const Icon(Icons.camera),
+              onPressed: () {
+                takePhoto(ImageSource.camera);
+              },
+              label: const Text("Camera"),
+            ),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.image),
+              onPressed: () {
+                takePhoto(ImageSource.gallery);
+              },
+              label: const Text("Gallery"),
+            ),
+          ])
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      imageFile = pickedFile!;
+    });
   }
 }
