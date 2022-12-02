@@ -17,12 +17,14 @@ class _SignInState extends State<SignIn> {
   late String email;
   late String pwd;
   late String error;
+  bool _pwdVisible = false;
   @override
   initState() {
     super.initState();
     email = '';
     pwd = '';
     error = '';
+    _pwdVisible = false;
   }
 
   final AuthService _auth = AuthService();
@@ -68,124 +70,170 @@ class _SignInState extends State<SignIn> {
                 ],
               ),
               body: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(224, 224, 224, 1),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
-                    margin: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+                    margin: const EdgeInsets.fromLTRB(5, 25, 15, 0),
                     padding: const EdgeInsets.symmetric(
                         vertical: 20, horizontal: 50),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                          child: Image.asset(
-                            "assets/icons/login.png",
-                            height: 36.0,
-                            width: 36.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: <Widget>[
-                              const SizedBox(
-                                height: 20.0,
-                              ),
-                              TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: textInputDecoration.copyWith(
-                                    hintText: 'Email',
-                                    prefixIcon: const Icon(
-                                      Icons.mail_outline,
-                                      color: Colors.black,
-                                    )),
-                                validator: (value) =>
-                                    value == '' ? 'Enter an Email' : null,
-                                onChanged: ((value) {
-                                  setState(() => email = value);
-                                }),
-                              ),
-                              const SizedBox(
-                                height: 20.0,
-                              ),
-                              TextFormField(
-                                keyboardType: TextInputType.visiblePassword,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: textInputDecoration.copyWith(
-                                    hintText: 'Password',
-                                    prefixIcon: const Icon(
-                                      Icons.lock_outline_rounded,
-                                      color: Colors.black,
-                                    )),
-                                validator: (value) => value!.length < 6
-                                    ? 'Enter a 6+ chars password'
-                                    : null,
-                                obscureText: true,
-                                onChanged: ((value) {
-                                  setState(() => pwd = value);
-                                }),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                error,
-                                style: const TextStyle(
-                                    color: Colors.red, fontSize: 14.0),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              ElevatedButton(
-                                  style: btnDecoration,
-                                  child: const Text(
-                                    "Let's go !",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      setState(() => isLoading = true);
-                                      await _auth
-                                          .signIn(context, email, pwd)
-                                          .then((value) {
-                                        if (value == null) {
-                                          setState(() {
-                                            error =
-                                                'Could not sign in with those credentials';
-                                            isLoading = false;
-                                          });
-                                        }
-                                        if (value != null) {
-                                          setState(() {
-                                            error = '';
-                                            isLoading = false;
-                                          });
-                                        }
-                                      }).onError((error, stackTrace) {
-                                        setState(() {
-                                          error =
-                                              'Could not sign in with those credentials';
-                                          isLoading = false;
-                                        });
-                                      });
-                                    }
-                                  }),
-                            ],
-                          ),
-                        ),
-                      ],
+                    child: const Text(
+                      'Welcome back on the App that boosts your rides !',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const PoweredBy(),
+                  Column(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromRGBO(224, 224, 224, 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(25))),
+                        margin: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 50),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                              child: Image.asset(
+                                "assets/icons/login.png",
+                                height: 36.0,
+                                width: 36.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  const SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  TextFormField(
+                                    keyboardType: TextInputType.emailAddress,
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: textInputDecoration.copyWith(
+                                        hintText: 'example@gmail.com',
+                                        prefixIcon: const Icon(
+                                          Icons.mail_outline,
+                                          color: Colors.black,
+                                        )),
+                                    validator: (value) {
+                                      if (value == '') {
+                                        return 'You must enter an Email';
+                                      } else if (!emailRegExp
+                                          .hasMatch(value!)) {
+                                        return 'You must enter a Valid Email ! ';
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    onChanged: ((value) {
+                                      setState(() => email = value);
+                                    }),
+                                  ),
+                                  const SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  TextFormField(
+                                    keyboardType: TextInputType.visiblePassword,
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: textInputDecoration.copyWith(
+                                      hintText: 'Password',
+                                      prefixIcon: const Icon(
+                                        Icons.lock_outline_rounded,
+                                        color: Colors.black,
+                                      ),
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          // Based on passwordVisible state choose the icon
+                                          _pwdVisible
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                          color: Colors.black,
+                                        ),
+                                        onPressed: () {
+                                          // Update the state i.e. toogle the state of passwordVisible variable
+                                          setState(() {
+                                            _pwdVisible = !_pwdVisible;
+                                          });
+                                        },
+                                      ),
+                                    ),
+
+                                    validator: (value) => value!.length < 6
+                                        ? 'You must enter : +6 characters'
+                                        : null,
+                                    //TODO : Update the validation of the Pwd  with this code below in Comments!!
+                                    // // validator: (value) => !isPasswordValid(value!)
+                                    // //     ? 'Must contain : +6 characters, Capital, small letter & Number & Special'
+                                    // //     : null,
+                                    obscureText: !_pwdVisible,
+                                    onChanged: ((value) {
+                                      setState(() => pwd = value);
+                                    }),
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Text(
+                                    error,
+                                    style: const TextStyle(
+                                        color: Colors.red, fontSize: 14.0),
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  ElevatedButton(
+                                      style: btnDecoration,
+                                      child: const Text(
+                                        "Let's go !",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          setState(() => isLoading = true);
+                                          await _auth
+                                              .signIn(context, email, pwd)
+                                              .then((value) {
+                                            if (value == null) {
+                                              setState(() {
+                                                error =
+                                                    'Could not sign in with those credentials';
+                                                isLoading = false;
+                                              });
+                                            }
+                                            if (value != null) {
+                                              setState(() {
+                                                error = '';
+                                                isLoading = false;
+                                              });
+                                            }
+                                          }).onError((error, stackTrace) {
+                                            setState(() {
+                                              error =
+                                                  'Could not sign in with those credentials';
+                                              isLoading = false;
+                                            });
+                                          });
+                                        }
+                                      }),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const PoweredBy(),
+                    ],
+                  ),
                 ],
               ),
             ),

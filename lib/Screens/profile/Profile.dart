@@ -74,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const Text("ADDRESS"),
             const Text("NPA/TOWN"),
             const Text("EMAIL"),
-            const RouteCard(),
+            //     RouteCard(isAdmin: true, route: ,),
           ],
         ),
       ),

@@ -10,7 +10,6 @@ class Authenticate extends StatefulWidget {
 class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
-
     return Stack(children: <Widget>[
       Image.asset(
         "assets/img/bkg_authenticate.jpg",
@@ -27,8 +26,8 @@ class _AuthenticateState extends State<Authenticate> {
                 alignment: Alignment.topLeft,
                 child: Container(
                   width: 230,
-                  height: 70.0,
-                  padding: const EdgeInsets.fromLTRB(2, 8, 0, 8),
+                  height: 80.0,
+                  padding: const EdgeInsets.fromLTRB(2, 30, 0, 8),
                   child: Image.asset(
                     "assets/img/logo_removebg.png",
                     fit: BoxFit.cover,
