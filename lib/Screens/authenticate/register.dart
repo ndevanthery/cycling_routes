@@ -451,17 +451,36 @@ class _RegisterState extends State<Register> {
                                                           localite,
                                                           dateInput.text)
                                                       .then((value) {
-                                                    if (value == null) {
-                                                      print('Result is Null');
-                                                      setState(() {
-                                                        error =
-                                                            'Please check information entered and try again';
-                                                        isLoading = false;
-                                                      });
-                                                    }
+                                                    print(
+                                                        'Result after register : ${value.toString()}');
                                                     if (value != null) {
                                                       setState(() {
                                                         error = '';
+                                                        isLoading = false;
+                                                      });
+                                                    }
+
+                                                    if (value.toString() ==
+                                                        'Already in use') {
+                                                      setState(() {
+                                                        error =
+                                                            'Email already used, try to log in';
+                                                        isLoading = false;
+                                                      });
+                                                    }
+
+                                                    if (value ==
+                                                        'Weak Password') {
+                                                      setState(() {
+                                                        error =
+                                                            'Password entered too weak';
+                                                        isLoading = false;
+                                                      });
+                                                    }
+                                                    if (value == null) {
+                                                      setState(() {
+                                                        error =
+                                                            'Unkown error, please try again later';
                                                         isLoading = false;
                                                       });
                                                     }

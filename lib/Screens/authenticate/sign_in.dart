@@ -226,33 +226,53 @@ class _SignInState extends State<SignIn> {
                                                       .signIn(
                                                           context, email, pwd)
                                                       .then((value) {
-                                                    if (value == null) {
-                                                      setState(() {
-                                                        error =
-                                                            'Error please try again later';
-                                                        isLoading = false;
-                                                      });
-                                                    }
+                                                    print(
+                                                        'Result after login : ${value.toString()}');
+
                                                     if (value != null) {
                                                       setState(() {
                                                         error = '';
                                                         isLoading = false;
                                                       });
                                                     }
-                                                  }).onError(
-                                                          (error, stackTrace) {
-                                                    print(
-                                                        'Error retrieved : $error');
-                                                    if (error
-                                                        .toString()
-                                                        .contains(
-                                                            'wrong-password')) {
+                                                    if (value.toString() ==
+                                                        'Account Not Found') {
                                                       setState(() {
                                                         error =
-                                                            'Could not sign in with those credentials';
+                                                            'Account Not Found, please register yourself';
                                                         isLoading = false;
                                                       });
                                                     }
+                                                    if (value.toString() ==
+                                                        'Account Disabled') {
+                                                      setState(() {
+                                                        error =
+                                                            'Account Disabled, please register again';
+                                                        isLoading = false;
+                                                      });
+                                                    }
+                                                    if (value.toString() ==
+                                                        'Wrong Password') {
+                                                      setState(() {
+                                                        error =
+                                                            'Wrong Password, please try again';
+                                                        isLoading = false;
+                                                      });
+                                                    }
+                                                    if (value == null) {
+                                                      setState(() {
+                                                        error =
+                                                            'Unkown error, please try again later';
+                                                        isLoading = false;
+                                                      });
+                                                    }
+                                                  }).onError(
+                                                          (error, stackTrace) {
+                                                    setState(() {
+                                                      error =
+                                                          'Could not sign in for the moment try again later';
+                                                      isLoading = false;
+                                                    });
                                                   });
                                                 }
                                               }),
