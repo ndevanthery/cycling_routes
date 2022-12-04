@@ -58,7 +58,7 @@ class AuthService {
       return myUser;
     } catch (e) {
       print(e.toString());
-      return null;
+      return e;
     }
   }
 
