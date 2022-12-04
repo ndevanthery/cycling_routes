@@ -109,7 +109,7 @@ class _RegisterState extends State<Register> {
                         children: [
                           Container(
                             margin: const EdgeInsets.fromLTRB(10, 25, 10, 3),
-                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: const Text(
                               "Let's join the ride !",
                               style: TextStyle(

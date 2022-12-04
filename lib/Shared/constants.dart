@@ -32,6 +32,11 @@ final textInputDecoration = InputDecoration(
     gapPadding: 0.0,
     borderSide: const BorderSide(color: Colors.amberAccent, width: 2.0),
   ),
+  focusedErrorBorder:OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
+    gapPadding: 0.0,
+    borderSide: const BorderSide(color: Colors.red, width: 2.0),
+  ),
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(15.0),
     gapPadding: 0.0,
