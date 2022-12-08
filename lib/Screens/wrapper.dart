@@ -18,7 +18,7 @@ class Wrapper extends StatelessWidget {
       return const Authenticate();
     } else {
       user.role =
-          1; // simulate admin section while the provider isn't working correctly
+          0; // simulate admin section while the provider isn't working correctly
       if (user.role == 1) {
         return AdminHome();
       }

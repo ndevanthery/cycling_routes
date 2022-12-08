@@ -56,7 +56,7 @@ class _RouteCardState extends State<RouteCard> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image(
+              child: const Image(
                 fit: BoxFit.cover,
                 image: AssetImage("assets/velo_tour.jpg"),
                 width: 170,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
@@ -235,7 +236,7 @@ class _CreateRouteState extends State<CreateRoute> {
 
       var coordinates = feature[0]['geometry']!['coordinates'];
       var summary = feature[0]['properties']!['summary']!;
-      myReturnRoute.distance = summary['distance'];
+      myReturnRoute.distance = summary['distance'] as double?;
       myReturnRoute.duration = summary['duration'];
 
       for (int i = 0; i < coordinates.length; i++) {

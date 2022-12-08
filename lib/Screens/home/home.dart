@@ -44,6 +44,7 @@ class _HomeState extends State<Home> {
       ),
       body: Center(
         child: _pages.elementAt(_selectedIndex), //New
+  
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
