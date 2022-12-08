@@ -66,8 +66,8 @@ class _AuthenticateState extends State<Authenticate> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 padding: const EdgeInsets.fromLTRB(3, 8, 3, 8),
-                                minimumSize: const Size(98.0, 98.0),
-                                maximumSize: const Size(98.0, 98.0),
+                                minimumSize: const Size(97.0, 95.0),
+                                maximumSize: const Size(97.0, 95.0),
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {

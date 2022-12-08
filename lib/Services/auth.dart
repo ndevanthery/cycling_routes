@@ -31,15 +31,14 @@ class AuthService {
           myUser.firstname = myData["firstname"];
           myUser.lastname = myData["lastname"];
           myUser.role = myData["role"];
-          print('User Connected : $myUser' );
+          print('User Connected : $myUser');
         } else {
           print('Document does not exist on the database');
-        }      
-
+        }
       });
       //while (myUser.firstname == null) {}
-            return myUser;
-}
+      return myUser;
+    }
   }
 
   //auth Changes Stream
@@ -52,12 +51,21 @@ class AuthService {
     try {
       UserCredential res = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      UserM? myUser =  _userFromFirebase(res.user);
+      UserM? myUser = _userFromFirebase(res.user);
 
       Navigator.pop(context, true);
       return myUser;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       print(e.toString());
+      if (e.code == 'user-not-found') {
+        return 'Account Not Found';
+      }
+      if (e.code == 'user-disabled') {
+        return 'Account Disabled';
+      }
+      if (e.code == 'wrong-password') {
+        return 'Wrong Password';
+      }
       return null;
     }
   }
@@ -81,8 +89,14 @@ class AuthService {
       await DatabaseService(uid: myUser.uid).updateUserData(myUser);
       Navigator.pop(context, true);
       return myUser;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       print(e.toString());
+      if (e.code == 'email-already-in-use') {
+        return 'Already in use';
+      }
+      if (e.code == 'weak-password') {
+        return 'Weak Password';
+      }
       return null;
     }
   }
