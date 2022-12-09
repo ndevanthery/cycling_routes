@@ -1,8 +1,15 @@
+import 'dart:developer';
+
 import 'package:cycling_routes/Shared/components/terms_of_use_text.dart';
+import 'package:cycling_routes/routes_generator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../../Models/user_m.dart';
+import '../../Services/database.dart';
 import '../../Services/auth.dart';
 import '../../Shared/components/loading.dart';
 import '../../Shared/components/powered_by.dart';
@@ -17,7 +24,6 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   TextEditingController dateInput = TextEditingController();
 
-  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool termAccepted = true;
@@ -53,11 +59,13 @@ class _RegisterState extends State<Register> {
       termAccepted = isAccepted;
     });
 
-    print('Update agreement to $termAccepted');
+    log('Update agreement to $termAccepted');
   }
 
   @override
   Widget build(BuildContext context) {
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+
     return isLoading
         ? const Loading()
         : Stack(children: <Widget>[
@@ -72,7 +80,7 @@ class _RegisterState extends State<Register> {
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    RoutesGenerator.sailor.pop();
                   },
                   icon: Image.asset(
                     "assets/icons/back_white.png",
@@ -143,6 +151,8 @@ class _RegisterState extends State<Register> {
                                           TextFormField(
                                             style: const TextStyle(
                                                 color: Colors.black),
+                                            keyboardType:
+                                                TextInputType.emailAddress,
                                             decoration:
                                                 textInputDecoration.copyWith(
                                                     hintText:
@@ -260,8 +270,8 @@ class _RegisterState extends State<Register> {
                                                   maxLengthEnforcement:
                                                       MaxLengthEnforcement
                                                           .enforced,
-                                                  keyboardType: TextInputType
-                                                      .streetAddress,
+                                                  keyboardType:
+                                                      TextInputType.number,
                                                   style: const TextStyle(
                                                       color: Colors.black),
                                                   decoration: textInputDecoration
@@ -433,66 +443,118 @@ class _RegisterState extends State<Register> {
                                                   setState(() {
                                                     error = '';
                                                   });
-                                                }
-                                                if (_formKey.currentState!
-                                                    .validate()) {
-                                                  setState(
-                                                      () => isLoading = true);
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    setState(
+                                                        () => isLoading = true);
 
-                                                  await _auth
-                                                      .registerWithEmail(
-                                                          context,
-                                                          email,
-                                                          pwd,
-                                                          firstname,
-                                                          lastname,
-                                                          address,
-                                                          npa,
-                                                          localite,
-                                                          dateInput.text)
-                                                      .then((value) {
-                                                    print(
-                                                        'Result after register : ${value.toString()}');
-                                                    if (value != null) {
-                                                      setState(() {
-                                                        error = '';
-                                                        isLoading = false;
-                                                      });
+                                                    try {
+                                                      await FirebaseAuth
+                                                          .instance
+                                                          .createUserWithEmailAndPassword(
+                                                              email: email,
+                                                              password: pwd);
+                                                      User newUser =
+                                                          FirebaseAuth.instance
+                                                              .currentUser!;
+
+                                                      UserM? myUser = UserM(
+                                                          uid: newUser.uid);
+                                                      myUser.email = email;
+                                                      myUser.firstname =
+                                                          firstname;
+                                                      myUser.lastname =
+                                                          lastname;
+                                                      myUser.address = address;
+                                                      myUser.npa = npa;
+                                                      myUser.localite =
+                                                          localite;
+                                                      myUser.birthday =
+                                                          dateInput.text;
+                                                      myUser.role = 0;
+
+                                                      await DatabaseService(
+                                                              uid: myUser.uid)
+                                                          .updateUserData(
+                                                              myUser);
+                                                      await loginManager
+                                                          .updateUser(
+                                                              FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser,
+                                                              shouldNotify:
+                                                                  true)
+                                                          .then((value) =>
+                                                              RoutesGenerator
+                                                                  .sailor
+                                                                  .pop());
+                                                    } on FirebaseAuthException catch (e) {
+                                                      if (e.code ==
+                                                          'weak-password') {
+                                                        log('The password provided is too weak.');
+                                                      } else if (e.code ==
+                                                          'email-already-in-use') {
+                                                        log('The account already exists for that email.');
+                                                      }
+                                                    } catch (e) {
+                                                      log('$e');
                                                     }
 
-                                                    if (value.toString() ==
-                                                        'Already in use') {
-                                                      setState(() {
-                                                        error =
-                                                            'Email already used, try to log in';
-                                                        isLoading = false;
-                                                      });
-                                                    }
+                                                    // await _auth
+                                                    //     .registerWithEmail(
+                                                    //         context,
+                                                    //         email,
+                                                    //         pwd,
+                                                    //         firstname,
+                                                    //         lastname,
+                                                    //         address,
+                                                    //         npa,
+                                                    //         localite,
+                                                    //         dateInput.text)
+                                                    //     .then((value) {
+                                                    //   print(
+                                                    //       'Result after register : ${value.toString()}');
+                                                    //   if (value != null) {
+                                                    //     setState(() {
+                                                    //       error = '';
+                                                    //       isLoading = false;
+                                                    //     });
+                                                    //   }
 
-                                                    if (value ==
-                                                        'Weak Password') {
-                                                      setState(() {
-                                                        error =
-                                                            'Password entered too weak';
-                                                        isLoading = false;
-                                                      });
-                                                    }
-                                                    if (value == null) {
-                                                      setState(() {
-                                                        error =
-                                                            'Unkown error, please try again later';
-                                                        isLoading = false;
-                                                      });
-                                                    }
-                                                  }).onError(
-                                                          (error, stackTrace) {
-                                                    setState(() {
-                                                      print('Error $error');
-                                                      error =
-                                                          'Could not register for the moment try again later';
-                                                      isLoading = false;
-                                                    });
-                                                  });
+                                                    //   if (value.toString() ==
+                                                    //       'Already in use') {
+                                                    //     setState(() {
+                                                    //       error =
+                                                    //           'Email already used, try to log in';
+                                                    //       isLoading = false;
+                                                    //     });
+                                                    //   }
+
+                                                    //   if (value ==
+                                                    //       'Weak Password') {
+                                                    //     setState(() {
+                                                    //       error =
+                                                    //           'Password entered too weak';
+                                                    //       isLoading = false;
+                                                    //     });
+                                                    //   }
+                                                    //   if (value == null) {
+                                                    //     setState(() {
+                                                    //       error =
+                                                    //           'Unkown error, please try again later';
+                                                    //       isLoading = false;
+                                                    //     });
+                                                    //   }
+                                                    // }).onError(
+                                                    //         (error, stackTrace) {
+                                                    //   setState(() {
+                                                    //     print('Error $error');
+                                                    //     error =
+                                                    //         'Could not register for the moment try again later';
+                                                    //     isLoading = false;
+                                                    //   });
+                                                    // });
+                                                  }
                                                 }
                                               }),
                                           TermOfUseText(

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class TermOfUse extends StatefulWidget {
@@ -42,6 +44,7 @@ class _TermOfUseState extends State<TermOfUse> {
         duration: const Duration(seconds: 1), curve: Curves.linear);
   }
 
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(

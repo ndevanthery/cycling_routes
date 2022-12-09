@@ -1,8 +1,7 @@
-import 'package:cycling_routes/Services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
+import '../../Services/auth.dart';
 import 'admin_routes.dart';
 import 'create_route.dart';
 
@@ -14,16 +13,16 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
-  final AuthService _auth = AuthService();
-
   int _selectedIndex = 0;
-  List<Widget> _pages = <Widget>[
-    AdminRouteList(),
+  final List<Widget> _pages = <Widget>[
+    const AdminRouteList(),
     CreateRoute(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -35,7 +34,7 @@ class _AdminHomeState extends State<AdminHome> {
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () async {
-              await _auth.signOut();
+              await loginManager.signOut(context);
             },
             icon: const Icon(Icons.person),
             label: const Text('Logout'),
@@ -46,10 +45,10 @@ class _AdminHomeState extends State<AdminHome> {
         child: _pages.elementAt(_selectedIndex), //New
       ),
       bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         child: BottomNavigationBar(
-          items: [
+          items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.browse_gallery), label: "My routes"),
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Create"),

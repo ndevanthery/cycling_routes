@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import './terms_of_use.dart' as fullDialog;
+import './terms_of_use.dart' as full_dialog;
 
 class TermOfUseText extends StatelessWidget {
   Function toggleTerms;
@@ -64,7 +64,7 @@ class TermOfUseText extends StatelessWidget {
   Future _openAgreeDialog(context) async {
     dynamic result = await Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) {
-          return const fullDialog.TermOfUse();
+          return const full_dialog.TermOfUse();
         },
         fullscreenDialog: true));
     if (result != null) {

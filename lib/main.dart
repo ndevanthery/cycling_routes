@@ -1,75 +1,68 @@
-import 'package:cycling_routes/Services/auth.dart';
-import 'package:cycling_routes/Shared/components/loading.dart';
-import 'package:cycling_routes/themes/customTheme.dart';
-import 'package:cycling_routes/route_generator.dart';
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
+import 'package:cycling_routes/themes/custom_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sailor/sailor.dart';
+import 'package:tuple/tuple.dart';
 
-import 'Models/user_m.dart';
+import 'Services/auth.dart';
 import 'Shared/firebase_options.dart';
+import 'routes_generator.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  final Future<FirebaseApp> _firebaseApp = Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  Auth loginManager = Auth();
+  await loginManager.init();
+  RoutesGenerator.createRoutes();
+
+  runApp(MyApp(
+    loginManager: loginManager,
+  ));
+}
+
+class MyApp extends StatefulWidget {
+  final Auth loginManager;
+
+  const MyApp({Key? key, required this.loginManager}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _firebaseApp,
-      builder: ((context, snapshot) {
-        //If has error show something went wrong
-        if (snapshot.hasError) {
-          print('Error with firebase connexion');
+    return ChangeNotifierProvider.value(
+      value: widget.loginManager,
+      child: Selector<Auth, Tuple2<bool, int>>(
+        selector: (_, loginManager) =>
+            Tuple2(loginManager.isUserLoggedIn, loginManager.userRole),
+        builder: (BuildContext context, loginManagerData, _) {
           return MaterialApp(
+            theme: CustomTheme(),
+            darkTheme: CustomNightTheme(),
             debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              body: Container(
-                color: Colors.amber[100],
-                child: const Center(
-                    child: Text(
-                  'An error occured, please try again later',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 212, 166, 0),
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                )),
-              ),
-            ),
+            onGenerateRoute: RoutesGenerator.sailor.generator(),
+            navigatorKey: RoutesGenerator.sailor.navigatorKey,
+            navigatorObservers: [
+              SailorLoggingObserver(),
+              RoutesGenerator.sailor.navigationStackObserver,
+            ],
+            initialRoute: "/",
           );
-        } else if (snapshot.hasData) {
-          //if has data show normal
-          print('firebase connected');
-          return StreamProvider<UserM?>.value(
-            value: AuthService().user,
-            initialData: null,
-            child: MaterialApp(
-              theme: CustomTheme(),
-              darkTheme: CustomNightTheme(),
-              debugShowCheckedModeBanner: false,
-              initialRoute: '/',
-              onGenerateRoute: RouteGenerator.generateRoute,
-            ),
-          );
-        } else {
-          //else show loading
-          print('Loading ; firebase connexion');
-          return const MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              body: Loading(),
-            ),
-          );
-        }
-      }),
+        },
+      ),
     );
   }
 }

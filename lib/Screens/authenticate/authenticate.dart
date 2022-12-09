@@ -1,3 +1,4 @@
+import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
@@ -71,7 +72,8 @@ class _AuthenticateState extends State<Authenticate> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/signIn');
+                              RoutesGenerator.sailor
+                                  .navigate(myLoginScreenRoute);
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,7 +114,8 @@ class _AuthenticateState extends State<Authenticate> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              Navigator.of(context).pushNamed('/register');
+                              RoutesGenerator.sailor
+                                  .navigate(myRegisterScreenRoute);
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

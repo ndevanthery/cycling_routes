@@ -1,9 +1,7 @@
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-import '../Models/route_m.dart';
+import '../../Models/route_m.dart';
 
 class RouteDetails extends StatefulWidget {
   RouteM route;

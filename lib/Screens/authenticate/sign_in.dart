@@ -1,8 +1,13 @@
-import 'package:cycling_routes/Services/auth.dart';
+import 'dart:developer';
+
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/Shared/components/powered_by.dart';
+import 'package:cycling_routes/routes_generator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../Services/auth.dart';
 import '../../Shared/constants.dart';
 
 class SignIn extends StatefulWidget {
@@ -27,12 +32,13 @@ class _SignInState extends State<SignIn> {
     _pwdVisible = false;
   }
 
-  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    Auth loginManager = Provider.of<Auth>(context, listen: true);
+
     return isLoading
         ? const Loading()
         : Stack(children: <Widget>[
@@ -47,7 +53,7 @@ class _SignInState extends State<SignIn> {
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    RoutesGenerator.sailor.pop();
                   },
                   icon: Image.asset(
                     "assets/icons/back_white.png",
@@ -222,58 +228,97 @@ class _SignInState extends State<SignIn> {
                                                     .validate()) {
                                                   setState(
                                                       () => isLoading = true);
-                                                  await _auth
-                                                      .signIn(
-                                                          context, email, pwd)
-                                                      .then((value) {
-                                                    print(
-                                                        'Result after login : ${value.toString()}');
 
-                                                    if (value != null) {
-                                                      setState(() {
-                                                        error = '';
-                                                        isLoading = false;
-                                                      });
-                                                    }
-                                                    if (value.toString() ==
-                                                        'Account Not Found') {
+                                                  //Sign In
+                                                  try {
+                                                    await FirebaseAuth.instance
+                                                        .signInWithEmailAndPassword(
+                                                            email: email,
+                                                            password: pwd);
+
+                                                    //Update User
+
+                                                    await loginManager
+                                                        .updateUser(
+                                                            FirebaseAuth
+                                                                .instance
+                                                                .currentUser,
+                                                            shouldNotify: true)
+                                                        .then((value) {
+                                                      setState(() =>
+                                                          isLoading = false);
+                                                      RoutesGenerator.sailor
+                                                          .pop();
+                                                    });
+                                                  } on FirebaseAuthException catch (e) {
+                                                    if (e.code ==
+                                                        'user-not-found') {
+                                                      log('No user found for that email.');
                                                       setState(() {
                                                         error =
                                                             'Account Not Found, please register yourself';
                                                         isLoading = false;
                                                       });
-                                                    }
-                                                    if (value.toString() ==
-                                                        'Account Disabled') {
-                                                      setState(() {
-                                                        error =
-                                                            'Account Disabled, please register again';
-                                                        isLoading = false;
-                                                      });
-                                                    }
-                                                    if (value.toString() ==
-                                                        'Wrong Password') {
+                                                    } else if (e.code ==
+                                                        'wrong-password') {
+                                                      log('Wrong password provided for that user.');
                                                       setState(() {
                                                         error =
                                                             'Wrong Password, please try again';
                                                         isLoading = false;
                                                       });
                                                     }
-                                                    if (value == null) {
-                                                      setState(() {
-                                                        error =
-                                                            'Unkown error, please try again later';
-                                                        isLoading = false;
-                                                      });
-                                                    }
-                                                  }).onError(
-                                                          (error, stackTrace) {
-                                                    setState(() {
-                                                      error =
-                                                          'Could not sign in for the moment try again later';
-                                                      isLoading = false;
-                                                    });
-                                                  });
+                                                  }
+
+                                                  // await _auth
+                                                  //     .signIn(
+                                                  //         context, email, pwd)
+                                                  //     .then((value) {
+                                                  //   if (value != null) {
+                                                  //     setState(() {
+                                                  //       error = '';
+                                                  //       isLoading = false;
+                                                  //     });
+                                                  //   }
+                                                  //   if (value.toString() ==
+                                                  //       'Account Not Found') {
+                                                  //     setState(() {
+                                                  //       error =
+                                                  //           'Account Not Found, please register yourself';
+                                                  //       isLoading = false;
+                                                  //     });
+                                                  //   }
+                                                  //   if (value.toString() ==
+                                                  //       'Account Disabled') {
+                                                  //     setState(() {
+                                                  //       error =
+                                                  //           'Account Disabled, please register again';
+                                                  //       isLoading = false;
+                                                  //     });
+                                                  //   }
+                                                  //   if (value.toString() ==
+                                                  //       'Wrong Password') {
+                                                  //     setState(() {
+                                                  //       error =
+                                                  //           'Wrong Password, please try again';
+                                                  //       isLoading = false;
+                                                  //     });
+                                                  //   }
+                                                  //   if (value == null) {
+                                                  //     setState(() {
+                                                  //       error =
+                                                  //           'Unkown error, please try again later';
+                                                  //       isLoading = false;
+                                                  //     });
+                                                  //   }
+                                                  // }).onError(
+                                                  //         (error, stackTrace) {
+                                                  //   setState(() {
+                                                  //     error =
+                                                  //         'Could not sign in for the moment try again later';
+                                                  //     isLoading = false;
+                                                  //   });
+                                                  // });
                                                 }
                                               }),
                                         ],

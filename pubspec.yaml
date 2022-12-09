@@ -44,6 +44,8 @@ dependencies:
   latlong2: ^0.8.0
   geolocator: ^8.2.0
   intl: ^0.17.0
+  sailor: ^0.7.1
+  tuple: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,10 +1,7 @@
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
-import 'package:cycling_routes/Shared/route_details.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cycling_routes/Shared/components/route_details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/user_m.dart';

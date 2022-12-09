@@ -11,7 +11,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-import '../../Models/user_m.dart';
+import '../../Services/auth.dart';
 import '../../Shared/components/route_card.dart';
 
 //##############################
@@ -27,8 +27,9 @@ class _SearchPageState extends State<SearchPage> {
   List<RouteM> allRoutes = [];
   @override
   void didChangeDependencies() {
-    var user = Provider.of<UserM?>(context);
-    DatabaseService myService = DatabaseService(uid: user!.uid);
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+    DatabaseService myService =
+        DatabaseService(uid: loginManager.getUser()!.uid);
 
     // Get all routes
     myService.getRoutes().then((value) => setState(() {

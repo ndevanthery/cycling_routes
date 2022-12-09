@@ -15,7 +15,7 @@ bool isPasswordValid(String password) {
 
 final textInputDecoration = InputDecoration(
   isDense: true,
-  contentPadding: EdgeInsets.all(0),
+  contentPadding: const EdgeInsets.all(0),
   labelStyle: const TextStyle(color: Colors.black, fontSize: 14),
   hintStyle:
       const TextStyle(color: Color.fromARGB(255, 116, 116, 116), fontSize: 14),
