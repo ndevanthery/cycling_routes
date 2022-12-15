@@ -2,6 +2,8 @@
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cycling_routes/Shared/components/route_card.dart';
@@ -20,6 +22,32 @@ class _ProfilePageState extends State<ProfilePage> {
   PickedFile? imageFile;
   final ImagePicker _picker = ImagePicker();
 
+  Color primaryColor = const Color.fromARGB(255, 255, 255, 255);
+  Color secondaryColor = const Color.fromARGB(255, 126, 121, 121);
+
+  TextEditingController firstnameController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController npaController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+
+  _buildTextField(TextEditingController controller) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+          color: secondaryColor,
+          border: Border.all(color: const Color.fromARGB(255, 151, 153, 156))),
+      child: TextField(
+        controller: controller,
+        style: const TextStyle(color: Colors.white),
+        decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            labelStyle: TextStyle(color: Colors.white),
+            border: InputBorder.none),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,52 +57,142 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 imageProfile(),
                 const SizedBox(
-                  height: 20,
-                )
-                /*CircleAvatar(
-                  radius: 62,
-                  backgroundColor: Colors.grey[700],
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/profile_pic.png'),
-                    radius: 60,
-                  ),
-                ),*/
-                ,
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    shape: const CircleBorder(),
-                  ),
-                  onPressed: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.settings,
-                      color: Colors.black,
-                    ),
-                  ),
+                  height: 200,
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            const Text(
-              "FIRSTNAME",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("Users")
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .snapshots(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData && snapshot.data != null) {
+                      final user = snapshot.data.data();
+                      return Column(
+                        children: [
+                          Text(user['firstname'] + ' ' + user['lastname'],
+                              style: const TextStyle(
+                                  fontSize: 32, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 15.0),
+                          Text(user['address'],
+                              style: const TextStyle(fontSize: 20)),
+                          const SizedBox(height: 15.0),
+                          Text(user['npa'] + ' ' + user['localite'],
+                              style: const TextStyle(fontSize: 20)),
+                          const SizedBox(height: 15.0),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: const CircleBorder(),
+                            ),
+                            onPressed: () {
+                              firstnameController.text = user['firstname'];
+                              lastnameController.text = user['lastname'];
+                              addressController.text = user['address'];
+                              npaController.text = user['npa'];
+                              locationController.text = user['localite'];
+
+                              showDialog(
+                                context: context,
+                                builder: (context) => Dialog(
+                                  child: Container(
+                                    color: primaryColor,
+                                    child: ListView(
+                                      shrinkWrap: true,
+                                      children: <Widget>[
+                                        _buildTextField(
+                                          firstnameController,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        _buildTextField(
+                                          lastnameController,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        _buildTextField(
+                                          addressController,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        _buildTextField(
+                                          npaController,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        _buildTextField(
+                                          locationController,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        ElevatedButton(
+                                          child: const Text('Save'),
+                                          onPressed: () {
+                                            final docUser = FirebaseFirestore
+                                                .instance
+                                                .collection('Users')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser!.uid);
+
+                                            docUser.update({
+                                              "firstname":
+                                                  firstnameController.text,
+                                              "lastname":
+                                                  lastnameController.text,
+                                              "address": addressController.text,
+                                              "npa": npaController.text,
+                                              "localite":
+                                                  locationController.text
+                                            }).whenComplete(
+                                                () => Navigator.pop(context));
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return const Material(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
+
             const SizedBox(height: 20),
-            const Text(
-              "LASTNAME",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-            const Text("ADDRESS"),
-            const Text("NPA/TOWN"),
-            const Text("EMAIL"),
-            //     RouteCard(isAdmin: true, route: ,),
+
+            //      RouteCard(isAdmin: true, route: ),
           ],
         ),
       ),
@@ -84,14 +202,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget imageProfile() {
     return Stack(children: <Widget>[
       CircleAvatar(
-          radius: 62.0,
+          radius: 90,
           // ignore: unnecessary_null_comparison
           backgroundImage: imageFile == null
               ? const AssetImage("assets/profile_pic.png") as ImageProvider
               : FileImage(File(imageFile!.path))),
       Positioned(
-        bottom: 20.0,
-        right: 20.0,
+        bottom: 30.0,
+        right: 30.0,
         child: InkWell(
           onTap: () {
             showModalBottomSheet(
@@ -100,7 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
             );
           },
           child: const Icon(Icons.camera_alt,
-              color: Color.fromARGB(255, 255, 255, 255), size: 28.0),
+              color: Color.fromARGB(255, 255, 255, 255), size: 32.0),
         ),
       ),
     ]);

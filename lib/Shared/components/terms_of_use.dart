@@ -48,14 +48,14 @@ class _TermOfUseState extends State<TermOfUse> {
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
         actions: [
-          FlatButton(
+          ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop('User Disagreed');
               },
               child: const Text('DISAGREE',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold))),
-          FlatButton(
+          ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop('User Agreed');
               },
