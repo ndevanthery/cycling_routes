@@ -1,5 +1,6 @@
 import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:sailor/sailor.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({Key? key}) : super(key: key);
@@ -72,8 +73,13 @@ class _AuthenticateState extends State<Authenticate> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              RoutesGenerator.sailor
-                                  .navigate(myLoginScreenRoute);
+                              RoutesGenerator.sailor.navigate(
+                                myLoginScreenRoute,
+                                transitions: [
+                                  SailorTransition.slide_from_top,
+                                ],
+                                customTransition: MyCustomTransition(),
+                              );
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,8 +120,13 @@ class _AuthenticateState extends State<Authenticate> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              RoutesGenerator.sailor
-                                  .navigate(myRegisterScreenRoute);
+                              RoutesGenerator.sailor.navigate(
+                                myRegisterScreenRoute,
+                                transitions: [
+                                  SailorTransition.slide_from_top,
+                                ],
+                                customTransition: MyCustomTransition(),
+                              );
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

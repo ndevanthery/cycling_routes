@@ -46,6 +46,8 @@ dependencies:
   intl: ^0.17.0
   sailor: ^0.7.1
   tuple: ^2.0.0
+  flutter_settings_screens: ^0.1.0+0.2
+  shared_preferences: ^0.5.7+3
 
 dev_dependencies:
   flutter_test:

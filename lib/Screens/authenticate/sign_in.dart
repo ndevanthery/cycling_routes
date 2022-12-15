@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cycling_routes/Shared/components/loading.dart';
+import 'package:cycling_routes/Shared/components/password_forgot_text.dart';
 import 'package:cycling_routes/Shared/components/powered_by.dart';
 import 'package:cycling_routes/routes_generator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../Services/auth.dart';
+import '../../Services/auth_exception_handler.dart';
 import '../../Shared/constants.dart';
 
 class SignIn extends StatefulWidget {
@@ -202,6 +204,13 @@ class _SignInState extends State<SignIn> {
                                               setState(() => pwd = value);
                                             }),
                                           ),
+                                          Container(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 3.0),
+                                              child: const Align(
+                                                alignment: Alignment.topRight,
+                                                child: PasswordForgotText(),
+                                              )),
                                           const SizedBox(
                                             height: 5.0,
                                           ),
@@ -230,14 +239,14 @@ class _SignInState extends State<SignIn> {
                                                       () => isLoading = true);
 
                                                   //Sign In
-                                                  try {
-                                                    await FirebaseAuth.instance
-                                                        .signInWithEmailAndPassword(
-                                                            email: email,
-                                                            password: pwd);
-
-                                                    //Update User
-
+                                                  final status =
+                                                      await loginManager.login(
+                                                    email: email,
+                                                    password: pwd,
+                                                  );
+                                                  if (status ==
+                                                      AuthStatus.successful) {
+                                                    //Update User logged in
                                                     await loginManager
                                                         .updateUser(
                                                             FirebaseAuth
@@ -250,75 +259,16 @@ class _SignInState extends State<SignIn> {
                                                       RoutesGenerator.sailor
                                                           .pop();
                                                     });
-                                                  } on FirebaseAuthException catch (e) {
-                                                    if (e.code ==
-                                                        'user-not-found') {
-                                                      log('No user found for that email.');
-                                                      setState(() {
-                                                        error =
-                                                            'Account Not Found, please register yourself';
-                                                        isLoading = false;
-                                                      });
-                                                    } else if (e.code ==
-                                                        'wrong-password') {
-                                                      log('Wrong password provided for that user.');
-                                                      setState(() {
-                                                        error =
-                                                            'Wrong Password, please try again';
-                                                        isLoading = false;
-                                                      });
-                                                    }
+                                                  } else {
+                                                    final newError =
+                                                        AuthExceptionHandler
+                                                            .generateErrorMessage(
+                                                                status);
+                                                    setState(() {
+                                                      isLoading = false;
+                                                      error = newError;
+                                                    });
                                                   }
-
-                                                  // await _auth
-                                                  //     .signIn(
-                                                  //         context, email, pwd)
-                                                  //     .then((value) {
-                                                  //   if (value != null) {
-                                                  //     setState(() {
-                                                  //       error = '';
-                                                  //       isLoading = false;
-                                                  //     });
-                                                  //   }
-                                                  //   if (value.toString() ==
-                                                  //       'Account Not Found') {
-                                                  //     setState(() {
-                                                  //       error =
-                                                  //           'Account Not Found, please register yourself';
-                                                  //       isLoading = false;
-                                                  //     });
-                                                  //   }
-                                                  //   if (value.toString() ==
-                                                  //       'Account Disabled') {
-                                                  //     setState(() {
-                                                  //       error =
-                                                  //           'Account Disabled, please register again';
-                                                  //       isLoading = false;
-                                                  //     });
-                                                  //   }
-                                                  //   if (value.toString() ==
-                                                  //       'Wrong Password') {
-                                                  //     setState(() {
-                                                  //       error =
-                                                  //           'Wrong Password, please try again';
-                                                  //       isLoading = false;
-                                                  //     });
-                                                  //   }
-                                                  //   if (value == null) {
-                                                  //     setState(() {
-                                                  //       error =
-                                                  //           'Unkown error, please try again later';
-                                                  //       isLoading = false;
-                                                  //     });
-                                                  //   }
-                                                  // }).onError(
-                                                  //         (error, stackTrace) {
-                                                  //   setState(() {
-                                                  //     error =
-                                                  //         'Could not sign in for the moment try again later';
-                                                  //     isLoading = false;
-                                                  //   });
-                                                  // });
                                                 }
                                               }),
                                         ],

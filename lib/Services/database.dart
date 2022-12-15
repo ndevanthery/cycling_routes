@@ -20,7 +20,10 @@ class DatabaseService {
   //Create User Doc at sign in
   //Or update their data
   Future updateUserData(UserM userM) async {
-    return await userCollect.doc(uid).set({
+    return await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userM.uid)
+        .set({
       'email': userM.email,
       'firstname': userM.firstname,
       'lastname': userM.lastname,

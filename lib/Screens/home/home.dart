@@ -1,6 +1,7 @@
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Screens/profile/Profile.dart';
 import 'package:cycling_routes/Screens/search/search.dart';
+import 'package:cycling_routes/Screens/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
     const SearchPage(),
     MapPage(),
     const ProfilePage(),
-    Container(child: const Center(child: Text("Settings"))),
+    const SettingsPage(),
   ];
 
   @override
@@ -34,36 +35,35 @@ class _HomeState extends State<Home> {
           'RideOn',
           style: TextStyle(color: Colors.black),
         ),
-        actions: <Widget>[
-          FlatButton.icon(
-            onPressed: () async {
-              await loginManager.signOut(context);
-            },
-            icon: const Icon(Icons.person),
-            label: const Text('Logout'),
-          )
-        ],
+        // actions: <Widget>[
+        //   FlatButton.icon(
+        //     onPressed: () async {
+        //       await loginManager.signOut(context);
+        //     },
+        //     icon: const Icon(Icons.person),
+        //     label: const Text('Logout'),
+        //   )
+        // ],
       ),
       body: Center(
         child: _pages.elementAt(_selectedIndex), //New
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(30), topLeft: const Radius.circular(30)),
+            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         child: BottomNavigationBar(
-          items: [
-            const BottomNavigationBarItem(
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
                 color: Colors.black,
               ),
               label: "Search",
             ),
-            const BottomNavigationBarItem(
-                icon: const Icon(Icons.browse_gallery), label: "Map"),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: "Profile"),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
+                icon: Icon(Icons.browse_gallery), label: "Map"),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Profile"),
+            BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: "Settings"),
           ],
           onTap: _onItemTapped,

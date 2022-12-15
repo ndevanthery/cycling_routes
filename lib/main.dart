@@ -3,12 +3,13 @@
 import 'package:cycling_routes/themes/custom_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' ;
 import 'package:sailor/sailor.dart';
 import 'package:tuple/tuple.dart';
 
 import 'Services/auth.dart';
 import 'Shared/firebase_options.dart';
+import 'Shared/utils.dart';
 import 'routes_generator.dart';
 
 Future<void> main() async {
@@ -19,6 +20,8 @@ Future<void> main() async {
 
   Auth loginManager = Auth();
   await loginManager.init();
+  UserPreferences.init();
+
   RoutesGenerator.createRoutes();
 
   runApp(MyApp(
