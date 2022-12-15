@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
           style: TextStyle(color: Colors.black),
         ),
         // actions: <Widget>[
-        //   FlatButton.icon(
+        //   TextButton.icon(
         //     onPressed: () async {
         //       await loginManager.signOut(context);
         //     },

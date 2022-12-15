@@ -32,7 +32,7 @@ class _AdminHomeState extends State<AdminHome> {
           style: TextStyle(color: Colors.black),
         ),
         actions: <Widget>[
-          FlatButton.icon(
+          ElevatedButton.icon(
             onPressed: () async {
               await loginManager.signOut(context);
             },
