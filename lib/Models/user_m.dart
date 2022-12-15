@@ -1,5 +1,5 @@
 class UserM {
-  final String uid;
+   dynamic uid='';
 
   dynamic email = '';
   dynamic firstname = '';
@@ -11,7 +11,7 @@ class UserM {
   dynamic role = '';
 
   UserM({
-    required this.uid,
+    this.uid,
     this.email,
     this.firstname,
     this.lastname,
@@ -21,6 +21,20 @@ class UserM {
     this.birthday,
     this.role,
   });
+  
+  factory UserM.fromJson(Map<String, dynamic> userJson, String uid) {
+    return UserM(
+      uid: uid,
+      email: userJson["email"],
+      firstname: userJson["firstname"],
+      lastname: userJson["lastname"],
+      address: userJson["address"],
+      npa: userJson["npa"],
+      localite: userJson["localite"],
+      birthday: userJson["birthday"],
+      role: userJson["role"],
+    );
+  }
 
   @override
   String toString() {

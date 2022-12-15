@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
@@ -11,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../../Models/user_m.dart';
+import '../../Services/auth.dart';
 
 class CreateRoute extends StatefulWidget {
   CreateRoute({Key? key}) : super(key: key);
@@ -61,13 +63,14 @@ class _CreateRouteState extends State<CreateRoute> {
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    user = Provider.of<UserM?>(context);
 
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+
     return Stack(
       children: [
         Scaffold(
@@ -191,7 +194,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        _dialSave();
+                        _dialSave(loginManager.getUser()!.uid);
                         //saveRoute();
                         //myRouteM.routePoints = [];
                         //points = [];
@@ -235,7 +238,7 @@ class _CreateRouteState extends State<CreateRoute> {
 
       var coordinates = feature[0]['geometry']!['coordinates'];
       var summary = feature[0]['properties']!['summary']!;
-      myReturnRoute.distance = summary['distance'];
+      myReturnRoute.distance = summary['distance'] as double?;
       myReturnRoute.duration = summary['duration'];
 
       for (int i = 0; i < coordinates.length; i++) {
@@ -246,14 +249,14 @@ class _CreateRouteState extends State<CreateRoute> {
     return myReturnRoute;
   }
 
-  void saveRoute() {
-    var dbService = DatabaseService(uid: user!.uid);
-    myRouteM.uidCreator = user!.uid;
+  void saveRoute(uid) {
+    var dbService = DatabaseService(uid: uid);
+    myRouteM.uidCreator = uid;
 
     dbService.addRoute(myRouteM);
   }
 
-  Future<void> _dialSave() {
+  Future<void> _dialSave(uid) {
     TextEditingController myController = TextEditingController();
     return showDialog<void>(
       context: context,
@@ -295,7 +298,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   myRouteM.name = myController.text;
                   print(myRouteM);
 
-                  saveRoute();
+                  saveRoute(uid);
                   myRouteM.routePoints = [];
                   points = [];
                 });

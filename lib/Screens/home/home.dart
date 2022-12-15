@@ -1,8 +1,10 @@
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Screens/profile/Profile.dart';
 import 'package:cycling_routes/Screens/search/search.dart';
-import 'package:cycling_routes/Services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../Services/auth.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -12,18 +14,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final AuthService _auth = AuthService();
-
   int _selectedIndex = 0;
-  List<Widget> _pages = <Widget>[
-    SearchPage(),
+  final List<Widget> _pages = <Widget>[
+    const SearchPage(),
     MapPage(),
-    ProfilePage(),
-    Container(child: Center(child: Text("Settings"))),
+    const ProfilePage(),
+    Container(child: const Center(child: Text("Settings"))),
   ];
 
   @override
   Widget build(BuildContext context) {
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -35,7 +37,7 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           TextButton.icon(
             onPressed: () async {
-              await _auth.signOut();
+              await loginManager.signOut(context);
             },
             icon: const Icon(Icons.person),
             label: const Text('Logout'),
@@ -46,21 +48,22 @@ class _HomeState extends State<Home> {
         child: _pages.elementAt(_selectedIndex), //New
       ),
       bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+        borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(30), topLeft: const Radius.circular(30)),
         child: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
                 color: Colors.black,
               ),
               label: "Search",
             ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.browse_gallery), label: "Map"),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Profile"),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
+                icon: const Icon(Icons.browse_gallery), label: "Map"),
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.home), label: "Profile"),
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: "Settings"),
           ],
           onTap: _onItemTapped,

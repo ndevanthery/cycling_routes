@@ -15,9 +15,10 @@ bool isPasswordValid(String password) {
 
 final textInputDecoration = InputDecoration(
   isDense: true,
-  contentPadding: const EdgeInsets.fromLTRB(7, 7, 7, 0),
-  labelStyle: const TextStyle(color: Colors.black),
-  hintStyle: const TextStyle(color: Color.fromARGB(255, 116, 116, 116)),
+  contentPadding: const EdgeInsets.all(0),
+  labelStyle: const TextStyle(color: Colors.black, fontSize: 14),
+  hintStyle:
+      const TextStyle(color: Color.fromARGB(255, 116, 116, 116), fontSize: 14),
   fillColor: Colors.white,
   filled: true,
   errorStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
@@ -30,6 +31,11 @@ final textInputDecoration = InputDecoration(
     borderRadius: BorderRadius.circular(15.0),
     gapPadding: 0.0,
     borderSide: const BorderSide(color: Colors.amberAccent, width: 2.0),
+  ),
+  focusedErrorBorder:OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
+    gapPadding: 0.0,
+    borderSide: const BorderSide(color: Colors.red, width: 2.0),
   ),
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(15.0),

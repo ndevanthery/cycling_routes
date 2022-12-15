@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:developer';
+
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,8 +11,10 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-import '../../Models/user_m.dart';
+import '../../Services/auth.dart';
 import '../../Shared/components/route_card.dart';
+
+//##############################
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -18,13 +24,16 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  List<RouteM> myRoutes = [];
+  List<RouteM> allRoutes = [];
   @override
   void didChangeDependencies() {
-    var user = Provider.of<UserM?>(context);
-    DatabaseService myService = DatabaseService(uid: user!.uid);
-    myService.getAdminRoutes().then((value) => setState(() {
-          myRoutes = value;
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+    DatabaseService myService =
+        DatabaseService(uid: loginManager.getUser()!.uid);
+
+    // Get all routes
+    myService.getRoutes().then((value) => setState(() {
+          allRoutes = value;
         }));
 
     super.didChangeDependencies();
@@ -32,19 +41,43 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (myRoutes.isEmpty) {
-      return Text("No routes available for now ! ");
+    if (allRoutes.isEmpty) {
+      return Text("No routes here for now ! ");
     }
     return GridView.count(
       crossAxisCount: 2,
-      children: [
-        ...myRoutes
+      children: <Widget>[
+        TextField(
+          onChanged: (value) => _runFilter(value),
+          decoration: const InputDecoration(
+              labelText: 'Search a route', suffixIcon: Icon(Icons.search)),
+        ),
+        ...allRoutes
             .map((e) => RouteCard(
                   route: e,
                   isAdmin: false,
+                  remove: (RouteM removed) {
+                    setState(() {
+                      allRoutes.remove(removed);
+                    });
+                  },
                 ))
-            .toList()
+            .toList(),
       ],
     );
+  }
+}
+
+//Filter
+void _runFilter(String inputText) {
+  List<RouteM> results = [];
+  if (inputText.isEmpty) {
+    results = _SearchPageState().allRoutes;
+  } else {
+    results = _SearchPageState()
+        .allRoutes
+        .where((Routes) =>
+            Routes.name!.toLowerCase().contains(inputText.toLowerCase()))
+        .toList();
   }
 }

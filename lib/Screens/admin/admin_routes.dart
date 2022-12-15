@@ -2,12 +2,9 @@ import 'package:cycling_routes/Services/database.dart';
 import 'package:cycling_routes/Shared/components/route_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
-
 import '../../Models/route_m.dart';
-import '../../Models/user_m.dart';
+import '../../Services/auth.dart';
 
 class AdminRouteList extends StatefulWidget {
   const AdminRouteList({Key? key}) : super(key: key);
@@ -27,8 +24,9 @@ class _AdminRouteListState extends State<AdminRouteList> {
 
   @override
   void didChangeDependencies() {
-    var user = Provider.of<UserM?>(context);
-    DatabaseService myService = DatabaseService(uid: user!.uid);
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+    DatabaseService myService =
+        DatabaseService(uid: loginManager.getUser()!.uid);
     myService.getAdminRoutes().then((value) => setState(() {
           myRoutes = value;
         }));
