@@ -145,7 +145,7 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                         ),
 
                         const SizedBox(
-                          height: 5.0,
+                          height: 10.0,
                         ),
                         TextFormField(
                           controller: _newPwdController,

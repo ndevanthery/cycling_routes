@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 enum AuthStatus {
   pending,
+  dataDeleted,
   successful,
   reauth,
   wrongPassword,
@@ -12,7 +13,7 @@ enum AuthStatus {
 }
 
 class AuthExceptionHandler {
-  static handleAuthException(FirebaseAuthException e) {
+  static handleAuthException(FirebaseException e) {
     AuthStatus status;
     switch (e.code) {
       case "invalid-email":

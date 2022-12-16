@@ -76,6 +76,30 @@ class Auth with ChangeNotifier {
     return _status;
   }
 
+    Future<AuthStatus> deleteAccount({
+    required UserM user,
+    required String password,
+  }) async {
+    try {
+      
+      User newUser = _auth.currentUser!;
+      user.uid = newUser.uid;
+
+      //delete a Document of user into Users Collection
+     _status= await DatabaseService(uid: user.uid).deleteUser(user);
+    
+    if(_status == AuthStatus.dataDeleted){
+      //Delete User into Firebase Auth
+      await _auth.currentUser!.delete();
+    }
+
+      _status = AuthStatus.successful;
+    } on FirebaseAuthException catch (e) {
+      _status = AuthExceptionHandler.handleAuthException(e);
+    }
+    return _status;
+  }
+
   Future<AuthStatus> updateCredentials({
     required UserM user,
     required String password,

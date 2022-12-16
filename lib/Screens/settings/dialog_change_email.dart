@@ -4,6 +4,7 @@ import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sailor/sailor.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
@@ -12,9 +13,8 @@ import '../../Shared/constants.dart';
 import '../../routes_generator.dart';
 
 class DialogChangeEmail extends StatefulWidget {
-  const DialogChangeEmail({
-    Key? key,
-  }) : super(key: key);
+  bool isDelete;
+  DialogChangeEmail({Key? key, required this.isDelete}) : super(key: key);
 
   @override
   State<DialogChangeEmail> createState() => _DialogChangeEmailState();
@@ -28,8 +28,6 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
   late bool isLoading;
 
   //Fields State
-  late String email;
-  late String pwd;
   late String msg;
   late bool isError;
   late bool _oldpwdVisible;
@@ -38,8 +36,6 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
   @override
   initState() {
     msg = '';
-    email = '';
-    pwd = '';
     isError = true;
     isLoading = false;
     _oldpwdVisible = false;
@@ -75,10 +71,11 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
   Widget build(BuildContext context) {
     loginManager = Provider.of<Auth>(context, listen: true);
 
+    if (widget.isDelete) _emailController.text = loginManager.getUser()!.email;
     return isLoading
         ? const Loading()
         : AlertDialog(
-            title: const Text('Edit Email'),
+            title: Text(widget.isDelete ? 'Delete my Account' : 'Edit Email'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +84,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    'You must enter your current password to be able to make changes.',
+                    'You must enter your current password to be able to make anything.',
                     style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                   ),
                 ),
@@ -110,10 +107,14 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                           height: 18.0,
                         ),
                         TextFormField(
+                          enabled: !widget.isDelete,
                           controller: _emailController,
                           style: const TextStyle(color: Colors.black),
                           keyboardType: TextInputType.emailAddress,
                           decoration: textInputDecoration.copyWith(
+                              fillColor: widget.isDelete
+                                  ? Colors.grey[350]
+                                  : Colors.white,
                               hintText: loginManager.getUser()!.email,
                               prefixIcon: const Icon(
                                 Icons.mail_outline,
@@ -131,7 +132,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                         ),
 
                         const SizedBox(
-                          height: 5.0,
+                          height: 10.0,
                         ),
                         TextFormField(
                           controller: _oldPwdController,
@@ -198,9 +199,9 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                 },
               ),
               FlatButton(
-                color: Colors.grey[600],
+                color: widget.isDelete ? Colors.red[300] : Colors.grey[600],
                 textColor: Colors.white,
-                child: const Text('SAVE'),
+                child: Text(widget.isDelete ? 'DELETE' : 'SAVE'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
@@ -214,10 +215,15 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
 
                     //Call function to sign in the user into firebase Authentication
                     //AND Creating its document into firestore
-                    status = await loginManager.updateCredentials(
-                        user: myUser,
-                        password: _oldPwdController.text,
-                        newPassword: null);
+                    if (widget.isDelete) {
+                      status = await loginManager.deleteAccount(
+                          user: myUser, password: _oldPwdController.text);
+                    } else {
+                      status = await loginManager.updateCredentials(
+                          user: myUser,
+                          password: _oldPwdController.text,
+                          newPassword: null);
+                    }
 
                     if (status == AuthStatus.successful) {
                       User newUser = FirebaseAuth.instance.currentUser!;
@@ -235,7 +241,12 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                         });
                         Future.delayed(const Duration(seconds: 5), () {
                           log('back to settings after 5 seconds');
-                          RoutesGenerator.sailor.pop();
+                          if (!widget.isDelete) {
+                            RoutesGenerator.sailor.pop();
+                          } else {
+                            RoutesGenerator.sailor.navigate(myinitalRoute,
+                                navigationType: NavigationType.pushReplace);
+                          }
                         });
                       });
                     } else {

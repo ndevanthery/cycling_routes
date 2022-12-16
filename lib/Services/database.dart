@@ -1,7 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Models/user_m.dart';
+import 'package:cycling_routes/Services/auth_exception_handler.dart';
 import 'package:latlong2/latlong.dart';
 
 class DatabaseService {
@@ -95,6 +95,21 @@ class DatabaseService {
 
   Future<void> deleteRoute(RouteM route) async {
     await routeCollect.doc(route.uid).delete();
+  }
+  
+
+  Future<AuthStatus> deleteUser(UserM user) async {
+    dynamic status = AuthStatus.pending;
+    try {
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(user.uid)
+          .delete();
+      status = AuthStatus.dataDeleted;
+    } on FirebaseException catch (e) {
+      status = AuthExceptionHandler.handleAuthException(e);
+    }
+    return status;
   }
 
   //Stream to listen for User Data Changes

@@ -111,11 +111,11 @@ class _SettingsPageState extends State<SettingsPage> {
       onTap: () async {
         switch (title) {
           case 'Modify email':
-            _displayEditCredentialDialog(context, true);
+            _displayEditCredentialDialog(context, 1);
             //Utils.openDialog(context, '', () {});
             break;
           case 'Modify password':
-            _displayEditCredentialDialog(context, false);
+            _displayEditCredentialDialog(context, 2);
             //Utils.openDialog(context, '', () {});
             break;
           case 'Logout':
@@ -130,6 +130,7 @@ class _SettingsPageState extends State<SettingsPage> {
             break;
 
           case 'Delete Account':
+            _displayEditCredentialDialog(context, 3);
             break;
           default:
         }
@@ -155,11 +156,20 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> _displayEditCredentialDialog(
-      BuildContext context, isEmail) async {
+      BuildContext context, int caseNo) async {
     return showDialog(
         context: context,
         builder: (context) {
-          return isEmail ? const DialogChangeEmail() : const DialogChangePwd();
+          switch (caseNo) {
+            case 1:
+              return  DialogChangeEmail(isDelete: false);
+            case 2:
+              return const DialogChangePwd();
+            case 3:
+              return  DialogChangeEmail(isDelete: true);
+            default:
+              return  DialogChangeEmail(isDelete: false);
+          }
         });
   }
 }
