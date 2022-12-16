@@ -70,8 +70,14 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
   @override
   Widget build(BuildContext context) {
     loginManager = Provider.of<Auth>(context, listen: true);
+    String email;
+    if (loginManager.getUser() == null) {
+      email = '';
+    } else {
+      email = loginManager.getUser()?.email;
+    }
 
-    if (widget.isDelete) _emailController.text = loginManager.getUser()!.email;
+    if (widget.isDelete) _emailController.text = email;
     return isLoading
         ? const Loading()
         : AlertDialog(
@@ -226,28 +232,29 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                     }
 
                     if (status == AuthStatus.successful) {
-                      User newUser = FirebaseAuth.instance.currentUser!;
+                      User? newUser = FirebaseAuth.instance.currentUser;
                       //Update the user logged in
                       await loginManager
                           .updateUser(newUser, shouldNotify: true)
                           .then((value) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        setState(() {
-                          isError = false;
-                          msg =
-                              'Changes Updated. You will be redirected to settings in 5 seconds.';
-                        });
-                        Future.delayed(const Duration(seconds: 5), () {
-                          log('back to settings after 5 seconds');
-                          if (!widget.isDelete) {
+                        if (!widget.isDelete) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          setState(() {
+                            isError = false;
+                            msg =
+                                'Changes Updated. You will be redirected to settings in 5 seconds.';
+                          });
+                          Future.delayed(const Duration(seconds: 5), () {
+                            log('back to settings after 5 seconds');
                             RoutesGenerator.sailor.pop();
-                          } else {
-                            RoutesGenerator.sailor.navigate(myinitalRoute,
-                                navigationType: NavigationType.pushReplace);
-                          }
-                        });
+                          });
+                        } else {
+                          log('User Deleted');
+                          RoutesGenerator.sailor.navigate(myinitalRoute,
+                              navigationType: NavigationType.pushReplace);
+                        }
                       });
                     } else {
                       final newError =
