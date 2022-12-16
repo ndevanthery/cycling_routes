@@ -51,22 +51,14 @@ class _TermOfUseState extends State<TermOfUse> {
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
         actions: [
-<<<<<<< HEAD
-          ElevatedButton(
-=======
           TextButton(
->>>>>>> 55a83df (Deleting Flatbutton ( Deprecated ))
               onPressed: () {
                 Navigator.of(context).pop('User Disagreed');
               },
               child: const Text('DISAGREE',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold))),
-<<<<<<< HEAD
-          ElevatedButton(
-=======
           TextButton(
->>>>>>> 55a83df (Deleting Flatbutton ( Deprecated ))
               onPressed: () {
                 Navigator.of(context).pop('User Agreed');
               },
