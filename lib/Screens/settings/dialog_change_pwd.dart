@@ -201,20 +201,24 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
               ],
             ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.grey[400],
-                textColor: Colors.white,
-                child: const Text('CANCEL'),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.grey[400]),
+                child: const Text(
+                  'CANCEL',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   setState(() {
                     Navigator.pop(context);
                   });
                 },
               ),
-              FlatButton(
-                color: Colors.grey[600],
-                textColor: Colors.white,
-                child: const Text('SAVE'),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.grey[600]),
+                child: const Text(
+                  'SAVE',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
