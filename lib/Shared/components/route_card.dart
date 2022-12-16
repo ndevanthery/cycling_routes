@@ -10,7 +10,13 @@ class RouteCard extends StatefulWidget {
   RouteM route;
   bool isAdmin;
   Function? remove;
-  RouteCard({Key? key, required this.route, required this.isAdmin, this.remove})
+  Function? update;
+  RouteCard(
+      {Key? key,
+      required this.route,
+      required this.isAdmin,
+      this.remove,
+      this.update})
       : super(key: key);
   @override
   State<RouteCard> createState() => _RouteCardState();
@@ -28,46 +34,53 @@ class _RouteCardState extends State<RouteCard> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => RouteDetails(
-                route: widget.route,
-              ),
-            ));
-      },
-      onLongPress: widget.isAdmin
-          ? () {
-              _dialDeleteRoute();
+    return Container(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RouteDetails(
+                  route: widget.route,
+                  isAdmin: widget.isAdmin,
+                ),
+              )).then((value) {
+            if (widget.update != null) {
+              widget.update!();
             }
-          : null,
-      child: Container(
-        padding: EdgeInsets.only(bottom: 5),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: const Image(
-                fit: BoxFit.cover,
-                image: AssetImage("assets/velo_tour.jpg"),
-                width: 170,
+          });
+        },
+        onLongPress: widget.isAdmin
+            ? () {
+                _dialDeleteRoute();
+              }
+            : null,
+        child: Container(
+          margin: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: const Image(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/velo_tour.jpg"),
+                  width: 170,
+                ),
               ),
-            ),
-            Text(
-              "${widget.route.name}",
-              style: TextStyle(fontWeight: FontWeight.w800),
-            ),
-            Text(
-              "Dist: ${widget.route.distance} Time: ${widget.route.duration} sec",
-              overflow: TextOverflow.clip,
-            )
-          ],
+              Text(
+                "${widget.route.name}",
+                style: TextStyle(fontWeight: FontWeight.w800),
+              ),
+              Text(
+                "Dist: ${widget.route.distance} Time: ${widget.route.duration} sec",
+                overflow: TextOverflow.clip,
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -39,11 +39,14 @@ class _AdminRouteListState extends State<AdminRouteList> {
     if (myRoutes.isEmpty) {
       return Text("You need to create a route first ! ");
     }
-    return GridView.count(
-      crossAxisCount: 2,
-      children: [
-        ...myRoutes
-            .map((e) => RouteCard(
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.count(
+        crossAxisCount: 2,
+        children: [
+          ...myRoutes
+              .map((e) => RouteCard(
                   route: e,
                   isAdmin: true,
                   remove: (RouteM removed) {
@@ -51,9 +54,12 @@ class _AdminRouteListState extends State<AdminRouteList> {
                       myRoutes.remove(removed);
                     });
                   },
-                ))
-            .toList()
-      ],
+                  update: () {
+                    setState(() {});
+                  }))
+              .toList()
+        ],
+      ),
     );
   }
 }

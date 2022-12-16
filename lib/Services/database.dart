@@ -70,6 +70,14 @@ class DatabaseService {
     return myRouteList;
   }
 
+  Future<bool> updateRouteName(String uid, String newName) async {
+    await FirebaseFirestore.instance
+        .collection('Routes')
+        .doc(uid)
+        .update({'name': newName});
+    return true;
+  }
+
   Future<List<RouteM>> getRoutes() async {
     var getRoutes = await routeCollect.get();
     var myDocs = getRoutes.docs;

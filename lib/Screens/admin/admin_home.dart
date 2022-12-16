@@ -36,12 +36,12 @@ class _AdminHomeState extends State<AdminHome> {
           IconButton(
               onPressed: () async {
                 Utils.showLogoutConfirmDialog(
-                context,
-                'Logout',
-                'Confirm to disconnect yourself.',
-                'LOGOUT',
-                'CANCEL',
-                loginManager);
+                    context,
+                    'Logout',
+                    'Confirm to disconnect yourself.',
+                    'LOGOUT',
+                    'CANCEL',
+                    loginManager);
               },
               icon: const Icon(
                 Icons.logout,
