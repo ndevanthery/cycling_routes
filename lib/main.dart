@@ -3,8 +3,8 @@ import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/themes/custom_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:sailor/sailor.dart';
 import 'package:tuple/tuple.dart';
 import 'Screens/wrapper.dart';
 import 'Services/auth.dart';
@@ -20,7 +20,6 @@ Future<void> main() async {
   Auth loginManager = Auth();
   await loginManager.init();
 
-  RoutesGenerator.createRoutes();
 
   runApp(MyApp(
     loginManager: loginManager,
