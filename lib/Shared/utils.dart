@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../Shared/components/terms_of_use.dart' as full_dialog_terms;
 import '../Shared/components/password_forgot.dart' as full_dialog_pwd;
 
@@ -82,17 +81,4 @@ class Utils {
       ),
     );
   }
-}
-
-class UserPreferences {
-  static late SharedPreferences _preferences;
-
-  static Map<dynamic, bool> myUserPrefs = {
-    isDarkMode: false,
-  };
-
-  static var isDarkMode = false;
-
-  static Future init() async =>
-      _preferences = await SharedPreferences.getInstance();
 }
