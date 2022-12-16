@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-enum AuthStatus {
+enum ExceptionStatus {
   pending,
   dataDeleted,
-  successful,
   reauth,
+  successful,
   wrongPassword,
   emailAlreadyExists,
   invalidEmail,
@@ -12,40 +12,41 @@ enum AuthStatus {
   unknown,
 }
 
-class AuthExceptionHandler {
+class ExceptionHandler {
   static handleAuthException(FirebaseException e) {
-    AuthStatus status;
+    ExceptionStatus status;
     switch (e.code) {
       case "invalid-email":
-        status = AuthStatus.invalidEmail;
+        status = ExceptionStatus.invalidEmail;
         break;
       case "wrong-password":
-        status = AuthStatus.wrongPassword;
+        status = ExceptionStatus.wrongPassword;
         break;
       case "weak-password":
-        status = AuthStatus.weakPassword;
+        status = ExceptionStatus.weakPassword;
         break;
       case "email-already-in-use":
-        status = AuthStatus.emailAlreadyExists;
+        status = ExceptionStatus.emailAlreadyExists;
         break;
       default:
-        status = AuthStatus.unknown;
+        status = ExceptionStatus.unknown;
     }
     return status;
   }
+
   static String generateErrorMessage(error) {
     String errorMessage;
     switch (error) {
-      case AuthStatus.invalidEmail:
+      case ExceptionStatus.invalidEmail:
         errorMessage = "Your email address appears to be malformed.";
         break;
-      case AuthStatus.weakPassword:
+      case ExceptionStatus.weakPassword:
         errorMessage = "Your password should be at least 6 characters.";
         break;
-      case AuthStatus.wrongPassword:
+      case ExceptionStatus.wrongPassword:
         errorMessage = "Your email or password is wrong.";
         break;
-      case AuthStatus.emailAlreadyExists:
+      case ExceptionStatus.emailAlreadyExists:
         errorMessage =
             "The email address is already in use by another account.";
         break;

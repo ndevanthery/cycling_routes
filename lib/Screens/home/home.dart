@@ -3,12 +3,9 @@ import 'package:cycling_routes/Screens/profile/Profile.dart';
 import 'package:cycling_routes/Screens/search/search.dart';
 import 'package:cycling_routes/Screens/settings/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../Services/auth.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -25,7 +22,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Auth loginManager = Provider.of<Auth>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(

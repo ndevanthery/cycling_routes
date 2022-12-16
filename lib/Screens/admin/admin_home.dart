@@ -31,6 +31,16 @@ class _AdminHomeState extends State<AdminHome> {
           'RideOn',
           style: TextStyle(color: Colors.black),
         ),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await loginManager.signOut(context);
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ))
+        ],
       ),
       body: Center(
         child: _pages.elementAt(_selectedIndex), //New

@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
 import '../../Shared/constants.dart';
-import '../../routes_generator.dart';
 
 class DialogChangePwd extends StatefulWidget {
   const DialogChangePwd({
@@ -201,9 +201,16 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
               ],
             ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.grey[400],
-                textColor: Colors.white,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                  primary: Colors.grey[400],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.all(13),
+                ),
                 child: const Text('CANCEL'),
                 onPressed: () {
                   setState(() {
@@ -211,9 +218,16 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                   });
                 },
               ),
-              FlatButton(
-                color: Colors.grey[600],
-                textColor: Colors.white,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600),
+                  primary: Colors.grey[500],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.all(13),
+                ),
                 child: const Text('SAVE'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -223,7 +237,7 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                     //Retrieve info entered by user
                     UserM myUser = loginManager.getUser()!;
 
-                    final AuthStatus status;
+                    final ExceptionStatus status;
 
                     //Call function to sign in the user into firebase Authentication
                     //AND Creating its document into firestore
@@ -232,7 +246,7 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                         password: _oldPwdController.text,
                         newPassword: _newPwdController.text);
 
-                    if (status == AuthStatus.successful) {
+                    if (status == ExceptionStatus.successful) {
                       User newUser = FirebaseAuth.instance.currentUser!;
                       //Update the user logged in
                       await loginManager
@@ -248,12 +262,12 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                         });
                         Future.delayed(const Duration(seconds: 5), () {
                           log('back to settings after 5 seconds');
-                          RoutesGenerator.sailor.pop();
+                          context.pop();
                         });
                       });
                     } else {
                       final newError =
-                          AuthExceptionHandler.generateErrorMessage(status);
+                          ExceptionHandler.generateErrorMessage(status);
                       updateError(newError, true);
                       setState(() {
                         isLoading = false;
