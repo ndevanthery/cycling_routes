@@ -146,7 +146,6 @@ class _RegisterState extends State<Register> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     UserDataForm(
-                                      isRegisterForm: true,
                                       user: loginManager.getUser(),
                                       error: error,
                                       updateError: updateError,

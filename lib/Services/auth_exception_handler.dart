@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 enum AuthStatus {
+  pending,
   successful,
+  reauth,
   wrongPassword,
   emailAlreadyExists,
   invalidEmail,

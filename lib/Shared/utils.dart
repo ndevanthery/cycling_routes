@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Shared/components/terms_of_use.dart' as full_dialog_terms;
 import '../Shared/components/password_forgot.dart' as full_dialog_pwd;
-import '../Screens/settings/account_settings.dart' as full_dialog_account;
 
 class Utils {
   static showConfirmDialog(BuildContext context, String title, String content,
@@ -56,10 +55,8 @@ class Utils {
         builder: (BuildContext context) {
           if (caseStr.contains('terms')) {
             return const full_dialog_terms.TermOfUse();
-          } else if (caseStr.contains('pwd')) {
-            return const full_dialog_pwd.PasswordForgot();
           } else {
-            return full_dialog_account.AccountSettings();
+            return const full_dialog_pwd.PasswordForgot();
           }
         },
         fullscreenDialog: true));

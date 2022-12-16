@@ -93,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           const SizedBox(height: 15.0),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
+                              primary: Colors.white,
                               shape: const CircleBorder(),
                             ),
                             onPressed: () {

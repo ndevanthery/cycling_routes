@@ -76,30 +76,44 @@ class Auth with ChangeNotifier {
     return _status;
   }
 
-  Future<AuthStatus> updateAccount({
+  Future<AuthStatus> updateCredentials({
     required UserM user,
     required String password,
-    required String newPassword,
+    required String? newPassword,
   }) async {
     try {
       user.uid = _auth.currentUser!.uid;
+//Reauthentication of the user
+      _status = await reAuthenticate(oldPwd: password);
 
-      //Changes inside Firebase Auth
-      if (password.compareTo(newPassword) != 0) {
-        //Reauthentication of the user
-        reAuthenticate(oldPwd: password);
-        changePassword(newPwd: newPassword);
+      if (_status == AuthStatus.reauth) {
+//Changes inside Firebase Auth
+        if (newPassword == null) {
+          if (user.email.compareTo(_auth.currentUser!.email) != 0) {
+            changeEmail(newEmail: user.email);
+            _status = AuthStatus.successful;
+          } else {
+            return AuthStatus.successful;
+          }
+        } else {
+          if (password.compareTo(newPassword) != 0) {
+            changePassword(newPwd: newPassword);
+            _status = AuthStatus.successful;
+          } else {
+            return AuthStatus.successful;
+          }
+        }
+
+        //Update Document of the user inside Firestore
+        if (_status == AuthStatus.successful) {
+          await DatabaseService(uid: user.uid).updateUserData(user);
+        }
+
+        _status = AuthStatus.successful;
       }
-      if (user.email.compareTo(_auth.currentUser!.email) != 0) {
-        reAuthenticate(oldPwd: password);
-        changeEmail(newEmail: user.email);
-      }
-
-      //Update Document of the user inside Firestore
-      await DatabaseService(uid: user.uid).updateUserData(user);
-
-      _status = AuthStatus.successful;
     } on FirebaseAuthException catch (e) {
+      log('Whole Update Credential Method Error : $e');
+
       _status = AuthExceptionHandler.handleAuthException(e);
     }
     return _status;
@@ -123,6 +137,8 @@ class Auth with ChangeNotifier {
       log('Email changed to : $newEmail');
       _status = AuthStatus.successful;
     } on FirebaseAuthException catch (e) {
+      log('Change Email Error : $e');
+
       _status = AuthExceptionHandler.handleAuthException(e);
     }
     return _status;
@@ -135,6 +151,8 @@ class Auth with ChangeNotifier {
       log('Password reset');
       _status = AuthStatus.successful;
     } on FirebaseAuthException catch (e) {
+      log('Change Pwd Error : $e');
+
       _status = AuthExceptionHandler.handleAuthException(e);
     }
     return _status;
@@ -158,9 +176,11 @@ class Auth with ChangeNotifier {
       final String email = user.email!;
       AuthCredential credential =
           EmailAuthProvider.credential(email: email, password: oldPwd);
-      await user.reauthenticateWithCredential(credential);
-      _status = AuthStatus.successful;
+      await user
+          .reauthenticateWithCredential(credential)
+          .then((value) => _status = AuthStatus.reauth);
     } on FirebaseAuthException catch (e) {
+      log('Re-Auth Error : $e');
       _status = AuthExceptionHandler.handleAuthException(e);
     }
     return _status;

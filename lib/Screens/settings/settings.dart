@@ -1,5 +1,7 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
+import 'package:cycling_routes/Screens/settings/dialog_change_email.dart';
+import 'package:cycling_routes/Screens/settings/dialog_change_pwd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../../Services/auth.dart';
 import '../../Services/database.dart';
 import '../../Shared/utils.dart';
-import 'account_settings.dart';
 
 class SettingsPage extends StatefulWidget {
   static const keyDarkMode = 'key-dark-mode';
@@ -64,12 +65,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(
                   height: 5.0,
                 ),
-                buildAccountOption(
-                    context,
-                    loginManager,
-                    'Modify account details',
-                    null,
+                buildAccountOption(context, loginManager, 'Modify email', null,
                     Icons.arrow_forward_ios_rounded),
+                buildAccountOption(context, loginManager, 'Modify password',
+                    null, Icons.arrow_forward_ios_rounded),
                 buildAccountOption(
                     context, loginManager, 'Logout', null, Icons.logout),
                 buildAccountOption(context, loginManager, 'Delete Account',
@@ -113,8 +112,13 @@ class _SettingsPageState extends State<SettingsPage> {
     return GestureDetector(
       onTap: () async {
         switch (title) {
-          case 'Modify account details':
-            Utils.openDialog(context, '', () {});
+          case 'Modify email':
+            _displayEditCredentialDialog(context, true);
+            //Utils.openDialog(context, '', () {});
+            break;
+          case 'Modify password':
+            _displayEditCredentialDialog(context, false);
+            //Utils.openDialog(context, '', () {});
             break;
           case 'Logout':
             Utils.showConfirmDialog(
@@ -150,5 +154,14 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _displayEditCredentialDialog(
+      BuildContext context, isEmail) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return isEmail ? DialogChangeEmail() : DialogChangePwd();
+        });
   }
 }

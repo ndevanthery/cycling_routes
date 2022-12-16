@@ -14,7 +14,6 @@ import '../constants.dart';
 class UserDataForm extends StatefulWidget {
   UserDataForm(
       {Key? key,
-      required this.isRegisterForm,
       required this.user,
       required this.error,
       required this.updateError,
@@ -23,7 +22,6 @@ class UserDataForm extends StatefulWidget {
       required this.termsAccepted})
       : super(key: key);
 
-  final bool isRegisterForm;
   final UserM? user;
 
   final String error;
@@ -42,8 +40,6 @@ class _UserDataFormState extends State<UserDataForm> {
   final TextEditingController _birthdayController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _newPasswordController = TextEditingController();
-
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
@@ -51,14 +47,12 @@ class _UserDataFormState extends State<UserDataForm> {
   final TextEditingController _localiteController = TextEditingController();
 
   late bool _pwdVisible;
-  late bool _newPwdVisible;
 
   @override
   initState() {
     super.initState();
     _pwdVisible = false;
-    _newPwdVisible = false;
-  }
+ }
 
   @override
   void didChangeDependencies() {
@@ -81,7 +75,6 @@ class _UserDataFormState extends State<UserDataForm> {
       _localiteController.text = "";
     }
     _passwordController.text = "";
-    _newPasswordController.text = "";
   }
 
   @override
@@ -89,7 +82,6 @@ class _UserDataFormState extends State<UserDataForm> {
     _birthdayController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _newPasswordController.dispose();
     _firstnameController.dispose();
     _lastnameController.dispose();
     _addressController.dispose();
@@ -295,10 +287,6 @@ class _UserDataFormState extends State<UserDataForm> {
             const SizedBox(
               height: 5.0,
             ),
-            //Show new Pwd field if in the settings
-            !widget.isRegisterForm
-                ? _buildNewPwdField()
-                : const SizedBox.shrink(),
 
             Text(
               widget.error,
@@ -311,30 +299,17 @@ class _UserDataFormState extends State<UserDataForm> {
             //Register User
             ElevatedButton(
                 style: btnDecoration,
-                child: widget.isRegisterForm
-                    ? const Text(
-                        'Register',
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      )
-                    : const Text(
-                        'Update Info',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                child: const Text(
+                  'Register',
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
                 onPressed: () async {
                   if (!widget.termsAccepted) {
                     widget.updateError(
                         'You have to accept the terms to continue');
                   } else {
                     widget.updateError('');
-
-                    if(_newPasswordController.text != ""){
-                      if(_newPasswordController.text.length<6){
-                        widget.updateError(
-                        'Your New Password should also be +6 Chars');
-                      }
-                    }
 
                     if (_formKey.currentState!.validate()) {
                       widget.updateLoading(true);
@@ -350,20 +325,13 @@ class _UserDataFormState extends State<UserDataForm> {
                       myUser.birthday = _birthdayController.text;
                       myUser.role = 0;
                       final AuthStatus status;
-                      if (widget.isRegisterForm) {
-                        //Call function to sign in the user into firebase Authentication
-                        //AND Creating its document into firestore
-                        status = await loginManager.createAccount(
-                          user: myUser,
-                          password: _passwordController.text,
-                        );
-                      } else {
-                        status = await loginManager.updateAccount(
-                          user: myUser,
-                          password: _passwordController.text,
-                          newPassword: _newPasswordController.text,
-                        );
-                      }
+
+                      //Call function to sign in the user into firebase Authentication
+                      //AND Creating its document into firestore
+                      status = await loginManager.createAccount(
+                        user: myUser,
+                        password: _passwordController.text,
+                      );
 
                       if (status == AuthStatus.successful) {
                         User newUser = FirebaseAuth.instance.currentUser!;
@@ -372,7 +340,7 @@ class _UserDataFormState extends State<UserDataForm> {
                             .updateUser(newUser, shouldNotify: true)
                             .then((value) {
                           widget.updateLoading(false);
-                          
+
                           RoutesGenerator.sailor.pop();
                         });
                       } else {
@@ -389,41 +357,6 @@ class _UserDataFormState extends State<UserDataForm> {
           ],
         ),
       ),
-    );
-  }
-
-  _buildNewPwdField() {
-    return Column(
-      children: [
-        TextFormField(
-          controller: _newPasswordController,
-          style: const TextStyle(color: Colors.black),
-          decoration: textInputDecoration.copyWith(
-            hintText: 'New Password',
-            prefixIcon: const Icon(
-              Icons.lock_outline_rounded,
-              color: Colors.black,
-            ),
-            suffixIcon: IconButton(
-              icon: Icon(
-                // Based on passwordVisible state choose the icon
-                _newPwdVisible ? Icons.visibility : Icons.visibility_off,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                // Update the state i.e. toogle the state of passwordVisible variable
-                setState(() {
-                  _newPwdVisible = !_newPwdVisible;
-                });
-              },
-            ),
-          ),
-          obscureText: !_newPwdVisible,
-        ),
-        const SizedBox(
-          height: 5.0,
-        )
-      ],
     );
   }
 }
