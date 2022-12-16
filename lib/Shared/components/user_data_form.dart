@@ -94,7 +94,7 @@ class _UserDataFormState extends State<UserDataForm> {
     Auth loginManager = Provider.of<Auth>(context, listen: false);
 
     return Padding(
-      padding: EdgeInsets.all(1),
+      padding: const EdgeInsets.all(1),
       child: Form(
         key: _formKey,
         child: Column(
@@ -336,7 +336,7 @@ class _UserDataFormState extends State<UserDataForm> {
                         User newUser = FirebaseAuth.instance.currentUser!;
                         //Update the user logged in
                         await loginManager
-                            .updateUser(newUser, shouldNotify: true)
+                            .updateUserInApp(newUser, shouldNotify: true)
                             .then((value) {
                           widget.updateLoading(false);
 

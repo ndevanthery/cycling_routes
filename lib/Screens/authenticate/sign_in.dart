@@ -247,7 +247,7 @@ class _SignInState extends State<SignIn> {
                                                           .successful) {
                                                     //Update User logged in
                                                     await loginManager
-                                                        .updateUser(
+                                                        .updateUserInApp(
                                                             FirebaseAuth
                                                                 .instance
                                                                 .currentUser,
@@ -255,8 +255,8 @@ class _SignInState extends State<SignIn> {
                                                         .then((value) {
                                                       setState(() =>
                                                           isLoading = false);
-                                                      context
-                                                          .goNamed(myinitalRoute);
+                                                      context.goNamed(
+                                                          myinitalRoute);
                                                     });
                                                   } else {
                                                     final newError =

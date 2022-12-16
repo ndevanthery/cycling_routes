@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../Models/user_m.dart';
 import 'auth_exception_handler.dart';
 import 'database.dart';
@@ -23,10 +24,10 @@ class Auth with ChangeNotifier {
   Future<void> init() async {
     // Fetching current user authentication
     User? user = _auth.currentUser;
-    await updateUser(user, shouldNotify: false);
+    await updateUserInApp(user, shouldNotify: false);
   }
 
-  Future<void> updateUser(User? user, {bool shouldNotify = true}) async {
+  Future<void> updateUserInApp(User? user, {bool shouldNotify = true}) async {
     if (user == null) {
       setPropertiesForNullUser();
     } else {
@@ -146,14 +147,21 @@ class Auth with ChangeNotifier {
   }
 
   //Logout
-  signOut(BuildContext context) async {
+  Future<ExceptionStatus> signOut(BuildContext context) async {
     try {
       await _auth.signOut();
-      await updateUser(_auth.currentUser, shouldNotify: true);
-    } catch (e) {
-      log(e.toString());
-      return null;
+      _status = ExceptionStatus.successful;
+      // .then((value) {
+      //   // if (Navigator.canPop(context)) {
+      //   //   context.pop();
+      //   // }
+      // });
+    } on FirebaseAuthException catch (e) {
+      log('Signout Method Error : $e');
+
+      _status = ExceptionHandler.handleAuthException(e);
     }
+    return _status;
   }
 
   //Updating the Email inside Firebase Auth

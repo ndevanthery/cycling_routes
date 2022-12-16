@@ -250,7 +250,7 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                       User newUser = FirebaseAuth.instance.currentUser!;
                       //Update the user logged in
                       await loginManager
-                          .updateUser(newUser, shouldNotify: true)
+                          .updateUserInApp(newUser, shouldNotify: true)
                           .then((value) {
                         setState(() {
                           isLoading = false;

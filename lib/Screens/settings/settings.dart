@@ -1,7 +1,3 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
-
-import 'package:cycling_routes/Screens/settings/dialog_change_email.dart';
-import 'package:cycling_routes/Screens/settings/dialog_change_pwd.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -97,6 +93,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(
                   height: 5.0,
                 ),
+                buildAccountOption(context, loginManager, 'About RideOn', null,
+                    Icons.info_outline_rounded),
               ],
             ),
           ],
@@ -104,33 +102,36 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   GestureDetector buildAccountOption(BuildContext context, loginManager,
-      String title, colorChoosed, iconChoosed) {
-    dynamic colorF = colorChoosed == null ? Colors.grey[600] : colorChoosed;
+      String title, colorChoosed, IconData iconChoosed) {
+    Color colorF = colorChoosed ?? Colors.grey[600];
 
     return GestureDetector(
       onTap: () async {
         switch (title) {
           case 'Modify email':
-            _displayEditCredentialDialog(context, 1);
-            //Utils.openDialog(context, '', () {});
+             Utils.displaySmallDialog(context, 1);
             break;
+
           case 'Modify password':
-            _displayEditCredentialDialog(context, 2);
-            //Utils.openDialog(context, '', () {});
+             Utils.displaySmallDialog(context, 2);
             break;
+
           case 'Logout':
-            Utils.showConfirmDialog(
+            Utils.showLogoutConfirmDialog(
                 context,
                 'Logout',
                 'Confirm to disconnect yourself.',
                 'LOGOUT',
                 'CANCEL',
                 loginManager);
-
             break;
 
           case 'Delete Account':
-            _displayEditCredentialDialog(context, 3);
+            Utils.displaySmallDialog(context, 3);
+            break;
+
+          case 'About RideOn':
+            Utils.openFullDialog(context, 'about', () {});
             break;
           default:
         }
@@ -155,21 +156,5 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Future<void> _displayEditCredentialDialog(
-      BuildContext context, int caseNo) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          switch (caseNo) {
-            case 1:
-              return  DialogChangeEmail(isDelete: false);
-            case 2:
-              return const DialogChangePwd();
-            case 3:
-              return  DialogChangeEmail(isDelete: true);
-            default:
-              return  DialogChangeEmail(isDelete: false);
-          }
-        });
-  }
+ 
 }

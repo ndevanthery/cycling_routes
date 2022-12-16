@@ -2,7 +2,6 @@ import 'package:cycling_routes/Shared/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-
 class TermOfUseText extends StatelessWidget {
   Function toggleTerms;
   bool isAccepted;
@@ -52,7 +51,7 @@ class TermOfUseText extends StatelessWidget {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Utils.openDialog(context, 'terms', toggleTerms);
+                        Utils.openFullDialog(context, 'terms', toggleTerms);
                       }),
               ],
             ),
@@ -61,5 +60,4 @@ class TermOfUseText extends StatelessWidget {
       )),
     );
   }
-
 }

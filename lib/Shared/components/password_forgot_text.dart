@@ -2,7 +2,6 @@ import 'package:cycling_routes/Shared/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-
 class PasswordForgotText extends StatelessWidget {
   const PasswordForgotText({Key? key}) : super(key: key);
 
@@ -32,7 +31,7 @@ class PasswordForgotText extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Utils.openDialog(context, 'pwd', () {});
+                      Utils.openFullDialog(context, 'pwd', () {});
                     }),
             ],
           ),

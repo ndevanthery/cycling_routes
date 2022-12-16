@@ -248,7 +248,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                       User? newUser = FirebaseAuth.instance.currentUser;
                       //Update the user logged in
                       await loginManager
-                          .updateUser(newUser, shouldNotify: true)
+                          .updateUserInApp(newUser, shouldNotify: true)
                           .then((value) {
                         if (!widget.isDelete) {
                           setState(() {
