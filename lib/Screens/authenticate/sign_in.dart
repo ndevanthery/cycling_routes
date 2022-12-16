@@ -1,10 +1,9 @@
-
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/Shared/components/password_forgot_text.dart';
 import 'package:cycling_routes/Shared/components/powered_by.dart';
-import 'package:cycling_routes/routes_generator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../Services/auth.dart';
@@ -54,7 +53,7 @@ class _SignInState extends State<SignIn> {
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
-                    RoutesGenerator.sailor.pop();
+                    context.pop();
                   },
                   icon: Image.asset(
                     "assets/icons/back_white.png",
@@ -204,8 +203,8 @@ class _SignInState extends State<SignIn> {
                                             }),
                                           ),
                                           Container(
-                                              padding:
-                                                 const EdgeInsets.only(bottom: 3.0),
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 3.0),
                                               child: const Align(
                                                 alignment: Alignment.topRight,
                                                 child: PasswordForgotText(),
@@ -244,10 +243,11 @@ class _SignInState extends State<SignIn> {
                                                     password: pwd,
                                                   );
                                                   if (status ==
-                                                      AuthStatus.successful) {
+                                                      ExceptionStatus
+                                                          .successful) {
                                                     //Update User logged in
                                                     await loginManager
-                                                        .updateUser(
+                                                        .updateUserInApp(
                                                             FirebaseAuth
                                                                 .instance
                                                                 .currentUser,
@@ -255,12 +255,12 @@ class _SignInState extends State<SignIn> {
                                                         .then((value) {
                                                       setState(() =>
                                                           isLoading = false);
-                                                      RoutesGenerator.sailor
-                                                          .pop();
+                                                      context.goNamed(
+                                                          myinitalRoute);
                                                     });
                                                   } else {
                                                     final newError =
-                                                        AuthExceptionHandler
+                                                        ExceptionHandler
                                                             .generateErrorMessage(
                                                                 status);
                                                     setState(() {

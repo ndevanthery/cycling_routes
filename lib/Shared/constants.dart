@@ -2,6 +2,11 @@
 
 import 'package:flutter/material.dart';
 
+const String myinitalRoute = '/';
+const String myLoginScreenRoute = '/loginScreenRoute';
+const String myRegisterScreenRoute = '/registerScreenRoute';
+
+
 final RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
 bool isPasswordValid(String password) {

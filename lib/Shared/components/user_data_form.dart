@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
-import '../../routes_generator.dart';
 import '../constants.dart';
 
 class UserDataForm extends StatefulWidget {
@@ -51,7 +51,7 @@ class _UserDataFormState extends State<UserDataForm> {
   initState() {
     super.initState();
     _pwdVisible = false;
- }
+  }
 
   @override
   void didChangeDependencies() {
@@ -94,7 +94,7 @@ class _UserDataFormState extends State<UserDataForm> {
     Auth loginManager = Provider.of<Auth>(context, listen: false);
 
     return Padding(
-      padding: EdgeInsets.all(1),
+      padding: const EdgeInsets.all(1),
       child: Form(
         key: _formKey,
         child: Column(
@@ -300,7 +300,7 @@ class _UserDataFormState extends State<UserDataForm> {
                 style: btnDecoration,
                 child: const Text(
                   'Register',
-                  style:  TextStyle(
+                  style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () async {
@@ -323,7 +323,7 @@ class _UserDataFormState extends State<UserDataForm> {
                       myUser.localite = _localiteController.text;
                       myUser.birthday = _birthdayController.text;
                       myUser.role = 0;
-                      final AuthStatus status;
+                      final ExceptionStatus status;
 
                       //Call function to sign in the user into firebase Authentication
                       //AND Creating its document into firestore
@@ -332,19 +332,19 @@ class _UserDataFormState extends State<UserDataForm> {
                         password: _passwordController.text,
                       );
 
-                      if (status == AuthStatus.successful) {
+                      if (status == ExceptionStatus.successful) {
                         User newUser = FirebaseAuth.instance.currentUser!;
                         //Update the user logged in
                         await loginManager
-                            .updateUser(newUser, shouldNotify: true)
+                            .updateUserInApp(newUser, shouldNotify: true)
                             .then((value) {
                           widget.updateLoading(false);
 
-                          RoutesGenerator.sailor.pop();
+                          context.goNamed(myinitalRoute);
                         });
                       } else {
                         final newError =
-                            AuthExceptionHandler.generateErrorMessage(status);
+                            ExceptionHandler.generateErrorMessage(status);
                         widget.updateError(newError);
                         widget.updateLoading(false);
                       }

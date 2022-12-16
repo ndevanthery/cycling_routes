@@ -105,16 +105,16 @@ class DatabaseService {
     await routeCollect.doc(route.uid).delete();
   }
 
-  Future<AuthStatus> deleteUser(UserM user) async {
-    dynamic status = AuthStatus.pending;
+  Future<ExceptionStatus> deleteUser(UserM user) async {
+    dynamic status = ExceptionStatus.pending;
     try {
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(user.uid)
           .delete();
-      status = AuthStatus.dataDeleted;
+      status = ExceptionStatus.dataDeleted;
     } on FirebaseException catch (e) {
-      status = AuthExceptionHandler.handleAuthException(e);
+      status = ExceptionHandler.handleAuthException(e);
     }
     return status;
   }

@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:cycling_routes/Shared/components/terms_of_use_text.dart';
-import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../Services/auth.dart';
@@ -78,7 +78,7 @@ class _RegisterState extends State<Register> {
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
-                    RoutesGenerator.sailor.pop();
+                    context.pop();
                   },
                   icon: Image.asset(
                     "assets/icons/back_white.png",

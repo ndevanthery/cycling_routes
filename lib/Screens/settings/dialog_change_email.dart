@@ -3,14 +3,13 @@ import 'dart:developer';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:sailor/sailor.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
 import '../../Shared/constants.dart';
-import '../../routes_generator.dart';
 
 class DialogChangeEmail extends StatefulWidget {
   bool isDelete;
@@ -195,12 +194,16 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
             ),
             actions: <Widget>[
               ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.grey[400]),
-                child: const Text(
-                  'CANCEL',
-                  style: TextStyle(color: Colors.white),
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                  primary: Colors.grey[400],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.all(13),
                 ),
+                child: const Text('CANCEL'),
                 onPressed: () {
                   setState(() {
                     Navigator.pop(context);
@@ -209,12 +212,15 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        widget.isDelete ? Colors.red[300] : Colors.grey[600]),
-                child: Text(
-                  widget.isDelete ? 'DELETE' : 'SAVE',
-                  style: TextStyle(color: Colors.white),
+                  textStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600),
+                  primary: widget.isDelete ? Colors.red[300] : Colors.grey[500],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.all(13),
                 ),
+                child: Text(widget.isDelete ? 'DELETE' : 'SAVE'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
@@ -224,7 +230,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                     UserM myUser = loginManager.getUser()!;
                     myUser.email = _emailController.text.trim();
 
-                    final AuthStatus status;
+                    final ExceptionStatus status;
 
                     //Call function to sign in the user into firebase Authentication
                     //AND Creating its document into firestore
@@ -238,11 +244,11 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                           newPassword: null);
                     }
 
-                    if (status == AuthStatus.successful) {
+                    if (status == ExceptionStatus.successful) {
                       User? newUser = FirebaseAuth.instance.currentUser;
                       //Update the user logged in
                       await loginManager
-                          .updateUser(newUser, shouldNotify: true)
+                          .updateUserInApp(newUser, shouldNotify: true)
                           .then((value) {
                         if (!widget.isDelete) {
                           setState(() {
@@ -255,17 +261,16 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                           });
                           Future.delayed(const Duration(seconds: 5), () {
                             log('back to settings after 5 seconds');
-                            RoutesGenerator.sailor.pop();
+                            context.pop();
                           });
                         } else {
                           log('User Deleted');
-                          RoutesGenerator.sailor.navigate(myinitalRoute,
-                              navigationType: NavigationType.pushReplace);
+                          context.goNamed(myinitalRoute);
                         }
                       });
                     } else {
                       final newError =
-                          AuthExceptionHandler.generateErrorMessage(status);
+                          ExceptionHandler.generateErrorMessage(status);
                       updateError(newError, true);
                       setState(() {
                         isLoading = false;

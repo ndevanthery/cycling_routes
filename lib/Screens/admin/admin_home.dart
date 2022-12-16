@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../Services/auth.dart';
+import '../../Shared/utils.dart';
 import 'admin_routes.dart';
 import 'create_route.dart';
 
@@ -31,14 +32,21 @@ class _AdminHomeState extends State<AdminHome> {
           'RideOn',
           style: TextStyle(color: Colors.black),
         ),
-        actions: <Widget>[
-          TextButton.icon(
-            onPressed: () async {
-              await loginManager.signOut(context);
-            },
-            icon: const Icon(Icons.person),
-            label: const Text('Logout'),
-          )
+        actions: [
+          IconButton(
+              onPressed: () async {
+                Utils.showLogoutConfirmDialog(
+                    context,
+                    'Logout',
+                    'Confirm to disconnect yourself.',
+                    'LOGOUT',
+                    'CANCEL',
+                    loginManager);
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ))
         ],
       ),
       body: Center(

@@ -48,6 +48,8 @@ dependencies:
   sailor: ^0.7.1
   tuple: ^2.0.0
   flutter_settings_screens: ^0.1.0+0.2
+  go_router: ^4.5.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
