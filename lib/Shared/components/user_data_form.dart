@@ -7,12 +7,11 @@ import 'package:provider/provider.dart';
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
-import '../../Services/database.dart';
 import '../../routes_generator.dart';
 import '../constants.dart';
 
 class UserDataForm extends StatefulWidget {
-  UserDataForm(
+  const UserDataForm(
       {Key? key,
       required this.user,
       required this.error,
@@ -301,7 +300,7 @@ class _UserDataFormState extends State<UserDataForm> {
                 style: btnDecoration,
                 child: const Text(
                   'Register',
-                  style: const TextStyle(
+                  style:  TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () async {

@@ -2,7 +2,6 @@ import 'package:cycling_routes/Shared/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'terms_of_use_text.dart';
 
 class PasswordForgotText extends StatelessWidget {
   const PasswordForgotText({Key? key}) : super(key: key);

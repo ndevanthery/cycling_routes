@@ -3,18 +3,16 @@ import 'dart:developer';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
-import '../../Shared/components/user_data_form.dart';
 import '../../Shared/constants.dart';
 import '../../routes_generator.dart';
 
 class DialogChangeEmail extends StatefulWidget {
-  DialogChangeEmail({
+  const DialogChangeEmail({
     Key? key,
   }) : super(key: key);
 
@@ -80,7 +78,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
     return isLoading
         ? const Loading()
         : AlertDialog(
-            title: Text('Edit Email'),
+            title: const Text('Edit Email'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +91,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                     style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -192,7 +190,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               FlatButton(
                 color: Colors.grey[400],
                 textColor: Colors.white,
-                child: Text('CANCEL'),
+                child: const Text('CANCEL'),
                 onPressed: () {
                   setState(() {
                     Navigator.pop(context);
@@ -202,7 +200,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               FlatButton(
                 color: Colors.grey[600],
                 textColor: Colors.white,
-                child: Text('SAVE'),
+                child: const Text('SAVE'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {

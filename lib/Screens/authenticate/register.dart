@@ -2,20 +2,13 @@ import 'dart:developer';
 
 import 'package:cycling_routes/Shared/components/terms_of_use_text.dart';
 import 'package:cycling_routes/routes_generator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../Models/user_m.dart';
-import '../../Services/auth_exception_handler.dart';
-import '../../Services/database.dart';
 import '../../Services/auth.dart';
 import '../../Shared/components/loading.dart';
 import '../../Shared/components/powered_by.dart';
 import '../../Shared/components/user_data_form.dart';
-import '../../Shared/constants.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);

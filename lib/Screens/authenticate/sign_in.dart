@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/Shared/components/password_forgot_text.dart';
@@ -206,7 +205,7 @@ class _SignInState extends State<SignIn> {
                                           ),
                                           Container(
                                               padding:
-                                                  EdgeInsets.only(bottom: 3.0),
+                                                 const EdgeInsets.only(bottom: 3.0),
                                               child: const Align(
                                                 alignment: Alignment.topRight,
                                                 child: PasswordForgotText(),

@@ -3,11 +3,9 @@
 import 'package:cycling_routes/Screens/settings/dialog_change_email.dart';
 import 'package:cycling_routes/Screens/settings/dialog_change_pwd.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:provider/provider.dart';
 
 import '../../Services/auth.dart';
-import '../../Services/database.dart';
 import '../../Shared/utils.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -58,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     )
                   ],
                 ),
-                Divider(
+                const Divider(
                   height: 20,
                   thickness: 1,
                 ),
@@ -73,7 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     context, loginManager, 'Logout', null, Icons.logout),
                 buildAccountOption(context, loginManager, 'Delete Account',
                     Colors.red[300], Icons.delete),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Row(
@@ -92,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     )
                   ],
                 ),
-                Divider(
+                const Divider(
                   height: 20,
                   thickness: 1,
                 ),
@@ -137,7 +135,7 @@ class _SettingsPageState extends State<SettingsPage> {
         }
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -161,7 +159,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return showDialog(
         context: context,
         builder: (context) {
-          return isEmail ? DialogChangeEmail() : DialogChangePwd();
+          return isEmail ? const DialogChangeEmail() : const DialogChangePwd();
         });
   }
 }

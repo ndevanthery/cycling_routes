@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cycling_routes/Screens/admin/admin_home.dart';
 import 'package:cycling_routes/Screens/home/home.dart';

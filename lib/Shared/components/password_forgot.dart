@@ -3,10 +3,8 @@
 import 'dart:developer';
 
 import 'package:cycling_routes/routes_generator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sailor/sailor.dart';
 
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
