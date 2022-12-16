@@ -49,7 +49,7 @@ class _AppAboutState extends State<AppAbout> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[600],
+        backgroundColor: Colors.grey[500],
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

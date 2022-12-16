@@ -10,7 +10,7 @@ class TermOfUse extends StatefulWidget {
 }
 
 class _TermOfUseState extends State<TermOfUse> {
-// thisdetermnines whether the back-to-top button is shown or not
+// determnines whether the back-to-top button is shown or not
   bool _showBackToTopButton = false;
 
   // scroll controller
@@ -38,7 +38,7 @@ class _TermOfUseState extends State<TermOfUse> {
     super.dispose();
   }
 
-  // This function is triggered when the user presses the back-to-top button
+  // when the user presses the back-to-top button
   void _scrollToTop() {
     _scrollController.animateTo(0,
         duration: const Duration(seconds: 1), curve: Curves.linear);
@@ -49,22 +49,24 @@ class _TermOfUseState extends State<TermOfUse> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.grey[500],
         actions: [
           ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.grey[500]),
               onPressed: () {
                 Navigator.of(context).pop('User Disagreed');
               },
               child: const Text('DISAGREE',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold))),
+                      color: Colors.black, fontWeight: FontWeight.bold))),
           ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.grey[500]),
               onPressed: () {
                 Navigator.of(context).pop('User Agreed');
               },
               child: const Text('AGREE',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold))),
+                      color: Colors.black, fontWeight: FontWeight.bold))),
         ],
       ),
       backgroundColor: Colors.white,

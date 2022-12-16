@@ -1,5 +1,5 @@
 import 'package:cycling_routes/Screens/map/mapView.dart';
-import 'package:cycling_routes/Screens/profile/Profile.dart';
+import 'package:cycling_routes/Screens/profile/profile.dart';
 import 'package:cycling_routes/Screens/search/search.dart';
 import 'package:cycling_routes/Screens/settings/settings.dart';
 import 'package:flutter/material.dart';

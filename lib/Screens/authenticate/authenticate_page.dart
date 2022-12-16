@@ -46,7 +46,9 @@ class _AuthenticatePageState extends State<AuthenticatePage> {
                   height: 240.0,
                   decoration: const BoxDecoration(
                       color: Color.fromRGBO(224, 224, 224, 1),
-                      borderRadius: BorderRadius.all(Radius.circular(25))),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,7 +78,7 @@ class _AuthenticatePageState extends State<AuthenticatePage> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              context.goNamed(myLoginScreenRoute);
+                              context.pushNamed(myLoginScreenRoute);
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,7 +119,7 @@ class _AuthenticatePageState extends State<AuthenticatePage> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              context.goNamed(myRegisterScreenRoute);
+                              context.pushNamed(myRegisterScreenRoute);
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

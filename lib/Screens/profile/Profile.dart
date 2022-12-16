@@ -1,15 +1,13 @@
-// ignore: file_names
+// ignore_for_file: file_names
 
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:cycling_routes/Shared/components/route_card.dart';
 
-//import 'package:flutter/src/foundation/key.dart';
-//import 'package:flutter/src/widgets/framework.dart';
+import '../../Shared/constants.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -31,19 +29,22 @@ class _ProfilePageState extends State<ProfilePage> {
   TextEditingController npaController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
-  _buildTextField(TextEditingController controller) {
+  _buildTextField(TextEditingController controller, icon) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-          color: secondaryColor,
-          border: Border.all(color: const Color.fromARGB(255, 151, 153, 156))),
+      // decoration: BoxDecoration(
+      //     color: secondaryColor,
+      //     border: Border.all(color: const Color.fromARGB(255, 151, 153, 156))),
       child: TextField(
         controller: controller,
-        style: const TextStyle(color: Colors.white),
-        decoration: const InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 10),
-            labelStyle: TextStyle(color: Colors.white),
-            border: InputBorder.none),
+        style: const TextStyle(color: Colors.black),
+        decoration: textInputDecoration.copyWith(
+            fillColor: Colors.white,
+            hintText: controller.text,
+            prefixIcon: Icon(
+              icon,
+              color: Colors.black,
+            )),
       ),
     );
   }
@@ -107,42 +108,56 @@ class _ProfilePageState extends State<ProfilePage> {
                                 context: context,
                                 builder: (context) => Dialog(
                                   child: Container(
-                                    color: primaryColor,
+                                    decoration: const BoxDecoration(
+                                        color: Color.fromRGBO(224, 224, 224, 1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25))),
+                                    // margin:
+                                    //     const EdgeInsets.fromLTRB(15, 0, 10, 8),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15, horizontal: 30),
                                     child: ListView(
                                       shrinkWrap: true,
                                       children: <Widget>[
-                                        _buildTextField(
-                                          firstnameController,
-                                        ),
+                                        _buildLabel(label: 'Firstname'),
+                                        _buildTextField(firstnameController,
+                                            Icons.person_outline_rounded),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        _buildTextField(
-                                          lastnameController,
-                                        ),
+                                        _buildLabel(label: 'Lastname'),
+                                        _buildTextField(lastnameController,
+                                            Icons.person_outline_rounded),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        _buildTextField(
-                                          addressController,
-                                        ),
+                                        _buildLabel(label: 'Address'),
+                                        _buildTextField(addressController,
+                                            Icons.location_on_outlined),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        _buildTextField(
-                                          npaController,
-                                        ),
+                                        _buildLabel(label: 'NPA'),
+                                        _buildTextField(npaController,
+                                            Icons.location_on_outlined),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        _buildTextField(
-                                          locationController,
-                                        ),
+                                        _buildLabel(label: 'City'),
+                                        _buildTextField(locationController,
+                                            Icons.location_on_outlined),
                                         const SizedBox(
                                           height: 10,
                                         ),
                                         ElevatedButton(
-                                          child: const Text('Save'),
+                                          style: btnDecoration,
+                                          child: const Text(
+                                            'Save',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
                                           onPressed: () {
                                             final docUser = FirebaseFirestore
                                                 .instance
@@ -159,8 +174,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                               "npa": npaController.text,
                                               "localite":
                                                   locationController.text
-                                            }).whenComplete(
-                                                () => Navigator.pop(context));
+                                            }).whenComplete(() =>
+                                                Navigator.of(context).pop());
                                           },
                                         )
                                       ],
@@ -195,6 +210,16 @@ class _ProfilePageState extends State<ProfilePage> {
             //      RouteCard(isAdmin: true, route: ),
           ],
         ),
+      ),
+    );
+  }
+
+  Padding _buildLabel({label}) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
+      child: Text(
+        label,
+        style: const TextStyle(color: Colors.black, fontSize: 14),
       ),
     );
   }
