@@ -31,18 +31,6 @@ class _AdminHomeState extends State<AdminHome> {
           'RideOn',
           style: TextStyle(color: Colors.black),
         ),
-<<<<<<< HEAD
-        actions: <Widget>[
-          ElevatedButton.icon(
-            onPressed: () async {
-              await loginManager.signOut(context);
-            },
-            icon: const Icon(Icons.person),
-            label: const Text('Logout'),
-          )
-        ],
-=======
->>>>>>> 55a83df (Deleting Flatbutton ( Deprecated ))
       ),
       body: Center(
         child: _pages.elementAt(_selectedIndex), //New

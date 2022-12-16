@@ -188,20 +188,27 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ],
             ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.grey[400],
-                textColor: Colors.white,
-                child: const Text('CANCEL'),
+              ElevatedButton(
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: Colors.grey[400]),
+                child: const Text(
+                  'CANCEL',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   setState(() {
                     Navigator.pop(context);
                   });
                 },
               ),
-              FlatButton(
-                color: widget.isDelete ? Colors.red[300] : Colors.grey[600],
-                textColor: Colors.white,
-                child: Text(widget.isDelete ? 'DELETE' : 'SAVE'),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        widget.isDelete ? Colors.red[300] : Colors.grey[600]),
+                child: Text(
+                  widget.isDelete ? 'DELETE' : 'SAVE',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
