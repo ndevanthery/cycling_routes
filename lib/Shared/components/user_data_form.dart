@@ -314,7 +314,7 @@ class _UserDataFormState extends State<UserDataForm> {
                       widget.updateLoading(true);
 
                       //Retrieve info entered by user
-                      UserM? myUser = UserM(uid: '');
+                      UserM? myUser = UserM(uid: '', fav: <String>[]);
                       myUser.email = _emailController.text.trim();
                       myUser.firstname = _firstnameController.text;
                       myUser.lastname = _lastnameController.text;

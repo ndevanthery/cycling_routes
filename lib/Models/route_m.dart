@@ -8,6 +8,7 @@ class RouteM {
   List<LatLng>? routePoints;
   double? distance;
   double? duration;
+  bool isFav;
 
   RouteM(
       {this.name,
@@ -15,5 +16,6 @@ class RouteM {
       this.uidCreator,
       this.routePoints,
       this.distance,
-      this.duration});
+      this.duration,
+      required this.isFav} );
 }

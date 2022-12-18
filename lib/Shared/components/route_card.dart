@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:cycling_routes/Shared/components/route_details.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/user_m.dart';
+import '../../Services/auth.dart';
 
 class RouteCard extends StatefulWidget {
   RouteM route;
@@ -34,6 +37,10 @@ class _RouteCardState extends State<RouteCard> {
 
   @override
   Widget build(BuildContext context) {
+    Auth loginManager = Provider.of<Auth>(context, listen: false);
+    DatabaseService dbManager =
+        DatabaseService(uid: loginManager.getUser()!.uid);
+
     return Container(
       child: InkWell(
         onTap: () {
@@ -71,14 +78,48 @@ class _RouteCardState extends State<RouteCard> {
                   width: 170,
                 ),
               ),
-              Text(
-                "${widget.route.name}",
-                style: TextStyle(fontWeight: FontWeight.w800),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        dbManager.manageFavs(
+                            widget.route, loginManager.getUser()!);
+
+                        log('Heart clicked on ${widget.route.name}, it is now isFav= ${widget.route.isFav}');
+                      },
+                      child: Icon(
+                        widget.route.isFav
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_outline_rounded,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "${widget.route.name}",
+                          style: TextStyle(fontWeight: FontWeight.w800),
+                        ),
+                        Text(
+                          "Dist: ${widget.route.distance} Time: ${widget.route.duration} sec",
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                "Dist: ${widget.route.distance} Time: ${widget.route.duration} sec",
-                overflow: TextOverflow.clip,
-              )
             ],
           ),
         ),

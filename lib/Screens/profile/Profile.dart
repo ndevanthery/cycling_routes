@@ -20,9 +20,6 @@ class _ProfilePageState extends State<ProfilePage> {
   PickedFile? imageFile;
   final ImagePicker _picker = ImagePicker();
 
-  Color primaryColor = const Color.fromARGB(255, 255, 255, 255);
-  Color secondaryColor = const Color.fromARGB(255, 126, 121, 121);
-
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -32,9 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
   _buildTextField(TextEditingController controller, icon) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      // decoration: BoxDecoration(
-      //     color: secondaryColor,
-      //     border: Border.all(color: const Color.fromARGB(255, 151, 153, 156))),
       child: TextField(
         controller: controller,
         style: const TextStyle(color: Colors.black),
@@ -52,6 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
         child: Column(
@@ -109,11 +104,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 builder: (context) => Dialog(
                                   child: Container(
                                     decoration: const BoxDecoration(
-                                        color: Color.fromRGBO(224, 224, 224, 1),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(25))),
-                                    // margin:
-                                    //     const EdgeInsets.fromLTRB(15, 0, 10, 8),
+                                      color: Color.fromRGBO(224, 224, 224, 1),
+                                    ),
+                                    
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 15, horizontal: 30),
                                     child: ListView(

@@ -83,8 +83,6 @@ class _MyAppState extends State<MyApp> {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,
                 Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
               return FadeTransition(
                 opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
                 child: child,
@@ -105,8 +103,6 @@ class _MyAppState extends State<MyApp> {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,
                 Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
               return FadeTransition(
                 opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
                 child: child,
@@ -115,50 +111,6 @@ class _MyAppState extends State<MyApp> {
           );
         },
       ),
-//     GoRoute(
-//       name: myHomeUserRoute,
-//       path: myHomeUserRoute,
-// pageBuilder: (context, state) {
-//         return CustomTransitionPage<void>(
-//               key: state.pageKey,
-//               child:  Home(),
-//               transitionDuration: const Duration(milliseconds: 150),
-//               transitionsBuilder: (BuildContext context,
-//                   Animation<double> animation,
-//                   Animation<double> secondaryAnimation,
-//                   Widget child) {
-//                 // Change the opacity of the screen using a Curve based on the the animation's
-//                 // value
-//                 return FadeTransition(
-//                   opacity:
-//                       CurveTween(curve: Curves.easeInOut).animate(animation),
-//                   child: child,
-//                 );
-//               },
-//             );
-//       },    ),
-//     GoRoute(
-//       name: myHomeAdminRoute,
-//       path: myHomeAdminRoute,
-// pageBuilder: (context, state) {
-//         return CustomTransitionPage<void>(
-//               key: state.pageKey,
-//               child:  AdminHome(),
-//               transitionDuration: const Duration(milliseconds: 150),
-//               transitionsBuilder: (BuildContext context,
-//                   Animation<double> animation,
-//                   Animation<double> secondaryAnimation,
-//                   Widget child) {
-//                 // Change the opacity of the screen using a Curve based on the the animation's
-//                 // value
-//                 return FadeTransition(
-//                   opacity:
-//                       CurveTween(curve: Curves.easeInOut).animate(animation),
-//                   child: child,
-//                 );
-//               },
-//             );
-//       },    ),
     ],
   );
 }

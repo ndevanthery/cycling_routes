@@ -1,5 +1,5 @@
 class UserM {
-   dynamic uid='';
+  dynamic uid = '';
 
   dynamic email = '';
   dynamic firstname = '';
@@ -8,6 +8,7 @@ class UserM {
   dynamic npa = '';
   dynamic localite = '';
   dynamic birthday = '';
+  List<String> favRoutes = <String>[];
   dynamic role = '';
 
   UserM({
@@ -19,9 +20,24 @@ class UserM {
     this.npa,
     this.localite,
     this.birthday,
+    required List<String> fav,
     this.role,
-  });
-  
+  }) {
+    if (fav.isEmpty) {
+      favRoutes = <String>[];
+    } else {
+      favRoutes = fav;
+    }
+  }
+
+  List<String> getFavs() {
+    return favRoutes;
+  }
+
+   void setFavs(List<String> newFavs) {
+    favRoutes = newFavs;
+  }
+
   factory UserM.fromJson(Map<String, dynamic> userJson, String uid) {
     return UserM(
       uid: uid,
@@ -32,12 +48,13 @@ class UserM {
       npa: userJson["npa"],
       localite: userJson["localite"],
       birthday: userJson["birthday"],
+      fav: List.from(userJson["favRoutes"]),
       role: userJson["role"],
     );
   }
 
   @override
   String toString() {
-    return 'email : $email Full name: $firstname $lastname Full Address: $address $npa $localite Birthday: $birthday, ROLE: $role';
+    return 'email : $email Full name: $firstname $lastname Full Address: $address $npa $localite Birthday: $birthday,Number of Favs : ${favRoutes.length}, ROLE: $role';
   }
 }

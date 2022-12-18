@@ -23,7 +23,7 @@ class _CreateRouteState extends State<CreateRoute> {
   bool switchValue = false;
   List<LatLng> points = [];
   //List<LatLng> myRoute = [];
-  RouteM myRouteM = RouteM(routePoints: []);
+  RouteM myRouteM = RouteM(routePoints: [], isFav: false);
   UserM? user;
 
   void _getCurrentLocation() async {
@@ -207,7 +207,7 @@ class _CreateRouteState extends State<CreateRoute> {
   }
 
   Future<RouteM> _getRoute(List<LatLng> myRoute) async {
-    RouteM myReturnRoute = RouteM(routePoints: []);
+    RouteM myReturnRoute = RouteM(routePoints: [],isFav:false);
     if (myRoute == []) {
       return myReturnRoute;
     }
