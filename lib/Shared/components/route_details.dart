@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/material.dart';
@@ -162,10 +163,14 @@ class _RouteDetailsState extends State<RouteDetails> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MapPage(
-                        route: widget.route,
-                      ),
-                    ));
+                        builder: (context) => Scaffold(
+                              appBar: AppBar(
+                                title: Text(widget.route.name!),
+                              ),
+                              body: MapPage(
+                                route: widget.route,
+                              ),
+                            )));
               },
               child: Text("Start")),
         ]),

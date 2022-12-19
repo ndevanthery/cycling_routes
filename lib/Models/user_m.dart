@@ -34,7 +34,7 @@ class UserM {
     return favRoutes;
   }
 
-   void setFavs(List<String> newFavs) {
+  void setFavs(List<String> newFavs) {
     favRoutes = newFavs;
   }
 
@@ -48,7 +48,8 @@ class UserM {
       npa: userJson["npa"],
       localite: userJson["localite"],
       birthday: userJson["birthday"],
-      fav: List.from(userJson["favRoutes"]),
+      fav:
+          userJson["favRoutes"] == null ? [] : List.from(userJson["favRoutes"]),
       role: userJson["role"],
     );
   }
