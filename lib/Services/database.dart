@@ -103,7 +103,7 @@ class DatabaseService {
           distance: myData['distance'] as double,
           duration: myData['duration'],
           name: myData['name'],
-          routePoints: [],
+          routePoints: myLatLng,
           isFav: false));
     }
 
@@ -147,7 +147,7 @@ class DatabaseService {
           distance: myData['distance'] as double?,
           duration: myData['duration'],
           name: myData['name'],
-          routePoints: [],
+          routePoints: myLatLng,
           isFav: isFav));
     }
 
