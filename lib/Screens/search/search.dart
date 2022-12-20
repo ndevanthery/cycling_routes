@@ -33,6 +33,8 @@ class _SearchPageState extends State<SearchPage> {
   List<RouteM> allRoutes = [];
   late bool isLoading = true;
   late bool showOnlyFavs = false;
+  String sortBy = "name";
+  bool isAscending = true;
 
   @override
   void initState() {
@@ -53,6 +55,9 @@ class _SearchPageState extends State<SearchPage> {
     myService.getRoutes(loginManager.getUser()!).then((value) => setState(() {
           isLoading = false;
           allRoutes = value;
+          allRoutes.sort(((a, b) {
+            return a.name!.compareTo(b.name!);
+          }));
         }));
 
     super.didChangeDependencies();
@@ -117,12 +122,15 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
               Expanded(
-                flex: 3,
-                child: TextField(
-                  onChanged: (value) => runFilter(value, _resetList),
-                  decoration: const InputDecoration(
-                      labelText: 'Search a route',
-                      suffixIcon: Icon(Icons.search)),
+                flex: 1,
+                child: IconButton(
+                  padding: EdgeInsets.fromLTRB(2, 2, 4, 0),
+                  icon: Icon(Icons.sort),
+                  color: Colors.grey[700],
+                  hoverColor: Colors.black,
+                  onPressed: () {
+                    _dialSort().then((value) => setState((() {})));
+                  },
                 ),
               ),
             ],
@@ -183,5 +191,155 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     resetList(results);
+  }
+
+  Future<void> _dialSort() async {
+    String tempSortBy = sortBy;
+    bool tempIsAscending = isAscending;
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Text("Sort Routes"),
+            content: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: ListBody(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            tempSortBy = "name";
+                          });
+                        },
+                        child: Text("Name"),
+                        style: ElevatedButton.styleFrom(
+                            primary: tempSortBy == "name" ? Colors.red : null),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            tempSortBy = "distance";
+                          });
+                        },
+                        child: Text("distance"),
+                        style: ElevatedButton.styleFrom(
+                            primary:
+                                tempSortBy == "distance" ? Colors.red : null),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            tempSortBy = "time";
+                          });
+                        },
+                        child: Text("Time"),
+                        style: ElevatedButton.styleFrom(
+                            primary: tempSortBy == "time" ? Colors.red : null),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            tempIsAscending = true;
+                          });
+                        },
+                        child: Text("Ascending"),
+                        style: ElevatedButton.styleFrom(
+                            primary: tempIsAscending ? Colors.red : null),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            tempIsAscending = false;
+                          });
+                        },
+                        child: Text("Descending"),
+                        style: ElevatedButton.styleFrom(
+                            primary: !tempIsAscending ? Colors.red : null),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            actionsPadding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+            actionsAlignment: MainAxisAlignment.spaceEvenly,
+            contentPadding: const EdgeInsets.fromLTRB(24, 15, 24, 15),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  "cancel",
+                  style: const TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text(
+                  "Ok",
+                  style: const TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  setState(() {
+                    switch (tempSortBy) {
+                      case "name":
+                        if (tempIsAscending) {
+                          allRoutes.sort(((a, b) {
+                            return a.name!.compareTo(b.name!);
+                          }));
+                        } else {
+                          allRoutes.sort(((a, b) {
+                            return b.name!.compareTo(a.name!);
+                          }));
+                        }
+                        break;
+                      case "distance":
+                        if (tempIsAscending) {
+                          allRoutes.sort(((a, b) {
+                            return a.distance!.compareTo(b.distance!);
+                          }));
+                        } else {
+                          allRoutes.sort(((a, b) {
+                            return b.distance!.compareTo(a.distance!);
+                          }));
+                        }
+                        break;
+                      case "time":
+                        if (tempIsAscending) {
+                          allRoutes.sort(((a, b) {
+                            return a.duration!.compareTo(b.duration!);
+                          }));
+                        } else {
+                          allRoutes.sort(((a, b) {
+                            return b.duration!.compareTo(a.duration!);
+                          }));
+                        }
+                        break;
+                    }
+                  });
+                  sortBy = tempSortBy;
+                  isAscending = tempIsAscending;
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+      },
+    );
   }
 }
