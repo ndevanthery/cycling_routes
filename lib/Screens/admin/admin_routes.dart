@@ -49,6 +49,8 @@ class _AdminRouteListState extends State<AdminRouteList> {
               .map((e) => RouteCard(
                   route: e,
                   isAdmin: true,
+                  isFav: false,
+                  onFavClick: () {},
                   remove: (RouteM removed) {
                     setState(() {
                       myRoutes.remove(removed);

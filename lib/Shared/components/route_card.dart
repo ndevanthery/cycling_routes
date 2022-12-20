@@ -12,12 +12,16 @@ import '../../Services/auth.dart';
 class RouteCard extends StatefulWidget {
   RouteM route;
   bool isAdmin;
+  bool isFav;
+  Function onFavClick;
   Function? remove;
   Function? update;
   RouteCard(
       {Key? key,
       required this.route,
       required this.isAdmin,
+      required this.isFav,
+      required this.onFavClick,
       this.remove,
       this.update})
       : super(key: key);
@@ -85,20 +89,23 @@ class _RouteCardState extends State<RouteCard> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: GestureDetector(
-                      onTap: () {
-                        dbManager.manageFavs(
-                            widget.route, loginManager.getUser()!);
-
-                        log('Heart clicked on ${widget.route.name}, it is now isFav= ${widget.route.isFav}');
-                      },
-                      child: Icon(
-                        widget.route.isFav
-                            ? Icons.favorite_rounded
-                            : Icons.favorite_outline_rounded,
-                        size: 15,
-                      ),
-                    ),
+                    child: widget.isAdmin
+                        ? Container()
+                        : GestureDetector(
+                            onTap: () {
+                              dbManager.manageFavs(
+                                  widget.route, loginManager.getUser()!);
+                              widget.onFavClick();
+                              widget.isFav = !widget.isFav;
+                              setState(() {});
+                            },
+                            child: Icon(
+                              widget.isFav
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_outline_rounded,
+                              size: 15,
+                            ),
+                          ),
                   ),
                   Expanded(
                     flex: 2,

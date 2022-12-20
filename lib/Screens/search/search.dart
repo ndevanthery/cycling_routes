@@ -31,6 +31,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   List<RouteM> allRoutes = [];
+  List<RouteM> favRoutes = [];
   late bool isLoading = true;
   late bool showOnlyFavs = false;
   String sortBy = "name";
@@ -50,6 +51,7 @@ class _SearchPageState extends State<SearchPage> {
     Auth loginManager = Provider.of<Auth>(context, listen: false);
     DatabaseService myService =
         DatabaseService(uid: loginManager.getUser()!.uid);
+    var favRoutesUser = loginManager.getUser()!.favRoutes;
 
     // Get all routes
     myService.getRoutes(loginManager.getUser()!).then((value) => setState(() {
@@ -58,6 +60,9 @@ class _SearchPageState extends State<SearchPage> {
           allRoutes.sort(((a, b) {
             return a.name!.compareTo(b.name!);
           }));
+          favRoutes = allRoutes
+              .where((element) => favRoutesUser.contains(element.uid))
+              .toList();
         }));
 
     super.didChangeDependencies();
@@ -73,12 +78,14 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       showOnlyFavs = !showOnlyFavs;
     });
+
     //TODO  make the list update
     // runShowOnlyFavs(showOnlyFavs, _resetList);
   }
 
   @override
   Widget build(BuildContext context) {
+    var routes = showOnlyFavs ? favRoutes : allRoutes;
     if (isLoading) {
       return Container(
         color: Colors.transparent,
@@ -144,10 +151,20 @@ class _SearchPageState extends State<SearchPage> {
           child: GridView.count(
             crossAxisCount: 2,
             children: <Widget>[
-              ...allRoutes
+              ...routes
                   .map((e) => RouteCard(
                         route: e,
                         isAdmin: false,
+                        isFav: favRoutes.contains(e),
+                        onFavClick: () {
+                          if (favRoutes.contains(e)) {
+                            setState(() {
+                              favRoutes.remove(e);
+                            });
+                          } else {
+                            favRoutes.add(e);
+                          }
+                        },
                         remove: (RouteM removed) {
                           setState(() {
                             allRoutes.remove(removed);
@@ -301,8 +318,14 @@ class _SearchPageState extends State<SearchPage> {
                           allRoutes.sort(((a, b) {
                             return a.name!.compareTo(b.name!);
                           }));
+                          favRoutes.sort(((a, b) {
+                            return a.name!.compareTo(b.name!);
+                          }));
                         } else {
                           allRoutes.sort(((a, b) {
+                            return b.name!.compareTo(a.name!);
+                          }));
+                          favRoutes.sort(((a, b) {
                             return b.name!.compareTo(a.name!);
                           }));
                         }
@@ -312,8 +335,14 @@ class _SearchPageState extends State<SearchPage> {
                           allRoutes.sort(((a, b) {
                             return a.distance!.compareTo(b.distance!);
                           }));
+                          favRoutes.sort(((a, b) {
+                            return a.distance!.compareTo(b.distance!);
+                          }));
                         } else {
                           allRoutes.sort(((a, b) {
+                            return b.distance!.compareTo(a.distance!);
+                          }));
+                          favRoutes.sort(((a, b) {
                             return b.distance!.compareTo(a.distance!);
                           }));
                         }
@@ -323,8 +352,14 @@ class _SearchPageState extends State<SearchPage> {
                           allRoutes.sort(((a, b) {
                             return a.duration!.compareTo(b.duration!);
                           }));
+                          favRoutes.sort(((a, b) {
+                            return a.duration!.compareTo(b.duration!);
+                          }));
                         } else {
                           allRoutes.sort(((a, b) {
+                            return b.duration!.compareTo(a.duration!);
+                          }));
+                          favRoutes.sort(((a, b) {
                             return b.duration!.compareTo(a.duration!);
                           }));
                         }
