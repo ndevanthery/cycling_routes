@@ -3,14 +3,17 @@
 import 'package:cycling_routes/themes/custom_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart' ;
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:sailor/sailor.dart';
 import 'package:tuple/tuple.dart';
 
 import 'Services/auth.dart';
 import 'Shared/firebase_options.dart';
 import 'Shared/utils.dart';
+import 'l10n/l10n.dart';
 import 'routes_generator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,6 +66,13 @@ class _MyAppState extends State<MyApp> {
               RoutesGenerator.sailor.navigationStackObserver,
             ],
             initialRoute: "/",
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: L10n.all,
           );
         },
       ),

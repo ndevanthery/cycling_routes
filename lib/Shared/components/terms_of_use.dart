@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TermOfUse extends StatefulWidget {
   const TermOfUse({Key? key}) : super(key: key);
@@ -55,14 +56,14 @@ class _TermOfUseState extends State<TermOfUse> {
               onPressed: () {
                 Navigator.of(context).pop('User Disagreed');
               },
-              child: const Text('DISAGREE',
+              child: Text(AppLocalizations.of(context)!.disagree,
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold))),
           ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop('User Agreed');
               },
-              child: const Text('AGREE',
+              child: Text(AppLocalizations.of(context)!.agree,
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold))),
         ],

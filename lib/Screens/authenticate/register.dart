@@ -4,11 +4,13 @@ import 'package:cycling_routes/Shared/components/terms_of_use_text.dart';
 import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 import '../../Shared/components/loading.dart';
 import '../../Shared/components/powered_by.dart';
 import '../../Shared/components/user_data_form.dart';
+import '../../l10n/l10n.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -116,8 +118,8 @@ class _RegisterState extends State<Register> {
                           Container(
                             margin: const EdgeInsets.fromLTRB(10, 25, 10, 3),
                             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: const Text(
-                              "Let's join the ride !",
+                            child: Text(
+                              AppLocalizations.of(context)!.registerTitle,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 28,

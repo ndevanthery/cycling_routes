@@ -4,6 +4,7 @@ import 'package:cycling_routes/Screens/settings/dialog_change_email.dart';
 import 'package:cycling_routes/Screens/settings/dialog_change_pwd.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 import '../../Shared/utils.dart';
@@ -28,10 +29,10 @@ class _SettingsPageState extends State<SettingsPage> {
             child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            const Align(
+            Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'Settings',
+                AppLocalizations.of(context)!.settings,
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
             ),
@@ -41,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 20.0,
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Icon(
                       Icons.person,
                       color: Colors.black,
@@ -50,7 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       width: 10,
                     ),
                     Text(
-                      'Account',
+                      AppLocalizations.of(context)!.account,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     )
@@ -75,7 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 30,
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Icon(
                       Icons.settings_applications,
                       color: Colors.black,
@@ -84,7 +85,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       width: 10,
                     ),
                     Text(
-                      'Appplication settings',
+                      AppLocalizations.of(context)!.applicationSettings,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     )

@@ -3,6 +3,7 @@ import 'package:cycling_routes/Services/database.dart';
 import 'package:cycling_routes/Shared/components/route_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Models/user_m.dart';
 
@@ -78,11 +79,11 @@ class _RouteCardState extends State<RouteCard> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Delete"),
+          title: Text(AppLocalizations.of(context)!.delete),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Are you sure you want to delete this route"),
+                Text(AppLocalizations.of(context)!.deleteSure),
               ],
             ),
           ),
@@ -94,7 +95,7 @@ class _RouteCardState extends State<RouteCard> {
           actions: <Widget>[
             TextButton(
               child: Text(
-                "cancel",
+                AppLocalizations.of(context)!.cancel,
                 style: const TextStyle(color: Colors.black),
               ),
               onPressed: () {
@@ -103,7 +104,7 @@ class _RouteCardState extends State<RouteCard> {
             ),
             TextButton(
               child: Text(
-                "delete",
+                AppLocalizations.of(context)!.delete2,
                 style: const TextStyle(color: Colors.black),
               ),
               onPressed: () async {

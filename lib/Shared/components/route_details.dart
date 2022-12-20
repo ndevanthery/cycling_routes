@@ -1,5 +1,6 @@
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Models/route_m.dart';
 
@@ -16,7 +17,7 @@ class _RouteDetailsState extends State<RouteDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Route description"),
+        title: Text(AppLocalizations.of(context)!.routeDescription),
         backgroundColor: Colors.transparent,
       ),
       body: Center(
@@ -39,7 +40,9 @@ class _RouteDetailsState extends State<RouteDetails> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Column(children: [Text("ALTITUDE ( UNKNOWN !!! )")]),
+                  child: Column(children: [
+                    Text(AppLocalizations.of(context)!.alltitude)
+                  ]),
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -83,7 +86,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                       ),
                     ));
               },
-              child: Text("Start")),
+              child: Text(AppLocalizations.of(context)!.start)),
         ]),
       ),
     );

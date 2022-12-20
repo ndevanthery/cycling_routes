@@ -1,7 +1,7 @@
 import 'package:cycling_routes/Shared/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordForgotText extends StatelessWidget {
   const PasswordForgotText({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class PasswordForgotText extends StatelessWidget {
       child: Center(
         child: RichText(
           text: TextSpan(
-            text: ' Password forgotten ?',
+            text: AppLocalizations.of(context)!.passwordForgot,
             style: const TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.w500,
@@ -24,7 +24,7 @@ class PasswordForgotText extends StatelessWidget {
             ),
             children: [
               TextSpan(
-                  text: ' Click here',
+                  text: AppLocalizations.of(context)!.clickHere,
                   style: const TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.w600,

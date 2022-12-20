@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PoweredBy extends StatelessWidget {
   const PoweredBy({Key? key}) : super(key: key);
@@ -10,9 +11,9 @@ class PoweredBy extends StatelessWidget {
       color: Colors.transparent,
       width: double.infinity,
       height: 40.0,
-      child: const Center(
+      child: Center(
           child: Text(
-        'Powered by HES-SO',
+        AppLocalizations.of(context)!.poweredByHesso,
         style: TextStyle(
             color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
       )),

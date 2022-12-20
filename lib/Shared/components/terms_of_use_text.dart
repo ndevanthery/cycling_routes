@@ -1,7 +1,7 @@
 import 'package:cycling_routes/Shared/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TermOfUseText extends StatelessWidget {
   Function toggleTerms;
@@ -36,7 +36,9 @@ class TermOfUseText extends StatelessWidget {
           ),
           RichText(
             text: TextSpan(
-              text: isAccepted ? ' I accept the ' : "I don't accept the ",
+              text: isAccepted
+                  ? AppLocalizations.of(context)!.acceptTerms
+                  : AppLocalizations.of(context)!.dontAcceptTerms,
               style: const TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.w500,
@@ -44,7 +46,7 @@ class TermOfUseText extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                    text: 'terms of use',
+                    text: AppLocalizations.of(context)!.termsOfUse,
                     style: const TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.w600,
@@ -61,5 +63,4 @@ class TermOfUseText extends StatelessWidget {
       )),
     );
   }
-
 }

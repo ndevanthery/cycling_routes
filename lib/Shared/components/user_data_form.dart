@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
@@ -51,7 +52,7 @@ class _UserDataFormState extends State<UserDataForm> {
   initState() {
     super.initState();
     _pwdVisible = false;
- }
+  }
 
   @override
   void didChangeDependencies() {
@@ -106,16 +107,16 @@ class _UserDataFormState extends State<UserDataForm> {
               style: const TextStyle(color: Colors.black),
               keyboardType: TextInputType.emailAddress,
               decoration: textInputDecoration.copyWith(
-                  hintText: 'example@gmail.com',
+                  hintText: AppLocalizations.of(context)!.exampleEmail,
                   prefixIcon: const Icon(
                     Icons.mail_outline,
                     color: Colors.black,
                   )),
               validator: (value) {
                 if (value == '') {
-                  return 'You must enter an Email';
+                  return AppLocalizations.of(context)!.noEmail;
                 } else if (!emailRegExp.hasMatch(value!)) {
-                  return 'You must enter a Valid Email ! ';
+                  return AppLocalizations.of(context)!.notCorrectEmail;
                 } else {
                   return null;
                 }
@@ -131,13 +132,14 @@ class _UserDataFormState extends State<UserDataForm> {
                     controller: _firstnameController,
                     style: const TextStyle(color: Colors.black),
                     decoration: textInputDecoration.copyWith(
-                        hintText: 'Firstname',
+                        hintText: AppLocalizations.of(context)!.firstname,
                         prefixIcon: const Icon(
                           Icons.person_outline_rounded,
                           color: Colors.black,
                         )),
-                    validator: (value) =>
-                        value == '' ? 'Enter your firstname' : null,
+                    validator: (value) => value == ''
+                        ? AppLocalizations.of(context)!.enterFirstname
+                        : null,
                   ),
                 ),
                 const SizedBox(
@@ -148,13 +150,14 @@ class _UserDataFormState extends State<UserDataForm> {
                     controller: _lastnameController,
                     style: const TextStyle(color: Colors.black),
                     decoration: textInputDecoration.copyWith(
-                        hintText: 'Lastname',
+                        hintText: AppLocalizations.of(context)!.lastname,
                         prefixIcon: const Icon(
                           Icons.person_outline_rounded,
                           color: Colors.black,
                         )),
-                    validator: (value) =>
-                        value == '' ? 'Enter your Lastname' : null,
+                    validator: (value) => value == ''
+                        ? AppLocalizations.of(context)!.enterLastname
+                        : null,
                   ),
                 ),
               ],
@@ -166,12 +169,14 @@ class _UserDataFormState extends State<UserDataForm> {
               controller: _addressController,
               style: const TextStyle(color: Colors.black),
               decoration: textInputDecoration.copyWith(
-                  hintText: 'Main Street, 13',
+                  hintText: AppLocalizations.of(context)!.mainStreet13,
                   prefixIcon: const Icon(
                     Icons.location_on_outlined,
                     color: Colors.black,
                   )),
-              validator: (value) => value == '' ? 'Enter your address' : null,
+              validator: (value) => value == ''
+                  ? AppLocalizations.of(context)!.enterAddress
+                  : null,
             ),
             const SizedBox(
               height: 5.0,
@@ -187,7 +192,7 @@ class _UserDataFormState extends State<UserDataForm> {
                     keyboardType: TextInputType.number,
                     style: const TextStyle(color: Colors.black),
                     decoration: textInputDecoration.copyWith(
-                        hintText: 'NPA',
+                        hintText: AppLocalizations.of(context)!.npa,
                         counterStyle: const TextStyle(
                           height: double.minPositive,
                         ),
@@ -196,8 +201,9 @@ class _UserDataFormState extends State<UserDataForm> {
                           Icons.location_on_outlined,
                           color: Colors.black,
                         )),
-                    validator: (value) =>
-                        value!.length < 4 ? 'Enter your NPA' : null,
+                    validator: (value) => value!.length < 4
+                        ? AppLocalizations.of(context)!.enterNpa
+                        : null,
                   ),
                 ),
                 const SizedBox(
@@ -209,13 +215,14 @@ class _UserDataFormState extends State<UserDataForm> {
                     controller: _localiteController,
                     style: const TextStyle(color: Colors.black),
                     decoration: textInputDecoration.copyWith(
-                        hintText: 'Locality',
+                        hintText: AppLocalizations.of(context)!.locality,
                         prefixIcon: const Icon(
                           Icons.location_on_outlined,
                           color: Colors.black,
                         )),
-                    validator: (value) =>
-                        value == '' ? 'Enter your locality' : null,
+                    validator: (value) => value == ''
+                        ? AppLocalizations.of(context)!.enterLocality
+                        : null,
                   ),
                 ),
               ],
@@ -226,10 +233,12 @@ class _UserDataFormState extends State<UserDataForm> {
             TextFormField(
               style: const TextStyle(color: Colors.black),
               controller: _birthdayController,
-              validator: (value) => value!.length < 6 ? 'Select a Date' : null,
+              validator: (value) => value!.length < 6
+                  ? AppLocalizations.of(context)!.selectDate
+                  : null,
               //editing controller of this TextField
               decoration: textInputDecoration.copyWith(
-                  hintText: 'Select your Birthday',
+                  hintText: AppLocalizations.of(context)!.selectBirthday,
                   prefixIcon: const Icon(
                     Icons.calendar_today,
                     color: Colors.black,
@@ -260,7 +269,7 @@ class _UserDataFormState extends State<UserDataForm> {
               controller: _passwordController,
               style: const TextStyle(color: Colors.black),
               decoration: textInputDecoration.copyWith(
-                hintText: 'Password',
+                hintText: AppLocalizations.of(context)!.password,
                 prefixIcon: const Icon(
                   Icons.lock_outline_rounded,
                   color: Colors.black,
@@ -279,8 +288,9 @@ class _UserDataFormState extends State<UserDataForm> {
                   },
                 ),
               ),
-              validator: (value) =>
-                  value!.length < 6 ? 'You must enter : +6 characters' : null,
+              validator: (value) => value!.length < 6
+                  ? AppLocalizations.of(context)!.passwordValidation
+                  : null,
               obscureText: !_pwdVisible,
             ),
             const SizedBox(
@@ -298,15 +308,15 @@ class _UserDataFormState extends State<UserDataForm> {
             //Register User
             ElevatedButton(
                 style: btnDecoration,
-                child: const Text(
-                  'Register',
-                  style:  TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.register,
+                  style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () async {
                   if (!widget.termsAccepted) {
                     widget.updateError(
-                        'You have to accept the terms to continue');
+                        AppLocalizations.of(context)!.acceptTermstoContinue);
                   } else {
                     widget.updateError('');
 

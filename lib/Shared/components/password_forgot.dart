@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
@@ -62,10 +63,10 @@ class _PasswordForgotState extends State<PasswordForgot> {
                 Container(
                   margin: const EdgeInsets.fromLTRB(5, 25, 10, 3),
                   padding: const EdgeInsets.fromLTRB(20, 10, 30, 0),
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      'Forgot Password',
+                      AppLocalizations.of(context)!.forgotPassword,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 28,
@@ -76,10 +77,10 @@ class _PasswordForgotState extends State<PasswordForgot> {
                 Container(
                   margin: const EdgeInsets.fromLTRB(5, 5, 10, 3),
                   padding: const EdgeInsets.fromLTRB(20, 10, 30, 0),
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      'Enter your email under, a link will be sent so you can reset your password.',
+                      AppLocalizations.of(context)!.textForgotPassword,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -123,16 +124,19 @@ class _PasswordForgotState extends State<PasswordForgot> {
                                   keyboardType: TextInputType.emailAddress,
                                   style: const TextStyle(color: Colors.black),
                                   decoration: textInputDecoration.copyWith(
-                                      hintText: 'example@gmail.com',
+                                      hintText: AppLocalizations.of(context)!
+                                          .exampleEmail,
                                       prefixIcon: const Icon(
                                         Icons.mail_outline,
                                         color: Colors.black,
                                       )),
                                   validator: (value) {
                                     if (value == '') {
-                                      return 'You must enter an Email';
+                                      return AppLocalizations.of(context)!
+                                          .noEmail;
                                     } else if (!emailRegExp.hasMatch(value!)) {
-                                      return 'You must enter a Valid Email ! ';
+                                      return AppLocalizations.of(context)!
+                                          .notCorrectEmail;
                                     } else {
                                       return null;
                                     }
@@ -160,8 +164,9 @@ class _PasswordForgotState extends State<PasswordForgot> {
                                 ),
                                 ElevatedButton(
                                     style: btnDecoration,
-                                    child: const Text(
-                                      "Reset Password",
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .resetPassword,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -177,8 +182,8 @@ class _PasswordForgotState extends State<PasswordForgot> {
                                           setState(() {
                                             isLoading = false;
                                             isErr = false;
-                                            msg =
-                                                'Email sent. You will be redirected to login in 5 seconds.';
+                                            msg = AppLocalizations.of(context)!
+                                                .emailSent;
                                           });
                                           Future.delayed(
                                               const Duration(seconds: 5), () {

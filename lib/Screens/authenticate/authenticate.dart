@@ -3,6 +3,7 @@
 import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:sailor/sailor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({Key? key}) : super(key: key);
@@ -50,8 +51,8 @@ class _AuthenticateState extends State<Authenticate> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      const Text(
-                        "Let's explore the world !",
+                      Text(
+                        AppLocalizations.of(context)!.firstMessage,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 25.0,
@@ -101,8 +102,8 @@ class _AuthenticateState extends State<Authenticate> {
                                 const SizedBox(
                                   width: 5,
                                 ),
-                                const Text(
-                                  'Login',
+                                Text(
+                                  AppLocalizations.of(context)!.login,
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ],
@@ -144,8 +145,8 @@ class _AuthenticateState extends State<Authenticate> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                const Text(
-                                  'Sign Up',
+                                Text(
+                                  AppLocalizations.of(context)!.register,
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ],

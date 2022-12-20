@@ -4,6 +4,7 @@ import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
@@ -78,7 +79,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
     return isLoading
         ? const Loading()
         : AlertDialog(
-            title: const Text('Edit Email'),
+            title: Text(AppLocalizations.of(context)!.editEmail),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +88,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    'You must enter your current password to be able to make changes.',
+                    AppLocalizations.of(context)!.enterCorrectPw,
                     style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                   ),
                 ),
@@ -121,9 +122,10 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                               )),
                           validator: (value) {
                             if (value == '') {
-                              return 'You must enter an Email';
+                              return AppLocalizations.of(context)!.noEmail;
                             } else if (!emailRegExp.hasMatch(value!)) {
-                              return 'You must enter a Valid Email ! ';
+                              return AppLocalizations.of(context)!
+                                  .notCorrectEmail;
                             } else {
                               return null;
                             }
@@ -137,7 +139,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                           controller: _oldPwdController,
                           style: const TextStyle(color: Colors.black),
                           decoration: textInputDecoration.copyWith(
-                            hintText: 'Current Password',
+                            hintText: AppLocalizations.of(context)!.currentPw,
                             prefixIcon: const Icon(
                               Icons.lock_outline_rounded,
                               color: Colors.black,
@@ -159,7 +161,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                             ),
                           ),
                           validator: (value) => value!.length < 6
-                              ? 'You must enter : +6 characters'
+                              ? AppLocalizations.of(context)!.passwordValidation
                               : null,
                           obscureText: !_oldpwdVisible,
                         ),
@@ -187,20 +189,23 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ],
             ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.grey[400],
-                textColor: Colors.white,
-                child: const Text('CANCEL'),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[400],
+                ),
+                child: Text(AppLocalizations.of(context)!.cancel),
                 onPressed: () {
                   setState(() {
                     Navigator.pop(context);
                   });
                 },
               ),
-              FlatButton(
-                color: Colors.grey[600],
-                textColor: Colors.white,
-                child: const Text('SAVE'),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.grey[600],
+                ),
+                child: Text(AppLocalizations.of(context)!.save),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
@@ -230,8 +235,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                         });
                         setState(() {
                           isError = false;
-                          msg =
-                              'Changes Updated. You will be redirected to settings in 5 seconds.';
+                          msg = AppLocalizations.of(context)!.changesUpdated;
                         });
                         Future.delayed(const Duration(seconds: 5), () {
                           log('back to settings after 5 seconds');

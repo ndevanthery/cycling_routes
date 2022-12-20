@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cycling_routes/Shared/components/route_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //import 'package:flutter/src/foundation/key.dart';
 //import 'package:flutter/src/widgets/framework.dart';
@@ -142,7 +143,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                           height: 10,
                                         ),
                                         ElevatedButton(
-                                          child: const Text('Save'),
+                                          child: Text(
+                                              AppLocalizations.of(context)!
+                                                  .save),
                                           onPressed: () {
                                             final docUser = FirebaseFirestore
                                                 .instance
@@ -231,8 +234,8 @@ class _ProfilePageState extends State<ProfilePage> {
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile picture",
+          Text(
+            AppLocalizations.of(context)!.chooseProfilePicture,
             style: TextStyle(
               fontSize: 20.0,
             ),
@@ -246,14 +249,14 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 takePhoto(ImageSource.camera);
               },
-              label: const Text("Camera"),
+              label: Text(AppLocalizations.of(context)!.camera),
             ),
             ElevatedButton.icon(
               icon: const Icon(Icons.image),
               onPressed: () {
                 takePhoto(ImageSource.gallery);
               },
-              label: const Text("Gallery"),
+              label: Text(AppLocalizations.of(context)!.gallery),
             ),
           ])
         ],

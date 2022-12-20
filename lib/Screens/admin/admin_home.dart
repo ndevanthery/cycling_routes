@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 import 'admin_routes.dart';
@@ -37,8 +38,10 @@ class _AdminHomeState extends State<AdminHome> {
               await loginManager.signOut(context);
             },
             icon: const Icon(Icons.person),
-            label: const Text('Logout'),
-          )
+            label: Text(
+              AppLocalizations.of(context)!.logout,
+            ),
+          ),
         ],
       ),
       body: Center(
@@ -48,10 +51,13 @@ class _AdminHomeState extends State<AdminHome> {
         borderRadius: const BorderRadius.only(
             topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         child: BottomNavigationBar(
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.browse_gallery), label: "My routes"),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Create"),
+                icon: Icon(Icons.browse_gallery),
+                label: AppLocalizations.of(context)!.myRoutes),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: AppLocalizations.of(context)!.create),
           ],
           onTap: _onItemTapped,
           currentIndex: _selectedIndex,

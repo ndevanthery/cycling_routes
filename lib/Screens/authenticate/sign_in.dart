@@ -1,4 +1,3 @@
-
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:cycling_routes/Shared/components/password_forgot_text.dart';
 import 'package:cycling_routes/Shared/components/powered_by.dart';
@@ -6,6 +5,7 @@ import 'package:cycling_routes/routes_generator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
@@ -91,8 +91,8 @@ class _SignInState extends State<SignIn> {
                           Container(
                             margin: const EdgeInsets.fromLTRB(5, 25, 10, 3),
                             padding: const EdgeInsets.fromLTRB(20, 10, 30, 0),
-                            child: const Text(
-                              'Welcome back on the App that boosts your rides !',
+                            child: Text(
+                              AppLocalizations.of(context)!.signInTitle,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 28,
@@ -138,17 +138,23 @@ class _SignInState extends State<SignIn> {
                                             decoration:
                                                 textInputDecoration.copyWith(
                                                     hintText:
-                                                        'example@gmail.com',
+                                                        AppLocalizations.of(
+                                                                context)!
+                                                            .exampleEmail,
                                                     prefixIcon: const Icon(
                                                       Icons.mail_outline,
                                                       color: Colors.black,
                                                     )),
                                             validator: (value) {
                                               if (value == '') {
-                                                return 'You must enter an Email';
+                                                return AppLocalizations.of(
+                                                        context)!
+                                                    .noEmail;
                                               } else if (!emailRegExp
                                                   .hasMatch(value!)) {
-                                                return 'You must enter a Valid Email ! ';
+                                                return AppLocalizations.of(
+                                                        context)!
+                                                    .notCorrectEmail;
                                               } else {
                                                 return null;
                                               }
@@ -167,7 +173,9 @@ class _SignInState extends State<SignIn> {
                                                 color: Colors.black),
                                             decoration:
                                                 textInputDecoration.copyWith(
-                                              hintText: 'Password',
+                                              hintText:
+                                                  AppLocalizations.of(context)!
+                                                      .password,
                                               prefixIcon: const Icon(
                                                 Icons.lock_outline_rounded,
                                                 color: Colors.black,
@@ -192,7 +200,8 @@ class _SignInState extends State<SignIn> {
                                             validator: (value) => value!
                                                         .length <
                                                     6
-                                                ? 'You must enter : +6 characters'
+                                                ? AppLocalizations.of(context)!
+                                                    .passwordValidation
                                                 : null,
                                             //TODO : Update the validation of the Pwd  with this code below in Comments!!
                                             // // validator: (value) => !isPasswordValid(value!)
@@ -204,8 +213,8 @@ class _SignInState extends State<SignIn> {
                                             }),
                                           ),
                                           Container(
-                                              padding:
-                                                 const EdgeInsets.only(bottom: 3.0),
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 3.0),
                                               child: const Align(
                                                 alignment: Alignment.topRight,
                                                 child: PasswordForgotText(),
@@ -224,8 +233,9 @@ class _SignInState extends State<SignIn> {
                                           ),
                                           ElevatedButton(
                                               style: btnDecoration,
-                                              child: const Text(
-                                                "Let's go !",
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .signInButton,
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontWeight:

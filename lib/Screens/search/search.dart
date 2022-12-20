@@ -10,6 +10,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 import '../../Shared/components/route_card.dart';
@@ -42,15 +43,16 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     if (allRoutes.isEmpty) {
-      return Text("No routes here for now ! ");
+      return Text(AppLocalizations.of(context)!.noRoutes);
     }
     return GridView.count(
       crossAxisCount: 2,
       children: <Widget>[
         TextField(
           onChanged: (value) => _runFilter(value),
-          decoration: const InputDecoration(
-              labelText: 'Search a route', suffixIcon: Icon(Icons.search)),
+          decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.searchRoute,
+              suffixIcon: Icon(Icons.search)),
         ),
         ...allRoutes
             .map((e) => RouteCard(

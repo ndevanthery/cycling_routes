@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
@@ -39,12 +40,11 @@ class _CreateRouteState extends State<CreateRoute> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        return Future.error(AppLocalizations.of(context)!.locationDenied);
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error(AppLocalizations.of(context)!.locationDeniedForever);
     }
     return await Geolocator.getCurrentPosition();
   }
@@ -177,7 +177,7 @@ class _CreateRouteState extends State<CreateRoute> {
                         myRouteM = getRoute;
                       });
                     },
-                    child: Text("calculate"),
+                    child: Text(AppLocalizations.of(context)!.calculate),
                   ),
                   TextButton(
                     onPressed: () {
@@ -186,7 +186,7 @@ class _CreateRouteState extends State<CreateRoute> {
                         points = [];
                       });
                     },
-                    child: Text("clear"),
+                    child: Text(AppLocalizations.of(context)!.clear),
                   ),
                   TextButton(
                     onPressed: () {
@@ -197,7 +197,7 @@ class _CreateRouteState extends State<CreateRoute> {
                         //points = [];
                       });
                     },
-                    child: Text("save"),
+                    child: Text(AppLocalizations.of(context)!.save),
                   ),
                 ],
               )),
@@ -259,11 +259,11 @@ class _CreateRouteState extends State<CreateRoute> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Save"),
+          title: Text(AppLocalizations.of(context)!.save),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Enter the name of the route"),
+                Text(AppLocalizations.of(context)!.enterRouteName),
                 TextField(
                   controller: myController,
                 ),
@@ -278,7 +278,7 @@ class _CreateRouteState extends State<CreateRoute> {
           actions: <Widget>[
             TextButton(
               child: Text(
-                "cancel",
+                AppLocalizations.of(context)!.cancel,
                 style: const TextStyle(color: Colors.black),
               ),
               onPressed: () {
@@ -287,7 +287,7 @@ class _CreateRouteState extends State<CreateRoute> {
             ),
             TextButton(
               child: Text(
-                "save",
+                AppLocalizations.of(context)!.save,
                 style: const TextStyle(color: Colors.black),
               ),
               onPressed: () {

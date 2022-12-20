@@ -29,6 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -43,7 +46,6 @@ dependencies:
   flutter_map: ^2.2.0
   latlong2: ^0.8.0
   geolocator: ^8.2.0
-  intl: ^0.17.0
   path: ^1.8.1
   image_picker: ^0.8.6
   sailor: ^0.7.1
@@ -67,6 +69,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   uses-material-design: true
 

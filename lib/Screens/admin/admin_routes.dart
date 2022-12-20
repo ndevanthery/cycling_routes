@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Models/route_m.dart';
 import '../../Services/auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdminRouteList extends StatefulWidget {
   const AdminRouteList({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _AdminRouteListState extends State<AdminRouteList> {
   @override
   Widget build(BuildContext context) {
     if (myRoutes.isEmpty) {
-      return Text("You need to create a route first ! ");
+      return Text(AppLocalizations.of(context)!.createRouteFirst);
     }
     return GridView.count(
       crossAxisCount: 2,

@@ -4,6 +4,7 @@ import 'package:cycling_routes/Screens/search/search.dart';
 import 'package:cycling_routes/Screens/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 
@@ -52,19 +53,23 @@ class _HomeState extends State<Home> {
         borderRadius: const BorderRadius.only(
             topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         child: BottomNavigationBar(
-          items: const [
+          items: [
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
                 color: Colors.black,
               ),
-              label: "Search",
+              label: AppLocalizations.of(context)!.search,
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.browse_gallery), label: "Map"),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Profile"),
+                icon: Icon(Icons.browse_gallery),
+                label: AppLocalizations.of(context)!.map),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: "Settings"),
+                icon: Icon(Icons.home),
+                label: AppLocalizations.of(context)!.profile),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: AppLocalizations.of(context)!.settings),
           ],
           onTap: _onItemTapped,
           currentIndex: _selectedIndex,
