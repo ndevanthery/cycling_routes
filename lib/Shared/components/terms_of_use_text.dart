@@ -54,7 +54,7 @@ class TermOfUseText extends StatelessWidget {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Utils.openDialog(context, 'terms', toggleTerms);
+                        Utils.openFullDialog(context, 'terms', toggleTerms);
                       }),
               ],
             ),

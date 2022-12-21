@@ -2,6 +2,11 @@
 
 import 'package:flutter/material.dart';
 
+const String myinitalRoute = '/';
+const String myLoginScreenRoute = '/loginScreenRoute';
+const String myRegisterScreenRoute = '/registerScreenRoute';
+
+
 final RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
 bool isPasswordValid(String password) {
@@ -32,7 +37,7 @@ final textInputDecoration = InputDecoration(
     gapPadding: 0.0,
     borderSide: const BorderSide(color: Colors.amberAccent, width: 2.0),
   ),
-  focusedErrorBorder:OutlineInputBorder(
+  focusedErrorBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(15.0),
     gapPadding: 0.0,
     borderSide: const BorderSide(color: Colors.red, width: 2.0),
@@ -41,6 +46,11 @@ final textInputDecoration = InputDecoration(
     borderRadius: BorderRadius.circular(15.0),
     gapPadding: 0.0,
     borderSide: const BorderSide(color: Colors.white, width: 2.0),
+  ),
+  disabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15.0),
+    gapPadding: 0.0,
+    borderSide: const BorderSide(color: Colors.grey, width: 2.0),
   ),
 );
 

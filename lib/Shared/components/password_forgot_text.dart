@@ -32,7 +32,7 @@ class PasswordForgotText extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Utils.openDialog(context, 'pwd', () {});
+                      Utils.openFullDialog(context, 'pwd', () {});
                     }),
             ],
           ),

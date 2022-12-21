@@ -1,7 +1,3 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
-
-import 'package:cycling_routes/Screens/settings/dialog_change_email.dart';
-import 'package:cycling_routes/Screens/settings/dialog_change_pwd.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -98,6 +94,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(
                   height: 5.0,
                 ),
+                buildAccountOption(context, loginManager, 'About RideOn', null,
+                    Icons.info_outline_rounded),
               ],
             ),
           ],
@@ -105,32 +103,36 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   GestureDetector buildAccountOption(BuildContext context, loginManager,
-      String title, colorChoosed, iconChoosed) {
-    dynamic colorF = colorChoosed == null ? Colors.grey[600] : colorChoosed;
+      String title, colorChoosed, IconData iconChoosed) {
+    Color colorF = colorChoosed ?? Colors.grey[600];
 
     return GestureDetector(
       onTap: () async {
         switch (title) {
           case 'Modify email':
-            _displayEditCredentialDialog(context, true);
-            //Utils.openDialog(context, '', () {});
+            Utils.displaySmallDialog(context, 1);
             break;
-          case 'Modify password':
-            _displayEditCredentialDialog(context, false);
-            //Utils.openDialog(context, '', () {});
-            break;
-          case 'Logout':
-            Utils.showConfirmDialog(
-                context,
-                'Logout',
-                'Confirm to disconnect yourself.',
-                'LOGOUT',
-                'CANCEL',
-                loginManager);
 
+          case 'Modify password':
+            Utils.displaySmallDialog(context, 2);
+            break;
+
+          case 'Logout':
+            Utils.showLogoutConfirmDialog(
+                context,
+                AppLocalizations.of(context)!.logout,
+                AppLocalizations.of(context)!.confirmDisconnect,
+                AppLocalizations.of(context)!.logout2,
+                AppLocalizations.of(context)!.cancel3,
+                loginManager);
             break;
 
           case 'Delete Account':
+            Utils.displaySmallDialog(context, 3);
+            break;
+
+          case 'About RideOn':
+            Utils.openFullDialog(context, 'about', () {});
             break;
           default:
         }
@@ -153,14 +155,5 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     );
-  }
-
-  Future<void> _displayEditCredentialDialog(
-      BuildContext context, isEmail) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return isEmail ? const DialogChangeEmail() : const DialogChangePwd();
-        });
   }
 }

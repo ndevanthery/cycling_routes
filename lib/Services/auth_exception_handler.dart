@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-enum AuthStatus {
+enum ExceptionStatus {
   pending,
-  successful,
+  dataDeleted,
   reauth,
+  successful,
   wrongPassword,
   emailAlreadyExists,
   invalidEmail,
@@ -11,45 +13,45 @@ enum AuthStatus {
   unknown,
 }
 
-class AuthExceptionHandler {
-  static handleAuthException(FirebaseAuthException e) {
-    AuthStatus status;
+class ExceptionHandler {
+  static handleAuthException(FirebaseException e) {
+    ExceptionStatus status;
     switch (e.code) {
       case "invalid-email":
-        status = AuthStatus.invalidEmail;
+        status = ExceptionStatus.invalidEmail;
         break;
       case "wrong-password":
-        status = AuthStatus.wrongPassword;
+        status = ExceptionStatus.wrongPassword;
         break;
       case "weak-password":
-        status = AuthStatus.weakPassword;
+        status = ExceptionStatus.weakPassword;
         break;
       case "email-already-in-use":
-        status = AuthStatus.emailAlreadyExists;
+        status = ExceptionStatus.emailAlreadyExists;
         break;
       default:
-        status = AuthStatus.unknown;
+        status = ExceptionStatus.unknown;
     }
     return status;
   }
+
   static String generateErrorMessage(error) {
     String errorMessage;
     switch (error) {
-      case AuthStatus.invalidEmail:
-        errorMessage = "Your email address appears to be malformed.";
+      case ExceptionStatus.invalidEmail:
+        errorMessage = AppLocalizations.of(error)!.emailMalformed;
         break;
-      case AuthStatus.weakPassword:
-        errorMessage = "Your password should be at least 6 characters.";
+      case ExceptionStatus.weakPassword:
+        errorMessage = AppLocalizations.of(error)!.passwordToShort;
         break;
-      case AuthStatus.wrongPassword:
-        errorMessage = "Your email or password is wrong.";
+      case ExceptionStatus.wrongPassword:
+        errorMessage = AppLocalizations.of(error)!.emailPasswordWrong;
         break;
-      case AuthStatus.emailAlreadyExists:
-        errorMessage =
-            "The email address is already in use by another account.";
+      case ExceptionStatus.emailAlreadyExists:
+        errorMessage = AppLocalizations.of(error)!.emailAlreadyExists;
         break;
       default:
-        errorMessage = "An error occured. Please try again later.";
+        errorMessage = AppLocalizations.of(error)!.errorOccured;
     }
     return errorMessage;
   }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -10,12 +11,10 @@ import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
 import '../../Services/auth_exception_handler.dart';
 import '../../Shared/constants.dart';
-import '../../routes_generator.dart';
 
 class DialogChangeEmail extends StatefulWidget {
-  const DialogChangeEmail({
-    Key? key,
-  }) : super(key: key);
+  bool isDelete;
+  DialogChangeEmail({Key? key, required this.isDelete}) : super(key: key);
 
   @override
   State<DialogChangeEmail> createState() => _DialogChangeEmailState();
@@ -29,8 +28,6 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
   late bool isLoading;
 
   //Fields State
-  late String email;
-  late String pwd;
   late String msg;
   late bool isError;
   late bool _oldpwdVisible;
@@ -39,8 +36,6 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
   @override
   initState() {
     msg = '';
-    email = '';
-    pwd = '';
     isError = true;
     isLoading = false;
     _oldpwdVisible = false;
@@ -75,11 +70,20 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
   @override
   Widget build(BuildContext context) {
     loginManager = Provider.of<Auth>(context, listen: true);
+    String email;
+    if (loginManager.getUser() == null) {
+      email = '';
+    } else {
+      email = loginManager.getUser()?.email;
+    }
 
+    if (widget.isDelete) _emailController.text = email;
     return isLoading
         ? const Loading()
         : AlertDialog(
-            title: Text(AppLocalizations.of(context)!.editEmail),
+            title: Text(widget.isDelete
+                ? AppLocalizations.of(context)!.deleteAccount
+                : AppLocalizations.of(context)!.editEmail),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -111,10 +115,14 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                           height: 18.0,
                         ),
                         TextFormField(
+                          enabled: !widget.isDelete,
                           controller: _emailController,
                           style: const TextStyle(color: Colors.black),
                           keyboardType: TextInputType.emailAddress,
                           decoration: textInputDecoration.copyWith(
+                              fillColor: widget.isDelete
+                                  ? Colors.grey[350]
+                                  : Colors.white,
                               hintText: loginManager.getUser()!.email,
                               prefixIcon: const Icon(
                                 Icons.mail_outline,
@@ -133,7 +141,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                         ),
 
                         const SizedBox(
-                          height: 5.0,
+                          height: 10.0,
                         ),
                         TextFormField(
                           controller: _oldPwdController,
@@ -191,7 +199,13 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
             actions: <Widget>[
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[400],
+                  textStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                  primary: Colors.grey[400],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.all(13),
                 ),
                 child: Text(AppLocalizations.of(context)!.cancel),
                 onPressed: () {
@@ -202,10 +216,17 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.grey[600],
+                  textStyle: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600),
+                  primary: widget.isDelete ? Colors.red[300] : Colors.grey[500],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: EdgeInsets.all(13),
                 ),
-                child: Text(AppLocalizations.of(context)!.save),
+                child: Text(widget.isDelete
+                    ? AppLocalizations.of(context)!.delete
+                    : AppLocalizations.of(context)!.save),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
@@ -215,36 +236,46 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                     UserM myUser = loginManager.getUser()!;
                     myUser.email = _emailController.text.trim();
 
-                    final AuthStatus status;
+                    final ExceptionStatus status;
 
                     //Call function to sign in the user into firebase Authentication
                     //AND Creating its document into firestore
-                    status = await loginManager.updateCredentials(
-                        user: myUser,
-                        password: _oldPwdController.text,
-                        newPassword: null);
+                    if (widget.isDelete) {
+                      status = await loginManager.deleteAccount(
+                          user: myUser, password: _oldPwdController.text);
+                    } else {
+                      status = await loginManager.updateCredentials(
+                          user: myUser,
+                          password: _oldPwdController.text,
+                          newPassword: null);
+                    }
 
-                    if (status == AuthStatus.successful) {
-                      User newUser = FirebaseAuth.instance.currentUser!;
+                    if (status == ExceptionStatus.successful) {
+                      User? newUser = FirebaseAuth.instance.currentUser;
                       //Update the user logged in
                       await loginManager
-                          .updateUser(newUser, shouldNotify: true)
+                          .updateUserInApp(newUser, shouldNotify: true)
                           .then((value) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        setState(() {
-                          isError = false;
-                          msg = AppLocalizations.of(context)!.changesUpdated;
-                        });
-                        Future.delayed(const Duration(seconds: 5), () {
-                          log('back to settings after 5 seconds');
-                          RoutesGenerator.sailor.pop();
-                        });
+                        if (!widget.isDelete) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          setState(() {
+                            isError = false;
+                            msg = AppLocalizations.of(context)!.changesUpdated;
+                          });
+                          Future.delayed(const Duration(seconds: 5), () {
+                            log('back to settings after 5 seconds');
+                            context.pop();
+                          });
+                        } else {
+                          log('User Deleted');
+                          context.goNamed(myinitalRoute);
+                        }
                       });
                     } else {
                       final newError =
-                          AuthExceptionHandler.generateErrorMessage(status);
+                          ExceptionHandler.generateErrorMessage(status);
                       updateError(newError, true);
                       setState(() {
                         isLoading = false;

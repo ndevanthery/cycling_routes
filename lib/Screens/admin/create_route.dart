@@ -24,7 +24,7 @@ class _CreateRouteState extends State<CreateRoute> {
   bool switchValue = false;
   List<LatLng> points = [];
   //List<LatLng> myRoute = [];
-  RouteM myRouteM = RouteM(routePoints: []);
+  RouteM myRouteM = RouteM(routePoints: [], isFav: false);
   UserM? user;
 
   void _getCurrentLocation() async {
@@ -101,8 +101,8 @@ class _CreateRouteState extends State<CreateRoute> {
             PolylineLayerOptions(
               polylines: [
                 Polyline(
-                  strokeWidth: 3,
-                  color: Colors.yellow,
+                  strokeWidth: 5,
+                  color: Colors.red,
                   points: [...myRouteM.routePoints!],
                 ),
               ],
@@ -112,21 +112,19 @@ class _CreateRouteState extends State<CreateRoute> {
               Marker(
                 point: LatLng(_position == null ? 0 : _position!.latitude,
                     _position == null ? 0 : _position!.longitude),
-                width: 80,
-                height: 80,
                 builder: (context) => Icon(
                   Icons.place,
                   color: Colors.red,
+                  size: 40,
                 ),
               ),
               ...points.map((e) {
                 return Marker(
                   point: e,
-                  width: 200,
-                  height: 200,
                   builder: (context) => Icon(
                     Icons.place,
                     color: Colors.green,
+                    size: 25,
                   ),
                 );
               }).toList(),
@@ -134,9 +132,10 @@ class _CreateRouteState extends State<CreateRoute> {
               if (myRouteM.routePoints!.isNotEmpty)
                 Marker(
                   point: myRouteM.routePoints!.first,
-                  width: 80,
-                  height: 80,
-                  builder: (context) => Icon(Icons.directions_bike),
+                  builder: (context) => Icon(
+                    Icons.directions_bike,
+                    size: 40,
+                  ),
                 ),
 
               //canvas/attempt to make start/end point
@@ -144,11 +143,10 @@ class _CreateRouteState extends State<CreateRoute> {
               if (myRouteM.routePoints!.isNotEmpty)
                 Marker(
                   point: myRouteM.routePoints!.last,
-                  width: 80,
-                  height: 80,
                   builder: (context) => Icon(
                     Icons.flag,
                     color: Colors.green,
+                    size: 40,
                   ),
                 ),
             ]),
@@ -207,7 +205,7 @@ class _CreateRouteState extends State<CreateRoute> {
   }
 
   Future<RouteM> _getRoute(List<LatLng> myRoute) async {
-    RouteM myReturnRoute = RouteM(routePoints: []);
+    RouteM myReturnRoute = RouteM(routePoints: [], isFav: false);
     if (myRoute == []) {
       return myReturnRoute;
     }

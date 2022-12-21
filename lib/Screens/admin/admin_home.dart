@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
+import '../../Shared/utils.dart';
 import 'admin_routes.dart';
 import 'create_route.dart';
 
@@ -32,16 +33,21 @@ class _AdminHomeState extends State<AdminHome> {
           'RideOn',
           style: TextStyle(color: Colors.black),
         ),
-        actions: <Widget>[
-          ElevatedButton.icon(
-            onPressed: () async {
-              await loginManager.signOut(context);
-            },
-            icon: const Icon(Icons.person),
-            label: Text(
-              AppLocalizations.of(context)!.logout,
-            ),
-          ),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                Utils.showLogoutConfirmDialog(
+                    context,
+                    AppLocalizations.of(context)!.logout,
+                    AppLocalizations.of(context)!.confirmDisconnect,
+                    AppLocalizations.of(context)!.logout2,
+                    AppLocalizations.of(context)!.cancel3,
+                    loginManager);
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ))
         ],
       ),
       body: Center(

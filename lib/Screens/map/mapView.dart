@@ -8,8 +8,7 @@ import 'package:http/http.dart' as http;
 
 class MapPage extends StatefulWidget {
   RouteM? route;
-  List<LatLng>? points;
-  MapPage({Key? key, this.points, this.route}) : super(key: key);
+  MapPage({Key? key, this.route}) : super(key: key);
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -18,26 +17,28 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   Position? _position;
   bool switchValue = false;
+  bool isUnmount = false;
   List<LatLng> myRoute = [];
 
   void _getCurrentLocation() async {
     Position position = await _determinePosition();
-    setState(() {
-      _position = position;
-    });
+
+    print(isUnmount);
+    if (!isUnmount) {
+      setState(() {
+        _position = position;
+      });
+    }
   }
 
   Future<Position> _determinePosition() async {
     LocationPermission permission;
+
     permission = await Geolocator.checkPermission();
+
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
         return Future.error('Location permissions are denied');
       }
     }
@@ -47,23 +48,24 @@ class _MapPageState extends State<MapPage> {
           'Location permissions are permanently denied, we cannot request permissions.');
     } // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
+    print(await Geolocator.getCurrentPosition());
     return await Geolocator.getCurrentPosition();
   }
 
   @override
   void initState() {
-    if (widget.points != null) {
-      _getRoute(widget.points!).then((value) => setState(() {
-            //print(value);
-/*             for (int i = 0; i < value.length; i++) {
-              myRoute.add(value[i]);
-            } */
-            myRoute = value;
-          }));
+    if (widget.route != null) {
+      myRoute = widget.route!.routePoints!;
     }
 
     _getCurrentLocation();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    isUnmount = true;
+    super.dispose();
   }
 
   @override
@@ -76,7 +78,9 @@ class _MapPageState extends State<MapPage> {
               minZoom: 9,
               maxZoom: 18,
               zoom: 9,
-              center: LatLng(46.5480234, 6.4022017),
+              center: myRoute.isEmpty
+                  ? LatLng(46.5480234, 6.4022017)
+                  : myRoute.first,
               maxBounds: LatLngBounds(
                   LatLng(45.398181, 5.140242), LatLng(48.230651, 11.47757))),
           layers: [
@@ -93,8 +97,8 @@ class _MapPageState extends State<MapPage> {
             PolylineLayerOptions(
               polylines: [
                 Polyline(
-                  strokeWidth: 3,
-                  color: Colors.yellow,
+                  strokeWidth: 5,
+                  color: Colors.red,
                   points: [...myRoute],
                 ),
               ],
@@ -104,8 +108,8 @@ class _MapPageState extends State<MapPage> {
               Marker(
                 point: LatLng(_position == null ? 0 : _position!.latitude,
                     _position == null ? 0 : _position!.longitude),
-                width: 80,
-                height: 80,
+                width: 120,
+                height: 120,
                 builder: (context) => Icon(
                   Icons.place,
                   color: Colors.red,
@@ -115,9 +119,12 @@ class _MapPageState extends State<MapPage> {
               if (myRoute.isNotEmpty)
                 Marker(
                   point: myRoute.first,
-                  width: 80,
-                  height: 80,
-                  builder: (context) => Icon(Icons.directions_bike),
+                  width: 150,
+                  height: 150,
+                  builder: (context) => Icon(
+                    Icons.directions_bike,
+                    size: 40,
+                  ),
                 ),
 
               //canvas/attempt to make start/end point
@@ -125,11 +132,10 @@ class _MapPageState extends State<MapPage> {
               if (myRoute.isNotEmpty)
                 Marker(
                   point: myRoute.last,
-                  width: 80,
-                  height: 80,
                   builder: (context) => Icon(
                     Icons.flag,
                     color: Colors.green,
+                    size: 40,
                   ),
                 ),
             ]),

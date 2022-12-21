@@ -1,18 +1,19 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
-import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
-import 'package:sailor/sailor.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Authenticate extends StatefulWidget {
-  const Authenticate({Key? key}) : super(key: key);
+import '../../Shared/constants.dart';
+
+class AuthenticatePage extends StatefulWidget {
+  const AuthenticatePage({Key? key}) : super(key: key);
 
   @override
-  _AuthenticateState createState() => _AuthenticateState();
+  _AuthenticatePageState createState() => _AuthenticatePageState();
 }
 
-class _AuthenticateState extends State<Authenticate> {
+class _AuthenticatePageState extends State<AuthenticatePage> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
@@ -46,7 +47,9 @@ class _AuthenticateState extends State<Authenticate> {
                   height: 240.0,
                   decoration: const BoxDecoration(
                       color: Color.fromRGBO(224, 224, 224, 1),
-                      borderRadius: BorderRadius.all(Radius.circular(25))),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,13 +79,7 @@ class _AuthenticateState extends State<Authenticate> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              RoutesGenerator.sailor.navigate(
-                                myLoginScreenRoute,
-                                transitions: [
-                                  SailorTransition.slide_from_top,
-                                ],
-                                customTransition: MyCustomTransition(),
-                              );
+                              context.pushNamed(myLoginScreenRoute);
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,13 +120,7 @@ class _AuthenticateState extends State<Authenticate> {
                                 primary: Colors.grey[500],
                                 onPrimary: Colors.black),
                             onPressed: () {
-                              RoutesGenerator.sailor.navigate(
-                                myRegisterScreenRoute,
-                                transitions: [
-                                  SailorTransition.slide_from_top,
-                                ],
-                                customTransition: MyCustomTransition(),
-                              );
+                              context.pushNamed(myRegisterScreenRoute);
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:cycling_routes/routes_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -178,7 +177,8 @@ class _PasswordForgotState extends State<PasswordForgot> {
                                         final status = await loginManager
                                             .forgotPassword(email: email);
 
-                                        if (status == AuthStatus.successful) {
+                                        if (status ==
+                                            ExceptionStatus.successful) {
                                           setState(() {
                                             isLoading = false;
                                             isErr = false;
@@ -188,10 +188,10 @@ class _PasswordForgotState extends State<PasswordForgot> {
                                           Future.delayed(
                                               const Duration(seconds: 5), () {
                                             log('Executed after 5 seconds');
-                                            RoutesGenerator.sailor.pop();
+                                            ;
                                           });
                                         } else {
-                                          final myError = AuthExceptionHandler
+                                          final myError = ExceptionHandler
                                               .generateErrorMessage(status);
                                           setState(() {
                                             isLoading = false;

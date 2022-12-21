@@ -40,21 +40,29 @@ class _AdminRouteListState extends State<AdminRouteList> {
     if (myRoutes.isEmpty) {
       return Text(AppLocalizations.of(context)!.createRouteFirst);
     }
-    return GridView.count(
-      crossAxisCount: 2,
-      children: [
-        ...myRoutes
-            .map((e) => RouteCard(
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.count(
+        crossAxisCount: 2,
+        children: [
+          ...myRoutes
+              .map((e) => RouteCard(
                   route: e,
                   isAdmin: true,
+                  isFav: false,
+                  onFavClick: () {},
                   remove: (RouteM removed) {
                     setState(() {
                       myRoutes.remove(removed);
                     });
                   },
-                ))
-            .toList()
-      ],
+                  update: () {
+                    setState(() {});
+                  }))
+              .toList()
+        ],
+      ),
     );
   }
 }

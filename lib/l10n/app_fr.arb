@@ -11,6 +11,9 @@
     "passwordValidation": "You must enter : +6 characters",
     "signInButton": "Let's go !",
     "logout": "Logout",
+    "confirmDisconnect": "Confirm to disconnect yourself.",
+    "logout2": "LOGOUT",
+    "cancel3": "CANCEL",
     "myRoutes": "My routes",
     "create": "Create",
     "createRouteFirst": "You need to create a route first ! ",
@@ -39,7 +42,6 @@
     "account": "Account",
     "modifyEmail": "Modify email",
     "modifyPassword": "Modify password",
-    "logout": "Logout",
     "deleteAccount": "Delete Account",
     "applicationSettings": "Application settings",
     "cancel2": "Cancel",
@@ -66,6 +68,7 @@
     "lastname": "Lastname",
     "enterLastname": "Enter your lastname",
     "mainStreet13": "Main Street, 13",
+    "address": "Address",
     "enterAddress": "Enter your address",
     "npa": "NPA",
     "enterNpa": "Enter your NPA",
@@ -73,15 +76,28 @@
     "enterLocality": "Enter your locality",
     "selectDate": "Select a date",
     "selectBirthday": "Select your Birthday",
-    "acceptTermstoContinue": "You have to accept the terms to continue!"
-
-
-
-
-
-
-
-
-
+    "acceptTermstoContinue": "You have to accept the terms to continue!",
+    "sortRoutes": "Sort Routes",
+    "name": "Name",
+    "distance": "Distance",
+    "time": "Time",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "emailMalformed": "Your email address appears to be malformed.",
+    "passwordToShort": "Your password should be at least 6 characters.",
+    "emailPasswordWrong": "Your email or password is wrong.",
+    "emailAlreadyExists": "The email address is already in use by another account.",
+    "errorOccured": "An error occured. Please try again later.",
+    "aboutRideOn": "About RideOn",
+    "lastUpdated": "Last Updated : 21-12-2022",
+    "developpedBy": "The RideOn application has been developped by ;",
+    "and": "And",
+    "purpose": "Purpose",
+    "contactUs": "Contact Us",
+    "ifYouHaveQuestions": "If you have any questions, You can contact us:",
+    "thankYou": "Thank you",
+    "sec": "sec",
+    "saveName": "Save Name",
+    "editName": "Edit Name"
 
 }
