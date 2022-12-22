@@ -98,5 +98,6 @@
     "thankYou": "Danke",
     "sec": "sek",
     "saveName": "Name speichern",
-    "editName": "Name ändern"
+    "editName": "Name ändern",
+    "language":"Sprache"
 }

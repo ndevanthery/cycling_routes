@@ -4,6 +4,7 @@ import 'package:cycling_routes/themes/custom_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -53,7 +54,7 @@ class _MyAppState extends State<MyApp> {
         selector: (_, loginManager) =>
             Tuple2(loginManager.isUserLoggedIn, loginManager.userRole),
         builder: (BuildContext context, loginManagerData, _) {
-          return MaterialApp.router(
+          return GetMaterialApp.router(
             theme: CustomTheme(),
             darkTheme: CustomNightTheme(),
             debugShowCheckedModeBanner: false,
@@ -67,6 +68,7 @@ class _MyAppState extends State<MyApp> {
               GlobalWidgetsLocalizations.delegate,
             ],
             supportedLocales: L10n.all,
+            locale: Locale('en'),
           );
         },
       ),
