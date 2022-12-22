@@ -212,7 +212,6 @@ class _CreateRouteState extends State<CreateRoute> {
     List<String> myCoordinates =
         myRoute.map((e) => '[ ${e.longitude} , ${e.latitude}]').toList();
 
-    print(myCoordinates.join(','));
     var response = await http.post(
         Uri.parse(
             "https://api.openrouteservice.org/v2/directions/cycling-regular/geojson"),
@@ -226,7 +225,6 @@ class _CreateRouteState extends State<CreateRoute> {
         body: '{"coordinates":[ ${myCoordinates.join(',')}]}',
         encoding: Encoding.getByName("utf-8"));
 
-    print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonParsed = jsonDecode(response.body);
       var feature = jsonParsed['features']!;
@@ -240,8 +238,38 @@ class _CreateRouteState extends State<CreateRoute> {
         myReturnRoute.routePoints!
             .add(LatLng(coordinates[i][1], coordinates[i][0]));
       }
+      myReturnRoute.altitudePoints =
+          await getAltitude(myReturnRoute.routePoints!);
     }
     return myReturnRoute;
+  }
+
+  Future<List<double>> getAltitude(List<LatLng> myCoordinates) async {
+    List<double> responseList = [];
+    print(myCoordinates.length);
+    List<List<double>> myStrings =
+        myCoordinates.map((e) => [e.latitude, e.longitude]).toList();
+    var data = jsonEncode(myStrings);
+
+    var response =
+        await http.post(Uri.parse("https://elevation.racemap.com/api"),
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: data,
+            encoding: Encoding.getByName("utf-8"));
+    print("status ${response.statusCode}");
+    if (response.statusCode == 200) {
+      List<dynamic> tempResp = jsonDecode(response.body);
+      responseList = tempResp
+          .map(
+            (e) => e * 1.0 as double,
+          )
+          .toList();
+
+      print(responseList);
+    }
+    return responseList;
   }
 
   void saveRoute(uid) {

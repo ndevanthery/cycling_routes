@@ -6,6 +6,7 @@ class RouteM {
   String? name;
   String? uidCreator;
   List<LatLng>? routePoints;
+  List<double>? altitudePoints;
   double? distance;
   double? duration;
   bool isFav;
@@ -15,7 +16,8 @@ class RouteM {
       this.uid,
       this.uidCreator,
       this.routePoints,
+      this.altitudePoints,
       this.distance,
       this.duration,
-      required this.isFav} );
+      required this.isFav});
 }

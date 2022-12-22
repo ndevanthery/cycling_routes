@@ -47,7 +47,9 @@ class DatabaseService {
       "distance": route.distance,
       "duration": route.duration,
       "name": route.name,
+      "altitudes": route.altitudePoints,
     };
+
     return await routeCollect.add(myRouteMap);
   }
 
@@ -95,8 +97,12 @@ class DatabaseService {
     for (var doc in myDocs) {
       var myData = doc.data()! as Map<String, dynamic>;
       List<dynamic> myPoints = myData['route'];
+
       List<LatLng> myLatLng =
           myPoints.map((point) => LatLng(point['lat'], point['long'])).toList();
+      List<dynamic> myAltitudesDyn = myData["altitudes"];
+      List<double> altPoints =
+          myAltitudesDyn.map((e) => e * 1.0 as double).toList();
       myRouteList.add(RouteM(
           uid: doc.id,
           uidCreator: myData['creator'],
@@ -104,6 +110,7 @@ class DatabaseService {
           duration: myData['duration'],
           name: myData['name'],
           routePoints: myLatLng,
+          altitudePoints: altPoints,
           isFav: false));
     }
 
@@ -140,7 +147,12 @@ class DatabaseService {
       List<dynamic> myPoints = myData['route'];
       List<LatLng> myLatLng =
           myPoints.map((point) => LatLng(point['lat'], point['long'])).toList();
+      List<dynamic> myAltitudesDyn = myData["altitudes"];
+      List<double> altPoints =
+          myAltitudesDyn.map((e) => e * 1.0 as double).toList();
+
       //Finally add the route with its info into the list
+
       myRouteList.add(RouteM(
           uid: doc.id,
           uidCreator: myData['creator'],
@@ -148,6 +160,7 @@ class DatabaseService {
           duration: myData['duration'],
           name: myData['name'],
           routePoints: myLatLng,
+          altitudePoints: altPoints,
           isFav: isFav));
     }
 

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:570032156758:android:0ddc569612820d448f4bf7",
         "android_client_info": {
-          "package_name": "com.example.cycling_routes"
+          "package_name": "com.group4.rideon"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "570032156758-ajcgdg1ue5o1qsp7bbad6a9bsvg34ti4.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.cyclingRoutes"
+                "bundle_id": "com.group4.rideon"
               }
             }
           ]

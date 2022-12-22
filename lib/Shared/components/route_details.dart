@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:map_elevation/map_elevation.dart';
 
 import '../../Models/route_m.dart';
 
@@ -19,10 +22,16 @@ class RouteDetails extends StatefulWidget {
 class _RouteDetailsState extends State<RouteDetails> {
   bool nameEdited = false;
   TextEditingController myNameController = TextEditingController();
+  int elevationDiff = 0;
 
   @override
   void initState() {
     myNameController.text = widget.route.name!;
+    var alt = widget.route.altitudePoints!;
+    alt.sort();
+
+    elevationDiff = (alt.last - alt.first).toInt();
+
     super.initState();
   }
 
@@ -80,7 +89,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "1050 m",
+                          "${elevationDiff} m",
                           style: TextStyle(
                               fontSize: 18,
                               letterSpacing: 1.1,
