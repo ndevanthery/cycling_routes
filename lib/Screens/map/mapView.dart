@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:cycling_routes/Models/route_m.dart';
+import 'package:cycling_routes/Models/trafficjam_m.dart';
+import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MapPage extends StatefulWidget {
   RouteM? route;
@@ -19,6 +22,7 @@ class _MapPageState extends State<MapPage> {
   bool switchValue = false;
   bool isUnmount = false;
   List<LatLng> myRoute = [];
+  LatLng? _clicked = null;
 
   void _getCurrentLocation() async {
     Position position = await _determinePosition();
@@ -75,6 +79,12 @@ class _MapPageState extends State<MapPage> {
         Scaffold(
             body: FlutterMap(
           options: MapOptions(
+              onTap: (tapPosition, point) {
+                setState(() {
+                  _clicked = point;
+                });
+                print(point.toString());
+              },
               minZoom: 9,
               maxZoom: 18,
               zoom: 9,
@@ -115,6 +125,15 @@ class _MapPageState extends State<MapPage> {
                   color: Colors.red,
                 ),
               ),
+              if (_clicked != null)
+                Marker(
+                  point: _clicked!,
+                  builder: (context) => Icon(
+                    Icons.place,
+                    color: Colors.red,
+                    size: 40,
+                  ),
+                ),
 
               if (myRoute.isNotEmpty)
                 Marker(
@@ -149,7 +168,35 @@ class _MapPageState extends State<MapPage> {
               setState(() {
                 switchValue = val;
               });
-            })
+            }),
+        if (_clicked != null)
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(children: [
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      _dialNotifyProblem(context).then((value) => setState(
+                            () {},
+                          ));
+                    },
+                    child: Text("Notify trouble")),
+              )),
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _clicked = null;
+                      });
+                    },
+                    child: Text("Clear")),
+              )),
+            ]),
+          ),
       ],
     );
   }
@@ -188,5 +235,64 @@ class _MapPageState extends State<MapPage> {
       }
     }
     return myReturn;
+  }
+
+  Future<void> _dialNotifyProblem(uid) {
+    TextEditingController myController = TextEditingController();
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("notify problem"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("Describe your problem :"),
+                TextField(
+                  minLines: 1,
+                  maxLines: 10,
+                  textInputAction: TextInputAction.newline,
+                  controller: myController,
+                ),
+              ],
+            ),
+          ),
+          actionsPadding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          contentPadding: const EdgeInsets.fromLTRB(24, 15, 24, 15),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                AppLocalizations.of(context)!.cancel,
+                style: const TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                AppLocalizations.of(context)!.save,
+                style: const TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                setState(() {
+                  DatabaseService myService = DatabaseService(uid: null);
+                  myService.addTrafficJam(new TrafficJamM(
+                      description: myController.text,
+                      date: DateTime.now(),
+                      place: _clicked!,
+                      isValidated: false));
+                  _clicked = null;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

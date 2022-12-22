@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycling_routes/Models/route_m.dart';
+import 'package:cycling_routes/Models/trafficjam_m.dart';
 import 'package:cycling_routes/Models/user_m.dart';
 import 'package:cycling_routes/Services/auth_exception_handler.dart';
 import 'package:latlong2/latlong.dart';
@@ -17,6 +18,8 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('Users');
   final CollectionReference routeCollect =
       FirebaseFirestore.instance.collection('Routes');
+  final CollectionReference trafficJamCollect =
+      FirebaseFirestore.instance.collection('trafficJam');
 
   //Create User Doc at sign in
   //Or update their data
@@ -51,6 +54,18 @@ class DatabaseService {
     };
 
     return await routeCollect.add(myRouteMap);
+  }
+
+  Future addTrafficJam(TrafficJamM jam) async {
+    Map<String, dynamic> myJam = {
+      "date": jam.date,
+      "description": jam.description,
+      "lat": jam.place.latitude,
+      "long": jam.place.longitude,
+      "isValidated": jam.isValidated,
+    };
+
+    return await trafficJamCollect.add(myJam);
   }
 
   Future<bool> updateRouteName(String uid, String newName) async {

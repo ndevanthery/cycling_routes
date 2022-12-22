@@ -5,8 +5,6 @@ import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:map_elevation/map_elevation.dart';
-
 import '../../Models/route_m.dart';
 
 class RouteDetails extends StatefulWidget {
