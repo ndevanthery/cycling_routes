@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Screens/admin/admin_jams.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,6 +19,7 @@ class _AdminHomeState extends State<AdminHome> {
   int _selectedIndex = 0;
   final List<Widget> _pages = <Widget>[
     const AdminRouteList(),
+    AdminJamsPage(),
     CreateRoute(),
   ];
 
@@ -61,6 +63,7 @@ class _AdminHomeState extends State<AdminHome> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.browse_gallery),
                 label: AppLocalizations.of(context)!.myRoutes),
+            BottomNavigationBarItem(icon: Icon(Icons.warning), label: "Jams"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: AppLocalizations.of(context)!.create),

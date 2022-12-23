@@ -53,6 +53,7 @@ dependencies:
   get:
   settings_ui:
   flutter_arb_translator:
+  flutter_slidable:
 
 dev_dependencies:
   flutter_test:

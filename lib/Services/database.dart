@@ -5,13 +5,14 @@ import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Models/trafficjam_m.dart';
 import 'package:cycling_routes/Models/user_m.dart';
 import 'package:cycling_routes/Services/auth_exception_handler.dart';
+import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
 class DatabaseService {
   final String? uid;
 
   //Constructor
-  DatabaseService({required this.uid});
+  DatabaseService({this.uid});
 
   //Collections Refs
   final CollectionReference userCollect =
@@ -66,6 +67,43 @@ class DatabaseService {
     };
 
     return await trafficJamCollect.add(myJam);
+  }
+
+  Future<List<TrafficJamM>> getTrafficJams() async {
+    List<TrafficJamM> myRouteList = [];
+
+    //Get all existing routes's doc
+    var getJams = await trafficJamCollect.get();
+    var myDocs = getJams.docs;
+
+    for (var doc in myDocs) {
+      var myData = doc.data()! as Map<String, dynamic>;
+
+      //Finally add the route with its info into the list
+
+      myRouteList.add(TrafficJamM(
+          uid: doc.id,
+          description: myData['description'],
+          date: (myData['date'] as Timestamp).toDate(),
+          place: LatLng(myData['lat'], myData['long']),
+          isValidated: myData['isValidated']));
+    }
+
+    return myRouteList;
+  }
+
+  Future deleteTrafficJam(TrafficJamM trafficJam) async {
+    await trafficJamCollect.doc(trafficJam.uid).delete();
+  }
+
+  Future validateTrafficJam(TrafficJamM trafficJam) async {
+    return await trafficJamCollect.doc(trafficJam.uid).set({
+      'date': trafficJam.date,
+      'description': trafficJam.description,
+      'lat': trafficJam.place.latitude,
+      'long': trafficJam.place.longitude,
+      'isValidated': true,
+    });
   }
 
   Future<bool> updateRouteName(String uid, String newName) async {
