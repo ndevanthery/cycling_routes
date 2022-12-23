@@ -99,7 +99,8 @@
     "sec": "sec",
     "saveName": "Save Name",
     "editName": "Edit Name",
-    "language": "Language"
+    "language": "Language",
+    "ok":"ok"
 
     
 

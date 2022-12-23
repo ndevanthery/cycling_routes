@@ -5,6 +5,8 @@ import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,6 +25,7 @@ class _MapPageState extends State<MapPage> {
   bool isUnmount = false;
   List<LatLng> myRoute = [];
   LatLng? _clicked = null;
+  List<TrafficJamM> jams = [];
 
   void _getCurrentLocation() async {
     Position position = await _determinePosition();
@@ -63,6 +66,9 @@ class _MapPageState extends State<MapPage> {
     }
 
     _getCurrentLocation();
+    DatabaseService myService = DatabaseService();
+    myService.getTrafficJams().then((value) =>
+        jams = value.where((element) => element.isValidated == true).toList());
     super.initState();
   }
 
@@ -114,12 +120,23 @@ class _MapPageState extends State<MapPage> {
               ],
             ),
             MarkerLayerOptions(markers: [
+              ...jams.map((e) => Marker(
+                    point: e.place,
+                    builder: (context) => IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        _dialProblem(e);
+                      },
+                      icon: Icon(
+                        Icons.warning,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  )),
               //retrieve user position (if he accepts to give it) and display a bike on the map
               Marker(
                 point: LatLng(_position == null ? 0 : _position!.latitude,
                     _position == null ? 0 : _position!.longitude),
-                width: 120,
-                height: 120,
                 builder: (context) => Icon(
                   Icons.place,
                   color: Colors.red,
@@ -287,6 +304,62 @@ class _MapPageState extends State<MapPage> {
                       isValidated: false));
                   _clicked = null;
                 });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _dialProblem(TrafficJamM jam) {
+    TextEditingController myController = TextEditingController();
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("problem detail"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  "Description : ",
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(jam.description),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "at ${jam.date!.hour.toString().padLeft(2, '0')} ${jam.date!.minute.toString().padLeft(2, '0')}",
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  DateFormat.yMMMMd(Get.locale!.languageCode).format(jam.date!),
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+          ),
+          actionsPadding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          contentPadding: const EdgeInsets.fromLTRB(24, 15, 24, 15),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                AppLocalizations.of(context)!.ok,
+                style: const TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),

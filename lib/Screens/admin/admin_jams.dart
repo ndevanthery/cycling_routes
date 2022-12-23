@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AdminJamsPage extends StatefulWidget {
   const AdminJamsPage({super.key});
@@ -102,7 +104,9 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 border: Border.all(color: Colors.black, width: 0.50),
               ),
               child: ListTile(
-                title: Text(e.description),
+                title: Text(DateFormat.yMMMMd(Get.locale!.languageCode)
+                        .format(e.date!) +
+                    "at ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
               ),
             ),
           ),
@@ -136,7 +140,9 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 border: Border.all(color: Colors.black, width: 0.50),
               ),
               child: ListTile(
-                title: Text(e.description),
+                title: Text(DateFormat.yMMMMd(Get.locale!.languageCode)
+                        .format(e.date!) +
+                    " at ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
               ),
             ),
           ),
