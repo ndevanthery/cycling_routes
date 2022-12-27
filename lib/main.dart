@@ -2,6 +2,7 @@ import 'package:cycling_routes/Screens/authenticate/register.dart';
 import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/themes/custom_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,11 @@ import 'Shared/firebase_options.dart';
 import 'l10n/l10n.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rxdart/rxdart.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +31,36 @@ Future<void> main() async {
 
   Auth loginManager = Auth();
   await loginManager.init();
+
+  //TODO Initialise notifications
+
+  final messaging = FirebaseMessaging.instance;
+  messaging.subscribeToTopic("all");
+
+  final settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+// used to pass messages from event handler to the UI
+  final _messageStreamController = BehaviorSubject<RemoteMessage>();
+
+  String? token = await messaging.getToken();
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+/*     print('Handling a foreground message: ${message.messageId}');
+    print('Message data: ${message.data}');
+    print('Message notification: ${message.notification?.title}');
+    print('Message notification: ${message.notification?.body}');
+ */
+    _messageStreamController.sink.add(message);
+  });
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(MyApp(
     loginManager: loginManager,

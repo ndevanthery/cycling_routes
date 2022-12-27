@@ -316,15 +316,40 @@ class _CreateRouteState extends State<CreateRoute> {
                 AppLocalizations.of(context)!.save,
                 style: const TextStyle(color: Colors.black),
               ),
-              onPressed: () {
+              onPressed: () async {
                 setState(() {
                   myRouteM.name = myController.text;
-                  print(myRouteM);
 
                   saveRoute(uid);
                   myRouteM.routePoints = [];
                   points = [];
                 });
+                /* Map<String, dynamic> myData = {
+                  "to": "/topics/all",
+                  "notification": {
+                    "title": "ITS FOKIN WORKIN",
+                    "body": "Rich Notification testing (body)",
+                    "mutable_content": true,
+                    "sound": "Tri-tone"
+                  },
+                  "data": {
+                    "url": "<url of media image>",
+                    "dl": "<deeplink action on tap of notification>"
+                  }
+                }; //TODO : Send Notification
+ */
+                var response = await http.post(
+                    Uri.parse("https://fcm.googleapis.com/fcm/send"),
+                    headers: {
+                      "Accept": 'application/json',
+                      "Content-Type": "application/json",
+                      'Authorization':
+                          'key=AAAAhLiQcFY:APA91bGOsLmxAkiQcdTLtriv3tUYUn7Dcm7WzL8hWwt4CSOkWzu7WDIyWEAf_BsfqjE88gKmxL1CD_zEOuVAM6kfEcd0RqfAr6zqcdWJKApppSxnqQCmDt6Xyv-VdtzhvtVKNJNJEMhC'
+                    },
+                    body:
+                        '{"to": "/topics/all","notification": {"title": "new route created","body": "The route ${myRouteM.name} was created","mutable_content": true,"sound": "Tri-tone"}}');
+                print(response.statusCode);
+                print(response.body);
                 Navigator.of(context).pop();
               },
             ),

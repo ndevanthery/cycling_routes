@@ -54,6 +54,11 @@ dependencies:
   settings_ui:
   flutter_arb_translator:
   flutter_slidable:
+  firebase_messaging:
+  overlay_support:
+
+  rxdart: ^0.27.7
+  firebase_analytics: ^10.0.8
 
 dev_dependencies:
   flutter_test:
