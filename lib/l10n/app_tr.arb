@@ -99,6 +99,17 @@
   "sec": "sn",
   "saveName": "İsim Kaydet",
   "editName": "Adı Düzenle",
-  "language": "Dil"
+  "language": "Dil",
+  "ok": "Tamam.",
+  "toVerify": "Doğrulamak için",
+  "displayed": "Görüntüleniyor",
+  "correct": "Doğru",
+  "incorect": "Incorect",
+  "at": "at",
+  "description": "Açıklama",
+  "problemDetail": "sorun detayı",
+  "notifyTrouble": "sorun bi̇ldi̇ri̇n",
+  "describeYourProblem": "sorununuzu tanımlayın"
+
 
 }

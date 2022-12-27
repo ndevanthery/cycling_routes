@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Saglabāt nosaukumu",
   "editName": "Rediģēt nosaukumu",
-  "language": "Valoda"
+  "language": "Valoda",
+  "ok": "ok",
+  "toVerify": "Lai pārbaudītu",
+  "displayed": "Parādīts",
+  "correct": "Pareizi",
+  "incorect": "Incorect",
+  "at": "vietnē",
+  "description": "Apraksts",
+  "problemDetail": "detalizēts problēmas apraksts",
+  "notifyTrouble": "paziņot par nepatikšanām",
+  "describeYourProblem": "aprakstiet savu problēmu."
+
 
 }

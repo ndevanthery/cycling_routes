@@ -199,7 +199,7 @@ class _MapPageState extends State<MapPage> {
                             () {},
                           ));
                     },
-                    child: Text("Notify trouble")),
+                    child: Text(AppLocalizations.of(context)!.notifyTrouble)),
               )),
               Expanded(
                   child: Padding(
@@ -210,7 +210,7 @@ class _MapPageState extends State<MapPage> {
                         _clicked = null;
                       });
                     },
-                    child: Text("Clear")),
+                    child: Text(AppLocalizations.of(context)!.clear)),
               )),
             ]),
           ),
@@ -260,11 +260,11 @@ class _MapPageState extends State<MapPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("notify problem"),
+          title: Text(AppLocalizations.of(context)!.notifyTrouble),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Describe your problem :"),
+                Text("${AppLocalizations.of(context)!.describeYourProblem}:"),
                 TextField(
                   minLines: 1,
                   maxLines: 10,
@@ -319,12 +319,12 @@ class _MapPageState extends State<MapPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("problem detail"),
+          title: Text(AppLocalizations.of(context)!.problemDetail),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text(
-                  "Description : ",
+                  "${AppLocalizations.of(context)!.description} : ",
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
@@ -335,7 +335,7 @@ class _MapPageState extends State<MapPage> {
                   height: 30,
                 ),
                 Text(
-                  "at ${jam.date!.hour.toString().padLeft(2, '0')} ${jam.date!.minute.toString().padLeft(2, '0')}",
+                  "${AppLocalizations.of(context)!.at} ${jam.date!.hour.toString().padLeft(2, '0')} ${jam.date!.minute.toString().padLeft(2, '0')}",
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 SizedBox(

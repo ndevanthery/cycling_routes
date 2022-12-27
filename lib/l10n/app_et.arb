@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Salvesta nimi",
   "editName": "Muuda nime",
-  "language": "Keel"
+  "language": "Keel",
+  "ok": "ok",
+  "toVerify": "Kontrollimiseks",
+  "displayed": "Kuvatud",
+  "correct": "Õige",
+  "incorect": "Incorect",
+  "at": "aadressil",
+  "description": "Kirjeldus",
+  "problemDetail": "probleemi detail",
+  "notifyTrouble": "teavitada hädaolukorrast",
+  "describeYourProblem": "kirjeldage oma probleemi"
+
 
 }

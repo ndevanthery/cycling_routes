@@ -1,105 +1,339 @@
 {
   "bg": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "cs": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "da": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "de": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "el": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "es": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "et": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "fi": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "fr": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "hu": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "id": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "it": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "ja": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "lt": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "lv": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "nl": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "pl": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "pt": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "ro": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "ru": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "sk": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "sl": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "sv": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "tr": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "uk": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ],
 
   "zh": [
-    "ok"
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
   ]
 }

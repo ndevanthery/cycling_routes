@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Simpan Nama",
   "editName": "Edit Nama",
-  "language": "Bahasa"
+  "language": "Bahasa",
+  "ok": "ok",
+  "toVerify": "Untuk memverifikasi",
+  "displayed": "Ditampilkan",
+  "correct": "Benar",
+  "incorect": "Incorect",
+  "at": "di",
+  "description": "Deskripsi",
+  "problemDetail": "detail masalah",
+  "notifyTrouble": "memberitahukan masalah",
+  "describeYourProblem": "jelaskan masalah Anda"
+
 
 }

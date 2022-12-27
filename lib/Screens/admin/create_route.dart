@@ -258,7 +258,6 @@ class _CreateRouteState extends State<CreateRoute> {
             },
             body: data,
             encoding: Encoding.getByName("utf-8"));
-    print("status ${response.statusCode}");
     if (response.statusCode == 200) {
       List<dynamic> tempResp = jsonDecode(response.body);
       responseList = tempResp
@@ -324,20 +323,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   myRouteM.routePoints = [];
                   points = [];
                 });
-                /* Map<String, dynamic> myData = {
-                  "to": "/topics/all",
-                  "notification": {
-                    "title": "ITS FOKIN WORKIN",
-                    "body": "Rich Notification testing (body)",
-                    "mutable_content": true,
-                    "sound": "Tri-tone"
-                  },
-                  "data": {
-                    "url": "<url of media image>",
-                    "dl": "<deeplink action on tap of notification>"
-                  }
-                }; //TODO : Send Notification
- */
+
                 var response = await http.post(
                     Uri.parse("https://fcm.googleapis.com/fcm/send"),
                     headers: {
@@ -348,8 +334,7 @@ class _CreateRouteState extends State<CreateRoute> {
                     },
                     body:
                         '{"to": "/topics/all","notification": {"title": "new route created","body": "The route ${myRouteM.name} was created","mutable_content": true,"sound": "Tri-tone"}}');
-                print(response.statusCode);
-                print(response.body);
+
                 Navigator.of(context).pop();
               },
             ),

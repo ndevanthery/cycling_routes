@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdminJamsPage extends StatefulWidget {
   const AdminJamsPage({super.key});
@@ -47,7 +48,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
       child: Column(
         children: [
           Text(
-            "To verify",
+            AppLocalizations.of(context)!.toVerify,
             style: TextStyle(fontSize: 24),
           ),
           ..._getJamsToVerify(),
@@ -55,7 +56,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
             height: 20,
           ),
           Text(
-            "Displayed",
+            AppLocalizations.of(context)!.displayed,
             style: TextStyle(fontSize: 24),
           ),
           ..._getJamsDisplayed(),
@@ -82,7 +83,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 backgroundColor: Colors.green,
                 foregroundColor: Colors.white,
                 icon: Icons.done,
-                label: 'Correct',
+                label: AppLocalizations.of(context)!.correct,
               ),
               SlidableAction(
                 autoClose: true,
@@ -96,7 +97,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
                 icon: Icons.close,
-                label: 'Incorect',
+                label: AppLocalizations.of(context)!.incorect,
               ),
             ]),
             child: Container(
@@ -106,7 +107,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
               child: ListTile(
                 title: Text(DateFormat.yMMMMd(Get.locale!.languageCode)
                         .format(e.date!) +
-                    "at ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
+                    "${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
               ),
             ),
           ),
@@ -132,7 +133,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
-                label: 'delete',
+                label: AppLocalizations.of(context)!.delete,
               ),
             ]),
             child: Container(
@@ -142,7 +143,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
               child: ListTile(
                 title: Text(DateFormat.yMMMMd(Get.locale!.languageCode)
                         .format(e.date!) +
-                    " at ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
+                    " ${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
               ),
             ),
           ),

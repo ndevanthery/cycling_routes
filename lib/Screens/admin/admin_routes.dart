@@ -18,8 +18,6 @@ class _AdminRouteListState extends State<AdminRouteList> {
   List<RouteM> myRoutes = [];
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
   }
 

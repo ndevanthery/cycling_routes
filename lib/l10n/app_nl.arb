@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Naam opslaan",
   "editName": "Naam bewerken",
-  "language": "Taal"
+  "language": "Taal",
+  "ok": "ok",
+  "toVerify": "Om te verifiëren",
+  "displayed": "Weergegeven",
+  "correct": "Correct",
+  "incorect": "Incorect",
+  "at": "op",
+  "description": "Beschrijving",
+  "problemDetail": "probleemdetail",
+  "notifyTrouble": "problemen melden",
+  "describeYourProblem": "beschrijf uw probleem"
+
 
 }

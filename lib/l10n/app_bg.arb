@@ -99,6 +99,17 @@
   "sec": "сек",
   "saveName": "Запазване на името",
   "editName": "Редактиране на името",
-  "language": "Език"
+  "language": "Език",
+  "ok": "добре",
+  "toVerify": "За да проверите",
+  "displayed": "Показване на",
+  "correct": "Правилно",
+  "incorect": "Incorect",
+  "at": "в",
+  "description": "Описание",
+  "problemDetail": "подробности за проблема",
+  "notifyTrouble": "уведомяване за проблеми",
+  "describeYourProblem": "опишете проблема си"
+
 
 }

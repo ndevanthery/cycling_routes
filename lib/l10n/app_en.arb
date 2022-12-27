@@ -100,7 +100,17 @@
     "saveName": "Save Name",
     "editName": "Edit Name",
     "language": "Language",
-    "ok":"ok"
+    "ok":"ok",
+    "toVerify" : "To verify",
+    "displayed":"Displayed",
+    "correct":"Correct",
+    "incorect":"Incorect",
+    "at" : "at",
+    "description": "Description",
+    "problemDetail": "problem detail",
+    "notifyTrouble": "notify trouble",
+    "describeYourProblem":"describe your problem"
+
 
     
 

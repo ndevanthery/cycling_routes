@@ -99,6 +99,17 @@
   "sec": "sek",
   "saveName": "Spara namn",
   "editName": "Redigera namn",
-  "language": "Språk"
+  "language": "Språk",
+  "ok": "ok",
+  "toVerify": "För att kontrollera",
+  "displayed": "Visad",
+  "correct": "Korrekt",
+  "incorect": "Incorect",
+  "at": "på",
+  "description": "Beskrivning",
+  "problemDetail": "problemdetaljering",
+  "notifyTrouble": "anmäla problem",
+  "describeYourProblem": "Beskriv ditt problem."
+
 
 }

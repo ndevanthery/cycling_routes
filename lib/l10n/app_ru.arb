@@ -99,6 +99,17 @@
   "sec": "сек",
   "saveName": "Сохранить имя",
   "editName": "Редактировать имя",
-  "language": "Язык"
+  "language": "Язык",
+  "ok": "хорошо",
+  "toVerify": "Для проверки",
+  "displayed": "Отображается",
+  "correct": "Правильно",
+  "incorect": "Инкорект",
+  "at": "на сайте",
+  "description": "Описание",
+  "problemDetail": "детализация проблемы",
+  "notifyTrouble": "уведомлять о проблемах",
+  "describeYourProblem": "опишите свою проблему"
+
 
 }

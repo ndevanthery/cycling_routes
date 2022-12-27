@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Zapisz nazwę",
   "editName": "Edytuj Nazwa",
-  "language": "Język"
+  "language": "Język",
+  "ok": "ok",
+  "toVerify": "Do sprawdzenia",
+  "displayed": "Wyświetlane",
+  "correct": "Prawidłowo",
+  "incorect": "Incorect",
+  "at": "na stronie",
+  "description": "Opis",
+  "problemDetail": "szczegół problemu",
+  "notifyTrouble": "powiadomić o problemie",
+  "describeYourProblem": "opisz swój problem"
+
 
 }

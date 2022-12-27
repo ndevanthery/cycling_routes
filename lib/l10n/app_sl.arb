@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Shrani ime",
   "editName": "Urejanje imena",
-  "language": "Jezik"
+  "language": "Jezik",
+  "ok": "ok",
+  "toVerify": "Preverjanje",
+  "displayed": "Prikazano",
+  "correct": "Pravilno",
+  "incorect": "Incorect",
+  "at": "na spletni strani .",
+  "description": "Opis",
+  "problemDetail": "podrobnosti o težavi",
+  "notifyTrouble": "obvestilo o težavah",
+  "describeYourProblem": "opišite svojo težavo."
+
 
 }

@@ -99,6 +99,17 @@
   "sec": "sek",
   "saveName": "Gem navn",
   "editName": "Rediger navn",
-  "language": "Sprog"
+  "language": "Sprog",
+  "ok": "ok",
+  "toVerify": "For at verificere",
+  "displayed": "Vises",
+  "correct": "Korrekt",
+  "incorect": "Incorect",
+  "at": "på",
+  "description": "Beskrivelse",
+  "problemDetail": "problemdetalje",
+  "notifyTrouble": "anmelde problemer",
+  "describeYourProblem": "beskrive dit problem"
+
 
 }

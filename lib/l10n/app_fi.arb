@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Tallenna nimi",
   "editName": "Muokkaa nimeä",
-  "language": "Kieli"
+  "language": "Kieli",
+  "ok": "ok",
+  "toVerify": "Varmentaa",
+  "displayed": "Näytetään",
+  "correct": "Oikein",
+  "incorect": "Incorect",
+  "at": "osoitteessa",
+  "description": "Kuvaus",
+  "problemDetail": "ongelman yksityiskohta",
+  "notifyTrouble": "ilmoittaa ongelmista",
+  "describeYourProblem": "kuvaile ongelmasi"
+
 
 }

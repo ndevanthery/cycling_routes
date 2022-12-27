@@ -99,6 +99,17 @@
   "sec": "sek",
   "saveName": "Išsaugoti pavadinimą",
   "editName": "Redaguoti pavadinimą",
-  "language": "Kalba"
+  "language": "Kalba",
+  "ok": "ok",
+  "toVerify": "Patikrinti",
+  "displayed": "Rodoma",
+  "correct": "Teisingai",
+  "incorect": "Incorect",
+  "at": "adresu",
+  "description": "Aprašymas",
+  "problemDetail": "išsamiai aprašyta problema",
+  "notifyTrouble": "pranešti apie bėdą",
+  "describeYourProblem": "aprašykite savo problemą"
+
 
 }

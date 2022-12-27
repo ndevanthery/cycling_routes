@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Salvează numele",
   "editName": "Editați numele",
-  "language": "Limba"
+  "language": "Limba",
+  "ok": "ok",
+  "toVerify": "Pentru a verifica",
+  "displayed": "Afișat",
+  "correct": "Corect",
+  "incorect": "Incorect",
+  "at": "la",
+  "description": "Descriere",
+  "problemDetail": "Detaliile problemei",
+  "notifyTrouble": "notifică probleme",
+  "describeYourProblem": "descrieți problema dvs."
+
 
 }

@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Αποθήκευση ονόματος",
   "editName": "Επεξεργασία ονόματος",
-  "language": "Γλώσσα"
+  "language": "Γλώσσα",
+  "ok": "εντάξει",
+  "toVerify": "Για να επαληθεύσετε",
+  "displayed": "Εμφανίζεται",
+  "correct": "Σωστό",
+  "incorect": "Incorect",
+  "at": "στο",
+  "description": "Περιγραφή",
+  "problemDetail": "λεπτομέρεια του προβλήματος",
+  "notifyTrouble": "ειδοποίηση προβλήματος",
+  "describeYourProblem": "περιγράψτε το πρόβλημά σας"
+
 
 }

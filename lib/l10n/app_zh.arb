@@ -99,6 +99,17 @@
   "sec": "秘密",
   "saveName": "保存名称",
   "editName": "编辑名称",
-  "language": "语言"
+  "language": "语言",
+  "ok": "好的",
+  "toVerify": "为了核实",
+  "displayed": "显示的",
+  "correct": "正确的",
+  "incorect": "兴业银行",
+  "at": "在",
+  "description": "描述",
+  "problemDetail": "问题细节",
+  "notifyTrouble": "通知麻烦",
+  "describeYourProblem": "描述你的问题"
+
 
 }

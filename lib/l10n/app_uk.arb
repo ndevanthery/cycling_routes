@@ -99,6 +99,17 @@
   "sec": "сек",
   "saveName": "Зберегти ім'я",
   "editName": "Редагувати назву",
-  "language": "Мова"
+  "language": "Мова",
+  "ok": "Добре.",
+  "toVerify": "Перевірити",
+  "displayed": "Відображається",
+  "correct": "Правильно.",
+  "incorect": "Incorect",
+  "at": "на",
+  "description": "Опис",
+  "problemDetail": "деталізація проблеми",
+  "notifyTrouble": "повідомити про несправність",
+  "describeYourProblem": "опишіть свою проблему"
+
 
 }

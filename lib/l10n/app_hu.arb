@@ -99,6 +99,17 @@
   "sec": "sec",
   "saveName": "Név mentése",
   "editName": "Név szerkesztése",
-  "language": "Nyelv"
+  "language": "Nyelv",
+  "ok": "ok",
+  "toVerify": "Ellenőrizni",
+  "displayed": "Megjelenített",
+  "correct": "Helyes",
+  "incorect": "Incorect",
+  "at": "a  címen.",
+  "description": "Leírás",
+  "problemDetail": "probléma részletei",
+  "notifyTrouble": "hiba bejelentése",
+  "describeYourProblem": "írja le a problémát"
+
 
 }

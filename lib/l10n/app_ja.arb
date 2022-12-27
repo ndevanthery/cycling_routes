@@ -99,6 +99,17 @@
   "sec": "セック",
   "saveName": "名前の保存",
   "editName": "編集名",
-  "language": "言語"
+  "language": "言語",
+  "ok": "大丈夫",
+  "toVerify": "検証のため",
+  "displayed": "表示",
+  "correct": "コレクト",
+  "incorect": "インコレクト",
+  "at": "で",
+  "description": "商品説明",
+  "problemDetail": "もんだいじょうほう",
+  "notifyTrouble": "とりしらべる",
+  "describeYourProblem": "問題を説明する"
+
 
 }

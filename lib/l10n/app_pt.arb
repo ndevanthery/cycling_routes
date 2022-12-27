@@ -99,6 +99,17 @@
   "sec": "seg",
   "saveName": "Guardar nome",
   "editName": "Editar Nome",
-  "language": "Idioma"
+  "language": "Idioma",
+  "ok": "ok",
+  "toVerify": "Para verificar",
+  "displayed": "Exibido em",
+  "correct": "Correcto",
+  "incorect": "Incorrecto",
+  "at": "em",
+  "description": "Descrição",
+  "problemDetail": "detalhe do problema",
+  "notifyTrouble": "notificar problemas",
+  "describeYourProblem": "descreva o seu problema"
+
 
 }

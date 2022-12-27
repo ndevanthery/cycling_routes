@@ -99,6 +99,17 @@
   "sec": "sek",
   "saveName": "Uložiť názov",
   "editName": "Upraviť názov",
-  "language": "Jazyk"
+  "language": "Jazyk",
+  "ok": "ok",
+  "toVerify": "Overenie",
+  "displayed": "Zobrazené na",
+  "correct": "Správne",
+  "incorect": "Incorect",
+  "at": "na adrese",
+  "description": "Popis",
+  "problemDetail": "detail problému",
+  "notifyTrouble": "upozorniť na problémy",
+  "describeYourProblem": "opíšte svoj problém"
+
 
 }
