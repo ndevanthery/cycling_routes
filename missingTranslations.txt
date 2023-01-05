@@ -10,6 +10,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "cs": [
@@ -23,6 +24,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "da": [
@@ -36,6 +38,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "de": [
@@ -49,6 +52,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "el": [
@@ -62,6 +66,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "es": [
@@ -75,6 +80,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "et": [
@@ -88,6 +94,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "fi": [
@@ -101,6 +108,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "fr": [
@@ -114,6 +122,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "hu": [
@@ -127,6 +136,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "id": [
@@ -140,6 +150,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "it": [
@@ -153,6 +164,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "ja": [
@@ -166,6 +178,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "lt": [
@@ -179,6 +192,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "lv": [
@@ -192,6 +206,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "nl": [
@@ -205,6 +220,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "pl": [
@@ -218,6 +234,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "pt": [
@@ -231,6 +248,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "ro": [
@@ -244,6 +262,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "ru": [
@@ -257,6 +276,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "sk": [
@@ -270,6 +290,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "sl": [
@@ -283,6 +304,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "sv": [
@@ -296,6 +318,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "tr": [
@@ -309,6 +332,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "uk": [
@@ -322,6 +346,7 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ],
 
   "zh": [
@@ -335,5 +360,6 @@
     "problemDetail",
     "notifyTrouble",
     "describeYourProblem"
+    "birthday"
   ]
 }

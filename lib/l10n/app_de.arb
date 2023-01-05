@@ -109,7 +109,8 @@
   "description": "Beschreibung",
   "problemDetail": "Problem-Detail",
   "notifyTrouble": "Probleme melden",
-  "describeYourProblem": "Ihr Problem beschreiben"
+  "describeYourProblem": "Ihr Problem beschreiben",
+  "birthday": "Geburtstag"
 
 
 }

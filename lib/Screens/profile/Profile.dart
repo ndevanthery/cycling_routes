@@ -24,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
+  TextEditingController birthdayController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController npaController = TextEditingController();
   TextEditingController locationController = TextEditingController();
@@ -83,6 +84,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: const TextStyle(
                                   fontSize: 32, fontWeight: FontWeight.bold)),
                           const SizedBox(height: 15.0),
+                          Text(user['birthday'],
+                              style: const TextStyle(fontSize: 20)),
+                          const SizedBox(height: 15.0),
                           Text(user['address'],
                               style: const TextStyle(fontSize: 20)),
                           const SizedBox(height: 15.0),
@@ -97,6 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             onPressed: () {
                               firstnameController.text = user['firstname'];
                               lastnameController.text = user['lastname'];
+                              birthdayController.text = user['birthday'];
                               addressController.text = user['address'];
                               npaController.text = user['npa'];
                               locationController.text = user['localite'];
@@ -126,6 +131,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 .lastname),
                                         _buildTextField(lastnameController,
                                             Icons.person_outline_rounded),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        _buildLabel(
+                                            label: AppLocalizations.of(context)!
+                                                .birthday),
+                                        _buildTextField(birthdayController,
+                                            Icons.location_on_outlined),
                                         const SizedBox(
                                           height: 10,
                                         ),
@@ -169,6 +182,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   firstnameController.text,
                                               "lastname":
                                                   lastnameController.text,
+                                              "birthday":
+                                                  birthdayController.text,
                                               "address": addressController.text,
                                               "npa": npaController.text,
                                               "localite":
