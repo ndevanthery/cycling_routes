@@ -3,10 +3,8 @@ import 'package:cycling_routes/Screens/profile/profile.dart';
 import 'package:cycling_routes/Screens/search/search.dart';
 import 'package:cycling_routes/Screens/settings/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../Services/auth.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -53,20 +51,20 @@ class _HomeState extends State<Home> {
         child: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 color: Colors.black,
               ),
               label: AppLocalizations.of(context)!.search,
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.browse_gallery),
+                icon: const Icon(Icons.browse_gallery),
                 label: AppLocalizations.of(context)!.map),
             BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 label: AppLocalizations.of(context)!.profile),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: const Icon(Icons.settings),
                 label: AppLocalizations.of(context)!.settings),
           ],
           onTap: _onItemTapped,

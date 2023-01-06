@@ -1,15 +1,11 @@
-import 'dart:developer';
-
 import 'package:cycling_routes/Shared/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Screens/settings/dialog_change_email.dart';
 import '../Screens/settings/dialog_change_pwd.dart';
 import '../Services/auth_exception_handler.dart';
 import '../Shared/components/terms_of_use.dart' as full_dialog_terms;
-import '../Shared/components/password_forgot.dart' as full_dialog_pwd;
 import '../Shared/components/app_about.dart' as full_dialog_app_about;
 
 class Utils {
@@ -21,7 +17,7 @@ class Utils {
         style: ElevatedButton.styleFrom(
           textStyle:
               const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-          primary: Colors.grey[500],
+          backgroundColor: Colors.grey[500],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -36,7 +32,7 @@ class Utils {
                 .updateUserInApp(FirebaseAuth.instance.currentUser,
                     shouldNotify: true)
                 .then((_) {
-              context.goNamed(myinitalRoute);
+              //context.goNamed(baseRoute);
             });
           } else {
             err = 'An Error Occured, try again later';
@@ -48,7 +44,7 @@ class Utils {
       style: ElevatedButton.styleFrom(
         textStyle:
             const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-        primary: Colors.grey[400],
+        backgroundColor: Colors.grey[400],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -91,18 +87,18 @@ class Utils {
   }
 
   static Future<void> displaySmallDialog(
-      BuildContext context, int caseNo) async {
+      BuildContext context, String currentCase) async {
     return showDialog(
         context: context,
         builder: (context) {
-          switch (caseNo) {
-            case 1: //Edit Email
+          switch (currentCase) {
+            case openChangeEmailBoxSmall: //Edit Email
               return DialogChangeEmail(isDelete: false);
 
-            case 2: //Edit Pwd
+            case openChangePwdBoxSmall: //Edit Pwd
               return const DialogChangePwd();
 
-            case 3: //DELETE ACCOUNT
+            case openDeleteBoxSmall: //DELETE ACCOUNT
               return DialogChangeEmail(isDelete: true);
 
             default:
@@ -112,18 +108,17 @@ class Utils {
   }
 
   static Future openFullDialog(
-      context, String caseStr, Function toggleTerms) async {
+      context, String currentCase, Function toggleTerms) async {
     dynamic result = await Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) {
-          if (caseStr.contains('terms')) {
-            return const full_dialog_terms.TermOfUse();
+          switch (currentCase) {
+            case openTermsBoxFull:
+              return const full_dialog_terms.TermOfUse();
+            case openAboutBoxFull:
+              return const full_dialog_app_about.AppAbout();
+            default:
+              return const full_dialog_app_about.AppAbout();
           }
-          if (caseStr.contains('pwd')) {
-            return const full_dialog_pwd.PasswordForgot();
-          }
-          //if(caseStr.contains('about')) {
-          return const full_dialog_app_about.AppAbout();
-          //}
         },
         fullscreenDialog: true));
     if (result != null) {
@@ -140,7 +135,7 @@ class Utils {
       SnackBar(
         content: Text(
           message,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),

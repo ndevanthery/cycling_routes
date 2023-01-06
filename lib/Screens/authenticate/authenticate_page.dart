@@ -25,131 +25,135 @@ class _AuthenticatePageState extends State<AuthenticatePage> {
       ),
       Scaffold(
           backgroundColor: Colors.transparent,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  width: 230,
-                  height: 80.0,
-                  padding: const EdgeInsets.fromLTRB(2, 30, 0, 8),
-                  child: Image.asset(
-                    "assets/img/logo_removebg.png",
-                    fit: BoxFit.cover,
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    width: 230,
+                    height: 80.0,
+                    padding: const EdgeInsets.fromLTRB(2, 0, 0, 8),
+                    child: Image.asset(
+                      "assets/img/logo_removebg.png",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  width: double.infinity,
-                  height: 240.0,
-                  decoration: const BoxDecoration(
-                      color: Color.fromRGBO(224, 224, 224, 1),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        AppLocalizations.of(context)!.firstMessage,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                padding: const EdgeInsets.fromLTRB(3, 8, 3, 8),
-                                minimumSize: const Size(97.0, 95.0),
-                                maximumSize: const Size(97.0, 95.0),
-                                primary: Colors.grey[500],
-                                onPrimary: Colors.black),
-                            onPressed: () {
-                              context.pushNamed(myLoginScreenRoute);
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                                  child: Image.asset(
-                                    "assets/icons/login.png",
-                                    height: 24.0,
-                                    width: 24.0,
-                                    fit: BoxFit.cover,
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: double.infinity,
+                    height: 240.0,
+                    decoration: const BoxDecoration(
+                        color: Color.fromRGBO(224, 224, 224, 1),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            topRight: Radius.circular(25))),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          AppLocalizations.of(context)!.firstMessage,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  AppLocalizations.of(context)!.login,
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 30.0,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                padding: const EdgeInsets.fromLTRB(3, 8, 3, 8),
-                                minimumSize: const Size(97.0, 95.0),
-                                maximumSize: const Size(97.0, 95.0),
-                                primary: Colors.grey[500],
-                                onPrimary: Colors.black),
-                            onPressed: () {
-                              context.pushNamed(myRegisterScreenRoute);
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
+                                  backgroundColor: Colors.grey[500],
                                   padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                                  child: Image.asset(
-                                    "assets/icons/signup_black.png",
-                                    height: 25.0,
-                                    width: 25.0,
-                                    fit: BoxFit.cover,
+                                      const EdgeInsets.fromLTRB(3, 8, 3, 8),
+                                  minimumSize: const Size(97.0, 95.0),
+                                  maximumSize: const Size(97.0, 95.0)),
+                              onPressed: () {
+                                context.pushNamed(loginRoute);
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                                    child: Image.asset(
+                                      "assets/icons/login.png",
+                                      height: 24.0,
+                                      width: 24.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  AppLocalizations.of(context)!.register,
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ],
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    AppLocalizations.of(context)!.login,
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            const SizedBox(
+                              width: 30.0,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  backgroundColor: Colors.grey[500],
+                                  padding:
+                                      const EdgeInsets.fromLTRB(3, 8, 3, 8),
+                                  minimumSize: const Size(97.0, 95.0),
+                                  maximumSize: const Size(97.0, 95.0)),
+                              onPressed: () {
+                                context.pushNamed(registerRoute);
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                                    child: Image.asset(
+                                      "assets/icons/signup_black.png",
+                                      height: 25.0,
+                                      width: 25.0,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Text(
+                                    AppLocalizations.of(context)!.register,
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )),
     ]);
   }

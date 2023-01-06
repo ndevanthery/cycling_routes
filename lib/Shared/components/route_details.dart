@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:cycling_routes/Screens/authenticate/sign_in.dart';
 import 'package:cycling_routes/Screens/map/mapView.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +45,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                 )
               : Text(
                   "${widget.route.name}",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
                 ),
           widget.isAdmin
               ? ElevatedButton.icon(
@@ -56,7 +53,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                     setState(() {
                       if (nameEdited == true) {
                         DatabaseService myService =
-                            new DatabaseService(uid: null);
+                             DatabaseService(uid: null);
                         myService.updateRouteName(
                             widget.route.uid!, myNameController.text);
                       }
@@ -64,7 +61,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                       nameEdited = !nameEdited;
                     });
                   },
-                  icon: nameEdited ? Icon(Icons.save) : Icon(Icons.edit),
+                  icon: nameEdited ? const Icon(Icons.save) : const Icon(Icons.edit),
                   label: nameEdited
                       ? Text(AppLocalizations.of(context)!.saveName)
                       : Text(AppLocalizations.of(context)!.editName))
@@ -87,13 +84,13 @@ class _RouteDetailsState extends State<RouteDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "${elevationDiff} m",
-                          style: TextStyle(
+                          "$elevationDiff m",
+                          style: const TextStyle(
                               fontSize: 18,
                               letterSpacing: 1.1,
                               fontWeight: FontWeight.w500),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.landscape,
                           size: 50,
                         ),
@@ -110,12 +107,12 @@ class _RouteDetailsState extends State<RouteDetails> {
                       children: [
                         Text(
                           "${(widget.route.distance! / 1000).toStringAsFixed(1)} km",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18,
                               letterSpacing: 1.1,
                               fontWeight: FontWeight.w500),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.time_to_leave,
                           size: 50,
                         ),
@@ -132,12 +129,12 @@ class _RouteDetailsState extends State<RouteDetails> {
                       children: [
                         Text(
                           "${(widget.route.duration! / 60).toStringAsFixed(0)} min",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18,
                               letterSpacing: 1.1,
                               fontWeight: FontWeight.w500),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.hourglass_top,
                           size: 50,
                         ),
@@ -153,13 +150,13 @@ class _RouteDetailsState extends State<RouteDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "Level ${(widget.route.duration! / 60 / 30).toInt()}",
-                          style: TextStyle(
+                          "Level ${widget.route.duration! / 60 ~/ 30}",
+                          style: const TextStyle(
                               fontSize: 18,
                               letterSpacing: 1.1,
                               fontWeight: FontWeight.w500),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.pedal_bike,
                           size: 50,
                         ),

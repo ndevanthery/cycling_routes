@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Shared/constants.dart';
 import 'package:cycling_routes/Shared/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class TermOfUseText extends StatelessWidget {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Utils.openFullDialog(context, 'terms', toggleTerms);
+                        Utils.openFullDialog(context, openTermsBoxFull, toggleTerms);
                       }),
               ],
             ),

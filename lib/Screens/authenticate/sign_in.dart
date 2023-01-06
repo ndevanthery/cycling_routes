@@ -1,5 +1,4 @@
 import 'package:cycling_routes/Shared/components/loading.dart';
-import 'package:cycling_routes/Shared/components/password_forgot_text.dart';
 import 'package:cycling_routes/Shared/components/powered_by.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +92,7 @@ class _SignInState extends State<SignIn> {
                             padding: const EdgeInsets.fromLTRB(20, 10, 30, 0),
                             child: Text(
                               AppLocalizations.of(context)!.signInTitle,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold),
@@ -212,13 +211,6 @@ class _SignInState extends State<SignIn> {
                                               setState(() => pwd = value);
                                             }),
                                           ),
-                                          Container(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 3.0),
-                                              child: const Align(
-                                                alignment: Alignment.topRight,
-                                                child: PasswordForgotText(),
-                                              )),
                                           const SizedBox(
                                             height: 5.0,
                                           ),
@@ -236,7 +228,7 @@ class _SignInState extends State<SignIn> {
                                               child: Text(
                                                 AppLocalizations.of(context)!
                                                     .signInButton,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.white,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -248,7 +240,9 @@ class _SignInState extends State<SignIn> {
                                                       () => isLoading = true);
 
                                                   //Sign In
-                                                  final status =
+                                                  ExceptionStatus status =
+                                                      ExceptionStatus.pending;
+                                                  status =
                                                       await loginManager.login(
                                                     email: email,
                                                     password: pwd,
@@ -266,13 +260,14 @@ class _SignInState extends State<SignIn> {
                                                         .then((value) {
                                                       setState(() =>
                                                           isLoading = false);
-                                                      context.goNamed(
-                                                          myinitalRoute);
+                                                      context
+                                                          .goNamed(baseRoute);
                                                     });
                                                   } else {
                                                     final newError =
                                                         ExceptionHandler
                                                             .generateErrorMessage(
+                                                                context,
                                                                 status);
                                                     setState(() {
                                                       isLoading = false;

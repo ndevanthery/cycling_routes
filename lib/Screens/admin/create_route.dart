@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
@@ -13,7 +15,7 @@ import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
 
 class CreateRoute extends StatefulWidget {
-  CreateRoute({Key? key}) : super(key: key);
+  const CreateRoute({Key? key}) : super(key: key);
   @override
   State<CreateRoute> createState() => _CreateRouteState();
 }
@@ -59,8 +61,6 @@ class _CreateRouteState extends State<CreateRoute> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-
     super.didChangeDependencies();
   }
 
@@ -112,7 +112,7 @@ class _CreateRouteState extends State<CreateRoute> {
               Marker(
                 point: LatLng(_position == null ? 0 : _position!.latitude,
                     _position == null ? 0 : _position!.longitude),
-                builder: (context) => Icon(
+                builder: (context) => const Icon(
                   Icons.place,
                   color: Colors.red,
                   size: 40,
@@ -121,7 +121,7 @@ class _CreateRouteState extends State<CreateRoute> {
               ...points.map((e) {
                 return Marker(
                   point: e,
-                  builder: (context) => Icon(
+                  builder: (context) => const Icon(
                     Icons.place,
                     color: Colors.green,
                     size: 25,
@@ -132,7 +132,7 @@ class _CreateRouteState extends State<CreateRoute> {
               if (myRouteM.routePoints!.isNotEmpty)
                 Marker(
                   point: myRouteM.routePoints!.first,
-                  builder: (context) => Icon(
+                  builder: (context) => const Icon(
                     Icons.directions_bike,
                     size: 40,
                   ),
@@ -143,7 +143,7 @@ class _CreateRouteState extends State<CreateRoute> {
               if (myRouteM.routePoints!.isNotEmpty)
                 Marker(
                   point: myRouteM.routePoints!.last,
-                  builder: (context) => Icon(
+                  builder: (context) => const Icon(
                     Icons.flag,
                     color: Colors.green,
                     size: 40,

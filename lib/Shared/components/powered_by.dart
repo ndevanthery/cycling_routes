@@ -14,7 +14,7 @@ class PoweredBy extends StatelessWidget {
       child: Center(
           child: Text(
         AppLocalizations.of(context)!.poweredByHesso,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
       )),
     );

@@ -58,7 +58,7 @@ class _TermOfUseState extends State<TermOfUse> {
                 Navigator.of(context).pop('User Disagreed');
               },
               child: Text(AppLocalizations.of(context)!.disagree,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold))),
           ElevatedButton(
               style: ElevatedButton.styleFrom(primary: Colors.grey[500]),
@@ -66,7 +66,7 @@ class _TermOfUseState extends State<TermOfUse> {
                 Navigator.of(context).pop('User Agreed');
               },
               child: Text(AppLocalizations.of(context)!.agree,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold))),
         ],
       ),

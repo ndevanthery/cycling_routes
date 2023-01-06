@@ -11,7 +11,7 @@ class AppAbout extends StatefulWidget {
 }
 
 class _AppAboutState extends State<AppAbout> {
-// thisdetermnines whether the back-to-top button is shown or not
+// this determines whether the back-to-top button is shown or not
   bool _showBackToTopButton = false;
 
   // scroll controller
@@ -76,7 +76,7 @@ class _AppAboutState extends State<AppAbout> {
                     Center(
                       child: Text(
                         AppLocalizations.of(context)!.aboutRideOn,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 24,
                             fontWeight: FontWeight.bold),
@@ -89,7 +89,7 @@ class _AppAboutState extends State<AppAbout> {
                       textAlign: TextAlign.end,
                       text: TextSpan(
                         text: AppLocalizations.of(context)!.lastUpdated,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                         ),
                       ),
@@ -105,7 +105,7 @@ class _AppAboutState extends State<AppAbout> {
               ),
               Text(
                 AppLocalizations.of(context)!.poweredByHesso,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 22,
                 ),
@@ -117,7 +117,7 @@ class _AppAboutState extends State<AppAbout> {
                 textAlign: TextAlign.justify,
                 text: TextSpan(
                   text: AppLocalizations.of(context)!.developpedBy,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
@@ -127,35 +127,13 @@ class _AppAboutState extends State<AppAbout> {
               _buildPuce(mytext: 'Nicolas Devanthéry'),
               _buildPuce(
                   mytext:
-                      AppLocalizations.of(context)!.and + 'Mégane Solliard'),
+                      '${AppLocalizations.of(context)!.and} Mégane Solliard'),
               const SizedBox(
-                height: 15,
-              ),
-              Text(
-                AppLocalizations.of(context)!.purpose,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22,
-                ),
-              ),
-              RichText(
-                textAlign: TextAlign.justify,
-                text: const TextSpan(
-                  text: ' ;',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const SizedBox(
-                height: 15,
+                height: 25,
               ),
               Text(
                 AppLocalizations.of(context)!.contactUs,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 22,
                 ),
@@ -167,7 +145,7 @@ class _AppAboutState extends State<AppAbout> {
                 textAlign: TextAlign.justify,
                 text: TextSpan(
                   text: AppLocalizations.of(context)!.ifYouHaveQuestions,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
@@ -179,7 +157,7 @@ class _AppAboutState extends State<AppAbout> {
               Center(
                 child: Text(
                   AppLocalizations.of(context)!.thankYou,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -213,7 +191,7 @@ class _AppAboutState extends State<AppAbout> {
           children: [
             const TextSpan(
               text: "• ",
-              style: const TextStyle(
+              style:  TextStyle(
                 fontWeight: FontWeight.w600,
               ),
             ),

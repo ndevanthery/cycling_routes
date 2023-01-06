@@ -5,7 +5,6 @@ import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Models/trafficjam_m.dart';
 import 'package:cycling_routes/Models/user_m.dart';
 import 'package:cycling_routes/Services/auth_exception_handler.dart';
-import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
 class DatabaseService {

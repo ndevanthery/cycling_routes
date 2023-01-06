@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Models/trafficjam_m.dart';
 import 'package:cycling_routes/Services/database.dart';
@@ -30,7 +31,7 @@ class _MapPageState extends State<MapPage> {
   void _getCurrentLocation() async {
     Position position = await _determinePosition();
 
-    print(isUnmount);
+    log('$isUnmount');
     if (!isUnmount) {
       setState(() {
         _position = position;
@@ -55,7 +56,7 @@ class _MapPageState extends State<MapPage> {
           'Location permissions are permanently denied, we cannot request permissions.');
     } // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    print(await Geolocator.getCurrentPosition());
+    log('${await Geolocator.getCurrentPosition()}');
     return await Geolocator.getCurrentPosition();
   }
 
@@ -89,7 +90,7 @@ class _MapPageState extends State<MapPage> {
                 setState(() {
                   _clicked = point;
                 });
-                print(point.toString());
+                log(point.toString());
               },
               minZoom: 9,
               maxZoom: 18,
@@ -127,7 +128,7 @@ class _MapPageState extends State<MapPage> {
                       onPressed: () {
                         _dialProblem(e);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.warning,
                         color: Colors.orange,
                       ),
@@ -137,7 +138,7 @@ class _MapPageState extends State<MapPage> {
               Marker(
                 point: LatLng(_position == null ? 0 : _position!.latitude,
                     _position == null ? 0 : _position!.longitude),
-                builder: (context) => Icon(
+                builder: (context) => const Icon(
                   Icons.place,
                   color: Colors.red,
                 ),
@@ -145,7 +146,7 @@ class _MapPageState extends State<MapPage> {
               if (_clicked != null)
                 Marker(
                   point: _clicked!,
-                  builder: (context) => Icon(
+                  builder: (context) => const Icon(
                     Icons.place,
                     color: Colors.red,
                     size: 40,
@@ -157,7 +158,7 @@ class _MapPageState extends State<MapPage> {
                   point: myRoute.first,
                   width: 150,
                   height: 150,
-                  builder: (context) => Icon(
+                  builder: (context) => const Icon(
                     Icons.directions_bike,
                     size: 40,
                   ),
@@ -168,7 +169,7 @@ class _MapPageState extends State<MapPage> {
               if (myRoute.isNotEmpty)
                 Marker(
                   point: myRoute.last,
-                  builder: (context) => Icon(
+                  builder: (context) => const Icon(
                     Icons.flag,
                     color: Colors.green,
                     size: 40,
@@ -226,7 +227,7 @@ class _MapPageState extends State<MapPage> {
     List<String> myCoordinates =
         myRoute.map((e) => '[ ${e.longitude} , ${e.latitude}]').toList();
 
-    print(myCoordinates.join(','));
+    log(myCoordinates.join(','));
     var response = await http.post(
         Uri.parse(
             "https://api.openrouteservice.org/v2/directions/cycling-regular/geojson"),
@@ -240,7 +241,7 @@ class _MapPageState extends State<MapPage> {
         body: '{"coordinates":[ ${myCoordinates.join(',')}]}',
         encoding: Encoding.getByName("utf-8"));
 
-    print(response.statusCode);
+    log('${response.statusCode}');
     if (response.statusCode == 200) {
       var jsonParsed = jsonDecode(response.body);
       var feature = jsonParsed['features']!;
@@ -297,7 +298,7 @@ class _MapPageState extends State<MapPage> {
               onPressed: () {
                 setState(() {
                   DatabaseService myService = DatabaseService(uid: null);
-                  myService.addTrafficJam(new TrafficJamM(
+                  myService.addTrafficJam(TrafficJamM(
                       description: myController.text,
                       date: DateTime.now(),
                       place: _clicked!,
@@ -325,25 +326,25 @@ class _MapPageState extends State<MapPage> {
               children: <Widget>[
                 Text(
                   "${AppLocalizations.of(context)!.description} : ",
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(jam.description),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Text(
                   "${AppLocalizations.of(context)!.at} ${jam.date!.hour.toString().padLeft(2, '0')} ${jam.date!.minute.toString().padLeft(2, '0')}",
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
                   DateFormat.yMMMMd(Get.locale!.languageCode).format(jam.date!),
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
               ],
             ),

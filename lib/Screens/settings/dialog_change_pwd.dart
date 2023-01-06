@@ -205,8 +205,7 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500),
-                  primary: Colors.grey[400],
+                      color: Colors.white, fontWeight: FontWeight.w500), backgroundColor: Colors.grey[400],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -222,8 +221,7 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
-                  primary: Colors.grey[500],
+                      color: Colors.white, fontWeight: FontWeight.w600), backgroundColor: Colors.grey[500],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -267,7 +265,7 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                       });
                     } else {
                       final newError =
-                          ExceptionHandler.generateErrorMessage(status);
+                          ExceptionHandler.generateErrorMessage(context,status);
                       updateError(newError, true);
                       setState(() {
                         isLoading = false;

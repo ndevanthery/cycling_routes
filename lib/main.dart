@@ -29,11 +29,11 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  //Initialize if user already connected or not
   Auth loginManager = Auth();
   await loginManager.init();
 
-  //TODO Initialise notifications
-
+  //Initialize notifications
   final messaging = FirebaseMessaging.instance;
   messaging.subscribeToTopic("all");
 
@@ -48,7 +48,7 @@ Future<void> main() async {
   );
 
 // used to pass messages from event handler to the UI
-  final _messageStreamController = BehaviorSubject<RemoteMessage>();
+  final messageStreamController = BehaviorSubject<RemoteMessage>();
 
   String? token = await messaging.getToken();
 
@@ -58,7 +58,7 @@ Future<void> main() async {
     print('Message notification: ${message.notification?.title}');
     print('Message notification: ${message.notification?.body}');
  */
-    _messageStreamController.sink.add(message);
+    messageStreamController.sink.add(message);
   });
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> {
               GlobalWidgetsLocalizations.delegate,
             ],
             supportedLocales: L10n.all,
-            locale: Locale('en'),
+            locale: const Locale('en'),
           );
         },
       ),
@@ -113,16 +113,17 @@ class _MyAppState extends State<MyApp> {
 
   // GoRouter configuration
   final _router = GoRouter(
-    initialLocation: myinitalRoute,
+    initialLocation: baseRoute,
     routes: [
       GoRoute(
-        name: myinitalRoute,
-        path: myinitalRoute,
-        builder: (context, state) => Wrapper(),
+        name: baseRoute,
+        path: baseRoute,
+        builder: (context, state) => const Wrapper(),
       ),
+      
       GoRoute(
-        name: myLoginScreenRoute,
-        path: myLoginScreenRoute,
+        name: loginRoute,
+        path: loginRoute,
         pageBuilder: (context, state) {
           return CustomTransitionPage<void>(
             key: state.pageKey,
@@ -141,8 +142,8 @@ class _MyAppState extends State<MyApp> {
         },
       ),
       GoRoute(
-        name: myRegisterScreenRoute,
-        path: myRegisterScreenRoute,
+        name: registerRoute,
+        path: registerRoute,
         pageBuilder: (context, state) {
           return CustomTransitionPage<void>(
             key: state.pageKey,

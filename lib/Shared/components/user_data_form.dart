@@ -310,7 +310,7 @@ class _UserDataFormState extends State<UserDataForm> {
                 style: btnDecoration,
                 child: Text(
                   AppLocalizations.of(context)!.register,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () async {
@@ -350,11 +350,11 @@ class _UserDataFormState extends State<UserDataForm> {
                             .then((value) {
                           widget.updateLoading(false);
 
-                          context.goNamed(myinitalRoute);
+                          context.goNamed(baseRoute);
                         });
                       } else {
                         final newError =
-                            ExceptionHandler.generateErrorMessage(status);
+                            ExceptionHandler.generateErrorMessage(context,status);
                         widget.updateError(newError);
                         widget.updateLoading(false);
                       }

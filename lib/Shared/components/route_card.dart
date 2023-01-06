@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
@@ -68,7 +67,7 @@ class _RouteCardState extends State<RouteCard> {
               }
             : null,
         child: Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(10),
@@ -117,7 +116,7 @@ class _RouteCardState extends State<RouteCard> {
                       children: [
                         Text(
                           "${widget.route.name}",
-                          style: TextStyle(fontWeight: FontWeight.w800),
+                          style: const TextStyle(fontWeight: FontWeight.w800),
                         ),
                         Text(
                           "Dist: ${widget.route.distance}${AppLocalizations.of(context)!.time}${widget.route.duration}${AppLocalizations.of(context)!.sec}",

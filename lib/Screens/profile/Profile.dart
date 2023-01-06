@@ -4,9 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:cycling_routes/Shared/components/route_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Shared/constants.dart';
@@ -91,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           const SizedBox(height: 15.0),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
+                              backgroundColor: Colors.white,
                               shape: const CircleBorder(),
                             ),
                             onPressed: () {
@@ -257,7 +255,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: <Widget>[
           Text(
             AppLocalizations.of(context)!.chooseProfilePicture,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20.0,
             ),
           ),
@@ -286,6 +284,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void takePhoto(ImageSource source) async {
+    // ignore: deprecated_member_use
     final pickedFile = await _picker.getImage(
       source: source,
     );

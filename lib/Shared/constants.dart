@@ -2,9 +2,30 @@
 
 import 'package:flutter/material.dart';
 
-const String myinitalRoute = '/';
-const String myLoginScreenRoute = '/loginScreenRoute';
-const String myRegisterScreenRoute = '/registerScreenRoute';
+//______
+//TODO Add for Traduction
+const String rideOnTitle = 'Ride';
+const String firstOnboardTxt = "Welcome to RideOn. Let's find your way !";
+const String secndOnboardTxt =
+    "We help people finding the best road for their rides. ";
+const String thirdOnboardTxt = "We notify you if there's trouble in the road.";
+const String btnOnboardTxt = "Continue";
+const String skipTxt = 'Skip information';
+//______
+
+//Constants Used accross app
+//Routes names
+const String baseRoute = '/';
+const String onboardingRoute = '/onBoardingScreenRoute';
+const String loginRoute = '/loginScreenRoute';
+const String registerRoute = '/registerScreenRoute';
+
+//Case string for Dialogs
+const String openTermsBoxFull = "openTermsBox";
+const String openAboutBoxFull = "openAboutBox";
+const String openChangeEmailBoxSmall = "openChangeEmailBoxSmall";
+const String openChangePwdBoxSmall = "openChangePwdBoxSmall";
+const String openDeleteBoxSmall = "openDeleteBoxSmall";
 
 
 final RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -55,11 +76,11 @@ final textInputDecoration = InputDecoration(
 );
 
 ButtonStyle btnDecoration = ElevatedButton.styleFrom(
+    foregroundColor: Colors.black,
+    backgroundColor: Colors.grey[500],
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20.0),
     ),
     maximumSize: const Size(120.0, 50.0),
     minimumSize: const Size(120.0, 50.0),
-    padding: const EdgeInsets.fromLTRB(3, 8, 3, 8),
-    primary: Colors.grey[500],
-    onPrimary: Colors.black);
+    padding: const EdgeInsets.fromLTRB(3, 8, 3, 8));

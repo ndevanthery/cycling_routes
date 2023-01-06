@@ -11,6 +11,7 @@ enum ExceptionStatus {
   invalidEmail,
   weakPassword,
   unknown,
+  notVerified,
 }
 
 class ExceptionHandler {
@@ -35,23 +36,23 @@ class ExceptionHandler {
     return status;
   }
 
-  static String generateErrorMessage(error) {
+  static String generateErrorMessage(context,error) {
     String errorMessage;
     switch (error) {
       case ExceptionStatus.invalidEmail:
-        errorMessage = AppLocalizations.of(error)!.emailMalformed;
+        errorMessage = AppLocalizations.of(context)!.emailMalformed;
         break;
       case ExceptionStatus.weakPassword:
-        errorMessage = AppLocalizations.of(error)!.passwordToShort;
+        errorMessage = AppLocalizations.of(context)!.passwordToShort;
         break;
       case ExceptionStatus.wrongPassword:
-        errorMessage = AppLocalizations.of(error)!.emailPasswordWrong;
+        errorMessage = AppLocalizations.of(context)!.emailPasswordWrong;
         break;
       case ExceptionStatus.emailAlreadyExists:
-        errorMessage = AppLocalizations.of(error)!.emailAlreadyExists;
+        errorMessage = AppLocalizations.of(context)!.emailAlreadyExists;
         break;
       default:
-        errorMessage = AppLocalizations.of(error)!.errorOccured;
+        errorMessage = error;
     }
     return errorMessage;
   }

@@ -200,8 +200,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500),
-                  primary: Colors.grey[400],
+                      color: Colors.white, fontWeight: FontWeight.w500), backgroundColor: Colors.grey[400],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -216,13 +215,12 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  textStyle: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
-                  primary: widget.isDelete ? Colors.red[300] : Colors.grey[500],
+                  textStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600), backgroundColor: widget.isDelete ? Colors.red[300] : Colors.grey[500],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  padding: EdgeInsets.all(13),
+                  padding: const EdgeInsets.all(13),
                 ),
                 child: Text(widget.isDelete
                     ? AppLocalizations.of(context)!.delete
@@ -270,12 +268,12 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                           });
                         } else {
                           log('User Deleted');
-                          context.goNamed(myinitalRoute);
+                          context.goNamed(baseRoute);
                         }
                       });
                     } else {
                       final newError =
-                          ExceptionHandler.generateErrorMessage(status);
+                          ExceptionHandler.generateErrorMessage(context,status);
                       updateError(newError, true);
                       setState(() {
                         isLoading = false;

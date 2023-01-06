@@ -1,3 +1,4 @@
+import 'package:cycling_routes/Shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -29,13 +30,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   settingsListBackground: Get.theme.scaffoldBackgroundColor),
               lightTheme: SettingsThemeData(
                   settingsListBackground: Get.theme.scaffoldBackgroundColor),
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               sections: [
                 SettingsSection(
                     title: Row(
                       children: [
-                        Icon(Icons.person),
-                        SizedBox(
+                        const Icon(Icons.person),
+                        const SizedBox(
                           width: 16,
                         ),
                         Text(
@@ -46,22 +47,22 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     tiles: [
                       SettingsTile.navigation(
-                        trailing: Icon(Icons.navigate_next),
+                        trailing: const Icon(Icons.navigate_next),
                         title: Text(AppLocalizations.of(context)!.modifyEmail),
                         onPressed: (value) {
-                          Utils.displaySmallDialog(context, 1);
+                          Utils.displaySmallDialog(context, openChangeEmailBoxSmall);
                         },
                       ),
                       SettingsTile.navigation(
-                        trailing: Icon(Icons.navigate_next),
+                        trailing: const Icon(Icons.navigate_next),
                         title:
                             Text(AppLocalizations.of(context)!.modifyPassword),
                         onPressed: (value) {
-                          Utils.displaySmallDialog(context, 2);
+                          Utils.displaySmallDialog(context, openChangePwdBoxSmall);
                         },
                       ),
                       SettingsTile.navigation(
-                        trailing: Icon(Icons.logout),
+                        trailing: const Icon(Icons.logout),
                         title: Text(AppLocalizations.of(context)!.logout),
                         onPressed: (value) {
                           Utils.showLogoutConfirmDialog(
@@ -74,24 +75,24 @@ class _SettingsPageState extends State<SettingsPage> {
                         },
                       ),
                       SettingsTile.navigation(
-                        trailing: Icon(
+                        trailing: const Icon(
                           Icons.delete,
                           color: Colors.red,
                         ),
                         title: Text(
                           AppLocalizations.of(context)!.deleteAccount,
-                          style: TextStyle(color: Colors.red),
+                          style: const TextStyle(color: Colors.red),
                         ),
                         onPressed: (value) {
-                          Utils.displaySmallDialog(context, 3);
+                          Utils.displaySmallDialog(context, openDeleteBoxSmall);
                         },
                       ),
                     ]),
                 SettingsSection(
                     title: Row(
                       children: [
-                        Icon(Icons.settings),
-                        SizedBox(
+                        const Icon(Icons.settings),
+                        const SizedBox(
                           width: 16,
                         ),
                         Text(
@@ -102,7 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     tiles: [
                       SettingsTile.navigation(
-                        trailing: Icon(
+                        trailing: const Icon(
                           Icons.language,
                         ),
                         title: Text(
@@ -113,7 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         },
                       ),
                       SettingsTile.navigation(
-                        trailing: Icon(
+                        trailing: const Icon(
                           Icons.info,
                         ),
                         title: Text(
@@ -133,10 +134,10 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: Text('Change Language'),
+          title: const Text('Change Language'),
           children: <Widget>[
             SimpleDialogOption(
-              child: Text('Bulgarian'),
+              child: const Text('Bulgarian'),
               onPressed: () async {
                 // set the app's language to Bulgarian using the Get package
                 await Get.updateLocale(const Locale('bg'));
@@ -145,7 +146,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Czech'),
+              child: const Text('Czech'),
               onPressed: () async {
                 // set the app's language to Czech using the Get package
                 await Get.updateLocale(const Locale('cs'));
@@ -154,7 +155,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Danish'),
+              child: const Text('Danish'),
               onPressed: () async {
                 // set the app's language to Danish using the Get package
                 await Get.updateLocale(const Locale('da'));
@@ -163,7 +164,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Greek'),
+              child: const Text('Greek'),
               onPressed: () async {
                 // set the app's language to Greek using the Get package
                 await Get.updateLocale(const Locale('el'));
@@ -172,7 +173,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('English'),
+              child: const Text('English'),
               onPressed: () async {
                 // set the app's language to English using the Get package
                 await Get.updateLocale(const Locale('en'));
@@ -181,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Spanish'),
+              child: const Text('Spanish'),
               onPressed: () async {
                 // set the app's language to Spanish using the Get package
                 await Get.updateLocale(const Locale('es'));
@@ -190,7 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Estonian'),
+              child: const Text('Estonian'),
               onPressed: () async {
                 // set the app's language to Estonian using the Get package
                 await Get.updateLocale(const Locale('et'));
@@ -199,7 +200,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Finnish'),
+              child: const Text('Finnish'),
               onPressed: () async {
                 // set the app's language to Finnish using the Get package
                 await Get.updateLocale(const Locale('fi'));
@@ -208,7 +209,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('French'),
+              child: const Text('French'),
               onPressed: () async {
                 // set the app's language to French using the Get package
                 await Get.updateLocale(const Locale('fr'));
@@ -217,7 +218,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Hungarian'),
+              child: const Text('Hungarian'),
               onPressed: () async {
                 // set the app's language to Hungarian using the Get package
                 await Get.updateLocale(const Locale('hu'));
@@ -226,7 +227,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Indonesian'),
+              child: const Text('Indonesian'),
               onPressed: () async {
                 // set the app's language to Indonesian using the Get package
                 await Get.updateLocale(const Locale('id'));
@@ -235,7 +236,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Italian'),
+              child: const Text('Italian'),
               onPressed: () async {
                 // set the app's language to Italian using the Get package
                 await Get.updateLocale(const Locale('it'));
@@ -244,7 +245,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Japanese'),
+              child: const Text('Japanese'),
               onPressed: () async {
                 // set the app's language to Japanese using the Get package
                 await Get.updateLocale(const Locale('ja'));
@@ -253,7 +254,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Lithuanian'),
+              child: const Text('Lithuanian'),
               onPressed: () async {
                 // set the app's language to Lithuanian using the Get package
                 await Get.updateLocale(const Locale('lt'));
@@ -262,7 +263,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Latvian'),
+              child: const Text('Latvian'),
               onPressed: () async {
                 // set the app's language to Latvian using the Get package
                 await Get.updateLocale(const Locale('lv'));
@@ -271,7 +272,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Dutch'),
+              child: const Text('Dutch'),
               onPressed: () async {
                 // set the app's language to Dutch using the Get package
                 await Get.updateLocale(const Locale('nl'));
@@ -280,7 +281,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Polish'),
+              child: const Text('Polish'),
               onPressed: () async {
                 // set the app's language to Polish using the Get package
                 await Get.updateLocale(const Locale('pl'));
@@ -289,7 +290,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Portuguese'),
+              child: const Text('Portuguese'),
               onPressed: () async {
                 // set the app's language to Portuguese using the Get package
                 await Get.updateLocale(const Locale('pt'));
@@ -298,7 +299,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Romanian'),
+              child: const Text('Romanian'),
               onPressed: () async {
                 // set the app's language to Romanian using the Get package
                 await Get.updateLocale(const Locale('ro'));
@@ -307,7 +308,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Russian'),
+              child: const Text('Russian'),
               onPressed: () async {
                 // set the app's language to Russian using the Get package
                 await Get.updateLocale(const Locale('ru'));
@@ -316,7 +317,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Slovak'),
+              child: const Text('Slovak'),
               onPressed: () async {
                 // set the app's language to Slovak using the Get package
                 await Get.updateLocale(const Locale('sk'));
@@ -325,7 +326,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Slovenian'),
+              child: const Text('Slovenian'),
               onPressed: () async {
                 // set the app's language to Slovenian using the Get package
                 await Get.updateLocale(const Locale('sl'));
@@ -334,7 +335,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Swedish'),
+              child: const Text('Swedish'),
               onPressed: () async {
                 // set the app's language to Swedish using the Get package
                 await Get.updateLocale(const Locale('sv'));
@@ -343,7 +344,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Turkish'),
+              child: const Text('Turkish'),
               onPressed: () async {
                 // set the app's language to Turkish using the Get package
                 await Get.updateLocale(const Locale('tr'));
@@ -352,7 +353,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Ukrainian'),
+              child: const Text('Ukrainian'),
               onPressed: () async {
                 // set the app's language to Ukrainian using the Get package
                 await Get.updateLocale(const Locale('uk'));
@@ -361,7 +362,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SimpleDialogOption(
-              child: Text('Chinese'),
+              child: const Text('Chinese'),
               onPressed: () async {
                 // set the app's language to Chinese using the Get package
                 await Get.updateLocale(const Locale('zh'));

@@ -19,8 +19,8 @@ class _AdminHomeState extends State<AdminHome> {
   int _selectedIndex = 0;
   final List<Widget> _pages = <Widget>[
     const AdminRouteList(),
-    AdminJamsPage(),
-    CreateRoute(),
+    const AdminJamsPage(),
+    const CreateRoute(),
   ];
 
   @override
@@ -61,11 +61,11 @@ class _AdminHomeState extends State<AdminHome> {
         child: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.browse_gallery),
+                icon: const Icon(Icons.browse_gallery),
                 label: AppLocalizations.of(context)!.myRoutes),
-            BottomNavigationBarItem(icon: Icon(Icons.warning), label: "Jams"),
+            const BottomNavigationBarItem(icon: Icon(Icons.warning), label: "Jams"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 label: AppLocalizations.of(context)!.create),
           ],
           onTap: _onItemTapped,
