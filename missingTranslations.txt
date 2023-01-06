@@ -1,1 +1,365 @@
-{}
+{
+  "bg": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "cs": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "da": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "de": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "el": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "es": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "et": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "fi": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "fr": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "hu": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "id": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "it": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "ja": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "lt": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "lv": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "nl": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "pl": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "pt": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "ro": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "ru": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "sk": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "sl": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "sv": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "tr": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "uk": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ],
+
+  "zh": [
+    "ok",
+    "toVerify",
+    "displayed",
+    "correct",
+    "incorect",
+    "at",
+    "description",
+    "problemDetail",
+    "notifyTrouble",
+    "describeYourProblem"
+    "birthday"
+  ]
+}
