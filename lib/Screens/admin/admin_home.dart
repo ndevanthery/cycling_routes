@@ -16,7 +16,7 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   final List<Widget> _pages = <Widget>[
     const AdminRouteList(),
     const AdminJamsPage(),
@@ -63,7 +63,8 @@ class _AdminHomeState extends State<AdminHome> {
             BottomNavigationBarItem(
                 icon: const Icon(Icons.browse_gallery),
                 label: AppLocalizations.of(context)!.myRoutes),
-            const BottomNavigationBarItem(icon: Icon(Icons.warning), label: "Jams"),
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.warning), label: "Jams"),
             BottomNavigationBarItem(
                 icon: const Icon(Icons.home),
                 label: AppLocalizations.of(context)!.create),
