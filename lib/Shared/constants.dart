@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 //______
 //TODO Add for Traduction
-const String rideOnTitle = 'Ride';
-const String firstOnboardTxt = "Welcome to RideOn. Let's find your way !";
-const String secndOnboardTxt =
-    "We help people finding the best road for their rides. ";
-const String thirdOnboardTxt = "We notify you if there's trouble in the road.";
-const String btnOnboardTxt = "Continue";
-const String skipTxt = 'Skip information';
+// const String rideOnTitle = 'Ride';
+// const String firstOnboardTxt = "Welcome to RideOn. Let's find your way !";
+// const String secndOnboardTxt =
+//     "We help people finding the best road for their rides. ";
+// const String thirdOnboardTxt = "We notify you if there's trouble in the road.";
+// const String btnOnboardTxt = "Continue";
+// const String skipTxt = 'Skip information';
 //______
 
 //Constants Used accross app

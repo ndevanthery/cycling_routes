@@ -4,6 +4,8 @@ import 'package:cycling_routes/Shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'widgets/onboarding_content.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class Onboarding extends StatefulWidget {
   final Function setFirstLaunch;
@@ -17,20 +19,7 @@ class _OnboardingState extends State<Onboarding> {
   late PageController _pageController;
 
   int currentIndex = 0;
-  List<Map<String, String>> contents = [
-    {
-      "txt": firstOnboardTxt,
-      "img": 'assets/img/Destination.png',
-    },
-    {
-      "txt": secndOnboardTxt,
-      "img": 'assets/img/bike_ride.png',
-    },
-    {
-      "txt": thirdOnboardTxt,
-      "img": 'assets/img/Posts.png',
-    }
-  ];
+  
 
   @override
   void initState() {
@@ -58,6 +47,22 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
+List<Map<String, String>> contents = [
+    {
+      "txt":  AppLocalizations.of(context)!.firstOnboardTxt,
+      "img": 'assets/img/Destination.png',
+    },
+    {
+      "txt": AppLocalizations.of(context)!.secndOnboardTxt,
+      "img": 'assets/img/bike_ride.png',
+    },
+    {
+      "txt": AppLocalizations.of(context)!.thirdOnboardTxt,
+      "img": 'assets/img/Posts.png',
+    }
+  ];
+
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -115,8 +120,9 @@ class _OnboardingState extends State<Onboarding> {
                                       curve: Curves.bounceIn,
                                     );
                                   },
-                                  child: const Text(
-                                    btnOnboardTxt,
+                                  child:  Text(
+                                     AppLocalizations.of(context)!
+                                                .btnOnboardTxt,
                                     style: TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
@@ -127,8 +133,9 @@ class _OnboardingState extends State<Onboarding> {
                                 onPressed: () async {
                                   await storeOnboardInfo();
                                 },
-                                child: const Text(
-                                  skipTxt,
+                                child:  Text(
+                                  AppLocalizations.of(context)!
+                                                .skipTxt,
                                   style: TextStyle(color: Colors.grey),
                                 )),
                             const Spacer()

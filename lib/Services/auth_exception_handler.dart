@@ -52,7 +52,7 @@ class ExceptionHandler {
         errorMessage = AppLocalizations.of(context)!.emailAlreadyExists;
         break;
       default:
-        errorMessage = error;
+        errorMessage = AppLocalizations.of(context)!.errorOccured;
     }
     return errorMessage;
   }

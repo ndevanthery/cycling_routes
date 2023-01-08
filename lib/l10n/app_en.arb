@@ -110,10 +110,14 @@
     "problemDetail": "problem detail",
     "notifyTrouble": "notify trouble",
     "describeYourProblem":"describe your problem",
-    "birthday": "birthday"
-
-
-    
+    "birthday": "birthday",
+    "rideOnTitle" : "Ride",
+    "firstOnboardTxt" : "Welcome to RideOn. Let's find your way !",
+    "secndOnboardTxt" :
+    "We help people finding the best road for their rides. ",
+    "thirdOnboardTxt" : "We notify you if there's trouble in the road.",
+    "btnOnboardTxt" : "Continue",
+    "skipTxt" : "Skip information"
 
 
 

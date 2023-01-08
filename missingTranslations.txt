@@ -1,365 +1,260 @@
 {
   "bg": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "cs": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "da": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "de": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "el": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "es": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "et": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "fi": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "fr": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "hu": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "id": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "it": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "ja": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "lt": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "lv": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "nl": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "pl": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "pt": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "ro": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "ru": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "sk": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "sl": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "sv": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "tr": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "uk": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ],
 
   "zh": [
-    "ok",
-    "toVerify",
-    "displayed",
-    "correct",
-    "incorect",
-    "at",
-    "description",
-    "problemDetail",
-    "notifyTrouble",
-    "describeYourProblem"
-    "birthday"
+    "birthday",
+    "rideOnTitle",
+    "firstOnboardTxt",
+    "secndOnboardTxt",
+    "thirdOnboardTxt",
+    "btnOnboardTxt",
+    "skipTxt"
   ]
 }

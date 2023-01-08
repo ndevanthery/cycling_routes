@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../Shared/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class OnboardingContent extends StatelessWidget {
   const OnboardingContent({
@@ -22,7 +24,7 @@ class OnboardingContent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
-                rideOnTitle,
+                AppLocalizations.of(context)!.rideOnTitle,
                 style: TextStyle(
                     fontSize: 42,
                     fontWeight: FontWeight.w600,
