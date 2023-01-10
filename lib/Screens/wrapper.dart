@@ -33,28 +33,17 @@ class _WrapperState extends State<Wrapper> {
   }
 
   _getShared() async {
-    log("Shared pref called");
+    log("Shared pref called in Wrapper");
     SharedPreferences pref = await SharedPreferences.getInstance();
     setState(() {
       firstLaunch = pref.getInt('onBoard');
     });
-    log('${pref.getInt('onBoard')} = On wrapper');
   }
 
   @override
   Widget build(BuildContext context) {
     Auth loginManager = Provider.of<Auth>(context, listen: true);
-    if (firstLaunch == 0) {
-      //Then its not the first installation of the app
-      if (!loginManager.isUserLoggedIn) {
-        return const AuthenticatePage();
-      } else {
-        if (loginManager.userRole == 1) {
-          return const AdminHome();
-        }
-        return const Home();
-      }
-    } else {
+    if (firstLaunch != 0) {
       log('Show Onboarding');
       //Otherwise it shows the onboarding pages
       return Onboarding(
@@ -64,6 +53,16 @@ class _WrapperState extends State<Wrapper> {
           });
         },
       );
+    } else {
+      //Then its not the first installation of the app
+      if (!loginManager.isUserLoggedIn) {
+        return const AuthenticatePage();
+      } else {
+        if (loginManager.userRole == 1) {
+          return const AdminHome();
+        }
+        return const Home();
+      }
     }
   }
 }

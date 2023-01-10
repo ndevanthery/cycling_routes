@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Services/auth.dart';
 import '../../Shared/components/route_card.dart';
-
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -30,7 +28,9 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    isLoading = true;
+    setState(() {
+      isLoading = true;
+    });
   }
 
   @override
@@ -223,7 +223,8 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: tempSortBy == "name" ? Colors.red : null),
+                            backgroundColor:
+                                tempSortBy == "name" ? Colors.red : null),
                         child: Text("name"),
                       ),
                       ElevatedButton(
@@ -233,7 +234,8 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: tempSortBy == "distance" ? Colors.red : null),
+                            backgroundColor:
+                                tempSortBy == "distance" ? Colors.red : null),
                         child: Text("distance"),
                       ),
                       ElevatedButton(
@@ -243,7 +245,8 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: tempSortBy == "time" ? Colors.red : null),
+                            backgroundColor:
+                                tempSortBy == "time" ? Colors.red : null),
                         child: Text("time"),
                       ),
                     ],
@@ -261,7 +264,8 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: tempIsAscending ? Colors.red : null),
+                            backgroundColor:
+                                tempIsAscending ? Colors.red : null),
                         child: Text(AppLocalizations.of(context)!.ascending),
                       ),
                       ElevatedButton(
@@ -271,7 +275,8 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: !tempIsAscending ? Colors.red : null),
+                            backgroundColor:
+                                !tempIsAscending ? Colors.red : null),
                         child: Text(AppLocalizations.of(context)!.descending),
                       ),
                     ],

@@ -102,8 +102,12 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 border: Border.all(color: Colors.black, width: 0.50),
               ),
               child: ListTile(
-                title: Text("${DateFormat.yMMMMd(Get.locale!.languageCode)
-                        .format(e.date!)}${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
+                title: Text(
+                  _checkLenghtDescription(e.description.toString()),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                    "${DateFormat.yMMMMd(Get.locale!.languageCode).format(e.date!)}${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
               ),
             ),
           ),
@@ -137,12 +141,22 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 border: Border.all(color: Colors.black, width: 0.50),
               ),
               child: ListTile(
-                title: Text("${DateFormat.yMMMMd(Get.locale!.languageCode)
-                        .format(e.date!)} ${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
+                title: Text(
+                  _checkLenghtDescription(e.description.toString()),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                    "${DateFormat.yMMMMd(Get.locale!.languageCode).format(e.date!)} ${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
               ),
             ),
           ),
         )
         .toList();
+  }
+
+  _checkLenghtDescription(String descr) {
+    String truncatedString =
+        descr.length > 50 ? descr.substring(0, 50) + '...' : descr;
+    return truncatedString;
   }
 }
