@@ -28,12 +28,15 @@ class _CreateRouteState extends State<CreateRoute> {
   //List<LatLng> myRoute = [];
   RouteM myRouteM = RouteM(routePoints: [], isFav: false);
   UserM? user;
+  bool isActive = true;
 
   void _getCurrentLocation() async {
     Position position = await _determinePosition();
-    setState(() {
-      _position = position;
-    });
+    if (isActive == true) {
+      setState(() {
+        _position = position;
+      });
+    }
   }
 
   Future<Position> _determinePosition() async {
@@ -60,6 +63,12 @@ class _CreateRouteState extends State<CreateRoute> {
   }
 
   @override
+  void dispose() {
+    isActive = false;
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
   }
@@ -77,9 +86,7 @@ class _CreateRouteState extends State<CreateRoute> {
                 setState(() {
                   _clicked = point;
                   points.add(point);
-                  print(points);
                 });
-                print(point.toString());
               },
               minZoom: 9,
               maxZoom: 18,
@@ -172,10 +179,29 @@ class _CreateRouteState extends State<CreateRoute> {
                     style: TextButton.styleFrom(
                         foregroundColor: Color.fromRGBO(100, 100, 100, 1)),
                     onPressed: () async {
-                      var getRoute = await _getRoute(points);
-                      setState(() {
-                        myRouteM = getRoute;
-                      });
+                      RouteM getRoute = await _getRoute(points);
+                      if (getRoute.routePoints!.isNotEmpty) {
+                        setState(() {
+                          myRouteM = getRoute;
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Color.fromRGBO(100, 100, 100, 1),
+                            content: Text(
+                              "No Possible Route",
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            action: SnackBarAction(
+                              textColor: Colors.grey,
+                              label: "ok",
+                              onPressed: (() {}),
+                            ),
+                          ),
+                        );
+                      }
                     },
                     child: Text(AppLocalizations.of(context)!.calculate),
                   ),
@@ -192,12 +218,26 @@ class _CreateRouteState extends State<CreateRoute> {
                   ),
                   TextButton(
                     onPressed: () {
-                      setState(() {
+                      if (myRouteM.routePoints!.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Color.fromRGBO(100, 100, 100, 1),
+                            content: Text(
+                              "No route to Save",
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            action: SnackBarAction(
+                              textColor: Colors.grey,
+                              label: "ok",
+                              onPressed: (() {}),
+                            ),
+                          ),
+                        );
+                      } else {
                         _dialSave(loginManager.getUser()!.uid);
-                        //saveRoute();
-                        //myRouteM.routePoints = [];
-                        //points = [];
-                      });
+                      }
                     },
                     style: TextButton.styleFrom(
                         foregroundColor: Color.fromRGBO(100, 100, 100, 1)),

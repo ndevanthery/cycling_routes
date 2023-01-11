@@ -77,14 +77,16 @@ class _RouteCardState extends State<RouteCard> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: const Image(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/velo_tour.jpg"),
-                  width: 170,
+                child: Image(
+                  fit: BoxFit.fitHeight,
+                  height: 120,
+                  image: AssetImage(
+                      "assets/velo_tour${(widget.route.distance!.toInt() % 10 + 1).toString()}.jpg"),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding:
+                    EdgeInsets.symmetric(horizontal: widget.isAdmin ? 8 : 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +96,7 @@ class _RouteCardState extends State<RouteCard> {
                       flex: widget.isAdmin ? 0 : 1,
                       child: widget.isAdmin
                           ? Container()
-                          : GestureDetector(
+                          : InkWell(
                               onTap: () {
                                 dbManager.manageFavs(
                                     widget.route, loginManager.getUser()!);
@@ -111,7 +113,7 @@ class _RouteCardState extends State<RouteCard> {
                             ),
                     ),
                     Expanded(
-                      flex: 2,
+                      flex: 4,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
