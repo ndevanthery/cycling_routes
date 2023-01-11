@@ -52,9 +52,8 @@ class _AdminHomeState extends State<AdminHome> {
               ))
         ],
       ),
-      body: Center(
-        child: _pages.elementAt(_selectedIndex), //New
-      ),
+      body: _pages.elementAt(_selectedIndex), //New
+
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
             topRight: Radius.circular(30), topLeft: Radius.circular(30)),

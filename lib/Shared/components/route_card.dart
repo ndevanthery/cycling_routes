@@ -1,10 +1,11 @@
-
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:cycling_routes/Shared/components/route_details.dart';
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 import '../../Models/user_m.dart';
 import '../../Services/auth.dart';
@@ -82,50 +83,56 @@ class _RouteCardState extends State<RouteCard> {
                   width: 170,
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: widget.isAdmin
-                        ? Container()
-                        : GestureDetector(
-                            onTap: () {
-                              dbManager.manageFavs(
-                                  widget.route, loginManager.getUser()!);
-                              widget.onFavClick();
-                              widget.isFav = !widget.isFav;
-                              setState(() {});
-                            },
-                            child: Icon(
-                              widget.isFav
-                                  ? Icons.favorite_rounded
-                                  : Icons.favorite_outline_rounded,
-                              size: 15,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: widget.isAdmin ? 0 : 1,
+                      child: widget.isAdmin
+                          ? Container()
+                          : GestureDetector(
+                              onTap: () {
+                                dbManager.manageFavs(
+                                    widget.route, loginManager.getUser()!);
+                                widget.onFavClick();
+                                widget.isFav = !widget.isFav;
+                                setState(() {});
+                              },
+                              child: Icon(
+                                widget.isFav
+                                    ? Icons.favorite_rounded
+                                    : Icons.favorite_outline_rounded,
+                                size: 15,
+                              ),
                             ),
-                          ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "${widget.route.name}",
-                          style: const TextStyle(fontWeight: FontWeight.w800),
-                        ),
-                        Text(
-                          "Dist: ${widget.route.distance}${AppLocalizations.of(context)!.time}${widget.route.duration}${AppLocalizations.of(context)!.sec}",
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
                     ),
-                  ),
-                ],
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "${widget.route.name}",
+                            style: const TextStyle(fontWeight: FontWeight.w800),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          TextScroll(
+                            "Dist: ${(widget.route.distance! / 1000).toInt()}km   ${AppLocalizations.of(context)!.time}: ${(widget.route.duration! / 60).toInt()}min        ",
+                            delayBefore: Duration(seconds: 2),
+                            pauseBetween: Duration(seconds: 5),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

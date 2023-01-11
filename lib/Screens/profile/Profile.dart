@@ -48,179 +48,188 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                imageProfile(),
-                const SizedBox(
-                  height: 200,
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection("Users")
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .snapshots(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData && snapshot.data != null) {
-                      final user = snapshot.data.data();
-                      return Column(
-                        children: [
-                          Text(user['firstname'] + ' ' + user['lastname'],
-                              style: const TextStyle(
-                                  fontSize: 32, fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 15.0),
-                          Text(user['birthday'],
-                              style: const TextStyle(fontSize: 20)),
-                          const SizedBox(height: 15.0),
-                          Text(user['address'],
-                              style: const TextStyle(fontSize: 20)),
-                          const SizedBox(height: 15.0),
-                          Text(user['npa'] + ' ' + user['localite'],
-                              style: const TextStyle(fontSize: 20)),
-                          const SizedBox(height: 15.0),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: const CircleBorder(),
-                            ),
-                            onPressed: () {
-                              firstnameController.text = user['firstname'];
-                              lastnameController.text = user['lastname'];
-                              birthdayController.text = user['birthday'];
-                              addressController.text = user['address'];
-                              npaController.text = user['npa'];
-                              locationController.text = user['localite'];
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  imageProfile(),
+                  const SizedBox(
+                    height: 200,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("Users")
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .snapshots(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData && snapshot.data != null) {
+                        final user = snapshot.data.data();
+                        return Column(
+                          children: [
+                            Text(user['firstname'] + ' ' + user['lastname'],
+                                style: const TextStyle(
+                                    fontSize: 32, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 15.0),
+                            Text(user['birthday'],
+                                style: const TextStyle(fontSize: 20)),
+                            const SizedBox(height: 15.0),
+                            Text(user['address'],
+                                style: const TextStyle(fontSize: 20)),
+                            const SizedBox(height: 15.0),
+                            Text(user['npa'] + ' ' + user['localite'],
+                                style: const TextStyle(fontSize: 20)),
+                            const SizedBox(height: 15.0),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: const CircleBorder(),
+                              ),
+                              onPressed: () {
+                                firstnameController.text = user['firstname'];
+                                lastnameController.text = user['lastname'];
+                                birthdayController.text = user['birthday'];
+                                addressController.text = user['address'];
+                                npaController.text = user['npa'];
+                                locationController.text = user['localite'];
 
-                              showDialog(
-                                context: context,
-                                builder: (context) => Dialog(
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Color.fromRGBO(224, 224, 224, 1),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 30),
-                                    child: ListView(
-                                      shrinkWrap: true,
-                                      children: <Widget>[
-                                        _buildLabel(
-                                            label: AppLocalizations.of(context)!
-                                                .firstname),
-                                        _buildTextField(firstnameController,
-                                            Icons.person_outline_rounded),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        _buildLabel(
-                                            label: AppLocalizations.of(context)!
-                                                .lastname),
-                                        _buildTextField(lastnameController,
-                                            Icons.person_outline_rounded),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        _buildLabel(
-                                            label: AppLocalizations.of(context)!
-                                                .birthday),
-                                        _buildTextField(birthdayController,
-                                            Icons.location_on_outlined),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        _buildLabel(
-                                            label: AppLocalizations.of(context)!
-                                                .address),
-                                        _buildTextField(addressController,
-                                            Icons.location_on_outlined),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        _buildLabel(
-                                            label: AppLocalizations.of(context)!
-                                                .npa),
-                                        _buildTextField(npaController,
-                                            Icons.location_on_outlined),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        _buildLabel(
-                                            label: AppLocalizations.of(context)!
-                                                .locality),
-                                        _buildTextField(locationController,
-                                            Icons.location_on_outlined),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        ElevatedButton(
-                                          child: Text(
-                                              AppLocalizations.of(context)!
-                                                  .save),
-                                          onPressed: () {
-                                            final docUser = FirebaseFirestore
-                                                .instance
-                                                .collection('Users')
-                                                .doc(FirebaseAuth
-                                                    .instance.currentUser!.uid);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => Dialog(
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        color: Color.fromRGBO(224, 224, 224, 1),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15, horizontal: 30),
+                                      child: ListView(
+                                        shrinkWrap: true,
+                                        children: <Widget>[
+                                          _buildLabel(
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .firstname),
+                                          _buildTextField(firstnameController,
+                                              Icons.person_outline_rounded),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          _buildLabel(
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .lastname),
+                                          _buildTextField(lastnameController,
+                                              Icons.person_outline_rounded),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          _buildLabel(
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .birthday),
+                                          _buildTextField(birthdayController,
+                                              Icons.location_on_outlined),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          _buildLabel(
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .address),
+                                          _buildTextField(addressController,
+                                              Icons.location_on_outlined),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          _buildLabel(
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .npa),
+                                          _buildTextField(npaController,
+                                              Icons.location_on_outlined),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          _buildLabel(
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .locality),
+                                          _buildTextField(locationController,
+                                              Icons.location_on_outlined),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          ElevatedButton(
+                                            child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .save),
+                                            onPressed: () {
+                                              final docUser = FirebaseFirestore
+                                                  .instance
+                                                  .collection('Users')
+                                                  .doc(FirebaseAuth.instance
+                                                      .currentUser!.uid);
 
-                                            docUser.update({
-                                              "firstname":
-                                                  firstnameController.text,
-                                              "lastname":
-                                                  lastnameController.text,
-                                              "birthday":
-                                                  birthdayController.text,
-                                              "address": addressController.text,
-                                              "npa": npaController.text,
-                                              "localite":
-                                                  locationController.text
-                                            }).whenComplete(() =>
-                                                Navigator.of(context).pop());
-                                          },
-                                        )
-                                      ],
+                                              docUser.update({
+                                                "firstname":
+                                                    firstnameController.text,
+                                                "lastname":
+                                                    lastnameController.text,
+                                                "birthday":
+                                                    birthdayController.text,
+                                                "address":
+                                                    addressController.text,
+                                                "npa": npaController.text,
+                                                "localite":
+                                                    locationController.text
+                                              }).whenComplete(() =>
+                                                  Navigator.of(context).pop());
+                                            },
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
+                                );
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
                                 ),
-                              );
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        );
+                      }
+                      return const Material(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       );
-                    }
-                    return const Material(
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
+                    },
+                  ),
+                ],
+              ),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            //      RouteCard(isAdmin: true, route: ),
-          ],
+              //      RouteCard(isAdmin: true, route: ),
+            ],
+          ),
         ),
       ),
     );
@@ -277,22 +286,28 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 20,
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            ElevatedButton.icon(
-              icon: const Icon(Icons.camera),
-              onPressed: () {
-                takePhoto(ImageSource.camera);
-              },
-              label: Text(AppLocalizations.of(context)!.camera),
-            ),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.image),
-              onPressed: () {
-                takePhoto(ImageSource.gallery);
-              },
-              label: Text(AppLocalizations.of(context)!.gallery),
-            ),
-          ])
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                  icon: const Icon(Icons.camera),
+                  onPressed: () {
+                    takePhoto(ImageSource.camera);
+                  },
+                  label: Text(AppLocalizations.of(context)!.camera),
+                ),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                  icon: const Icon(Icons.image),
+                  onPressed: () {
+                    takePhoto(ImageSource.gallery);
+                  },
+                  label: Text(AppLocalizations.of(context)!.gallery),
+                ),
+              ])
         ],
       ),
     );

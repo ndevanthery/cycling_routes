@@ -45,15 +45,15 @@ class _RouteDetailsState extends State<RouteDetails> {
                 )
               : Text(
                   "${widget.route.name}",
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w600),
                 ),
           widget.isAdmin
               ? ElevatedButton.icon(
                   onPressed: () {
                     setState(() {
                       if (nameEdited == true) {
-                        DatabaseService myService =
-                             DatabaseService(uid: null);
+                        DatabaseService myService = DatabaseService(uid: null);
                         myService.updateRouteName(
                             widget.route.uid!, myNameController.text);
                       }
@@ -61,10 +61,15 @@ class _RouteDetailsState extends State<RouteDetails> {
                       nameEdited = !nameEdited;
                     });
                   },
-                  icon: nameEdited ? const Icon(Icons.save) : const Icon(Icons.edit),
+                  icon: nameEdited
+                      ? const Icon(Icons.save)
+                      : const Icon(Icons.edit),
                   label: nameEdited
                       ? Text(AppLocalizations.of(context)!.saveName)
-                      : Text(AppLocalizations.of(context)!.editName))
+                      : Text(AppLocalizations.of(context)!.editName),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                )
               : Container(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 50),
@@ -150,7 +155,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "Level ${widget.route.duration! / 60 ~/ 30}",
+                          "Level ${(widget.route.duration! * elevationDiff / 100) / 60 ~/ 30}",
                           style: const TextStyle(
                               fontSize: 18,
                               letterSpacing: 1.1,
@@ -179,6 +184,8 @@ class _RouteDetailsState extends State<RouteDetails> {
                               ),
                             )));
               },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
               child: Text(AppLocalizations.of(context)!.start)),
         ]),
       ),

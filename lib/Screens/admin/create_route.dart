@@ -169,6 +169,8 @@ class _CreateRouteState extends State<CreateRoute> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
+                    style: TextButton.styleFrom(
+                        foregroundColor: Color.fromRGBO(100, 100, 100, 1)),
                     onPressed: () async {
                       var getRoute = await _getRoute(points);
                       setState(() {
@@ -184,6 +186,8 @@ class _CreateRouteState extends State<CreateRoute> {
                         points = [];
                       });
                     },
+                    style: TextButton.styleFrom(
+                        foregroundColor: Color.fromRGBO(100, 100, 100, 1)),
                     child: Text(AppLocalizations.of(context)!.clear),
                   ),
                   TextButton(
@@ -195,6 +199,8 @@ class _CreateRouteState extends State<CreateRoute> {
                         //points = [];
                       });
                     },
+                    style: TextButton.styleFrom(
+                        foregroundColor: Color.fromRGBO(100, 100, 100, 1)),
                     child: Text(AppLocalizations.of(context)!.save),
                   ),
                 ],
