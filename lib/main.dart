@@ -105,6 +105,7 @@ class _MyAppState extends State<MyApp> {
             ],
             supportedLocales: L10n.all,
             locale: const Locale('en'),
+            themeMode: ThemeMode.light,
           );
         },
       ),
@@ -120,7 +121,6 @@ class _MyAppState extends State<MyApp> {
         path: baseRoute,
         builder: (context, state) => const Wrapper(),
       ),
-      
       GoRoute(
         name: loginRoute,
         path: loginRoute,

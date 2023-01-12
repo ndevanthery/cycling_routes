@@ -14,7 +14,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MapPage extends StatefulWidget {
   RouteM? route;
-  MapPage({Key? key, this.route}) : super(key: key);
+  LatLng? focusPoint;
+  MapPage({Key? key, this.route, this.focusPoint}) : super(key: key);
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -95,9 +96,11 @@ class _MapPageState extends State<MapPage> {
               minZoom: 9,
               maxZoom: 18,
               zoom: 9,
-              center: myRoute.isEmpty
-                  ? LatLng(46.5480234, 6.4022017)
-                  : myRoute.first,
+              center: widget.focusPoint == null
+                  ? myRoute.isEmpty
+                      ? LatLng(46.5480234, 6.4022017)
+                      : myRoute.first
+                  : widget.focusPoint,
               maxBounds: LatLngBounds(
                   LatLng(45.398181, 5.140242), LatLng(48.230651, 11.47757))),
           layers: [
@@ -143,6 +146,15 @@ class _MapPageState extends State<MapPage> {
                   color: Colors.red,
                 ),
               ),
+              if (widget.focusPoint != null)
+                Marker(
+                  point: widget.focusPoint!,
+                  builder: (context) => Icon(
+                    Icons.warning,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                ),
               if (_clicked != null)
                 Marker(
                   point: _clicked!,

@@ -204,9 +204,10 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                tempSortBy == "name" ? Colors.red : null),
-                        child: Text("name"),
+                            backgroundColor: tempSortBy == "name"
+                                ? Colors.red
+                                : Color.fromRGBO(100, 100, 100, 1)),
+                        child: Text(AppLocalizations.of(context)!.name),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -215,9 +216,10 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                tempSortBy == "distance" ? Colors.red : null),
-                        child: Text("distance"),
+                            backgroundColor: tempSortBy == "distance"
+                                ? Colors.red
+                                : Color.fromRGBO(100, 100, 100, 1)),
+                        child: Text(AppLocalizations.of(context)!.distance),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -226,9 +228,10 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                tempSortBy == "time" ? Colors.red : null),
-                        child: Text("time"),
+                            backgroundColor: tempSortBy == "time"
+                                ? Colors.red
+                                : Color.fromRGBO(100, 100, 100, 1)),
+                        child: Text(AppLocalizations.of(context)!.time),
                       ),
                     ],
                   ),
@@ -245,8 +248,9 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                tempIsAscending ? Colors.red : null),
+                            backgroundColor: tempIsAscending
+                                ? Colors.red
+                                : Color.fromRGBO(100, 100, 100, 1)),
                         child: Text(AppLocalizations.of(context)!.ascending),
                       ),
                       ElevatedButton(
@@ -256,8 +260,9 @@ class _SearchPageState extends State<SearchPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                !tempIsAscending ? Colors.red : null),
+                            backgroundColor: !tempIsAscending
+                                ? Colors.red
+                                : Color.fromRGBO(100, 100, 100, 1)),
                         child: Text(AppLocalizations.of(context)!.descending),
                       ),
                     ],
