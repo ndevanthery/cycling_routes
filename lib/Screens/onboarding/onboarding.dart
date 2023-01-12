@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cycling_routes/Shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'widgets/onboarding_content.dart';
@@ -107,8 +106,7 @@ List<Map<String, String>> contents = [
                                   style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(20)),
-                                      primary: Colors.amber),
+                                              BorderRadius.circular(20)), backgroundColor: Colors.amber),
                                   onPressed: () async {
                                     if (currentIndex == contents.length - 1) {
                                       await storeOnboardInfo();
@@ -123,7 +121,7 @@ List<Map<String, String>> contents = [
                                   child:  Text(
                                      AppLocalizations.of(context)!
                                                 .btnOnboardTxt,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
@@ -136,7 +134,7 @@ List<Map<String, String>> contents = [
                                 child:  Text(
                                   AppLocalizations.of(context)!
                                                 .skipTxt,
-                                  style: TextStyle(color: Colors.grey),
+                                  style: const TextStyle(color: Colors.grey),
                                 )),
                             const Spacer()
                           ],

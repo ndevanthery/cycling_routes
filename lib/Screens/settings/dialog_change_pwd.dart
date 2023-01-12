@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:cycling_routes/Shared/components/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -205,7 +204,8 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500), backgroundColor: Colors.grey[400],
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                  backgroundColor: Colors.grey[400],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -221,7 +221,8 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600), backgroundColor: Colors.grey[500],
+                      color: Colors.white, fontWeight: FontWeight.w600),
+                  backgroundColor: Colors.grey[500],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -260,12 +261,12 @@ class _DialogChangePwdState extends State<DialogChangePwd> {
                         });
                         Future.delayed(const Duration(seconds: 5), () {
                           log('back to settings after 5 seconds');
-                          context.pop();
+                          Navigator.of(context).pop();
                         });
                       });
                     } else {
-                      final newError =
-                          ExceptionHandler.generateErrorMessage(context,status);
+                      final newError = ExceptionHandler.generateErrorMessage(
+                          context, status);
                       updateError(newError, true);
                       setState(() {
                         isLoading = false;

@@ -104,7 +104,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
               child: ListTile(
                 title: Text(
                   _checkLenghtDescription(e.description.toString()),
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(
                     "${DateFormat.yMMMMd(Get.locale!.languageCode).format(e.date!)}${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
@@ -143,7 +143,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
               child: ListTile(
                 title: Text(
                   _checkLenghtDescription(e.description.toString()),
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(
                     "${DateFormat.yMMMMd(Get.locale!.languageCode).format(e.date!)} ${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
@@ -156,7 +156,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
 
   _checkLenghtDescription(String descr) {
     String truncatedString =
-        descr.length > 50 ? descr.substring(0, 50) + '...' : descr;
+        descr.length > 50 ? '${descr.substring(0, 50)}...' : descr;
     return truncatedString;
   }
 }

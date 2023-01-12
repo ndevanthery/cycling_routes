@@ -1,6 +1,5 @@
 import 'package:cycling_routes/Services/database.dart';
 import 'package:cycling_routes/Shared/components/route_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
