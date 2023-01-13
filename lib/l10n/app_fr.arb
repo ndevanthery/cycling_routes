@@ -109,7 +109,15 @@
   "description": "Description",
   "problemDetail": "détail du problème",
   "notifyTrouble": "notifier les problèmes",
-  "describeYourProblem": "décrivez votre problème"
-
-
+  "describeYourProblem": "décrivez votre problème",
+  "birthday": "anniversaire",
+  "rideOnTitle": "Ride",
+  "firstOnboardTxt": "Bienvenue à RideOn. Trouvez votre chemin !",
+  "secndOnboardTxt": "Nous aidons les gens à trouver la meilleure route pour leurs randonnées.",
+  "thirdOnboardTxt": "Nous vous avertissons s'il y a des problèmes sur la route.",
+  "btnOnboardTxt": "Continuer",
+  "skipTxt": "Informations sur les sauts",
+  "noRouteToSave": "pas de route à sauver !",
+  "noPossibleRoute": "aucune route possible !",
+  "nothingToDisplay": "Rien à afficher !"
 }

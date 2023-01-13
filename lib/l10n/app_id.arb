@@ -109,7 +109,15 @@
   "description": "Deskripsi",
   "problemDetail": "detail masalah",
   "notifyTrouble": "memberitahukan masalah",
-  "describeYourProblem": "jelaskan masalah Anda"
-
-
+  "describeYourProblem": "jelaskan masalah Anda",
+  "birthday": "ulang tahun",
+  "rideOnTitle": "Naik",
+  "firstOnboardTxt": "Selamat datang di RideOn. Mari temukan jalan Anda!",
+  "secndOnboardTxt": "Kami membantu orang menemukan jalan terbaik untuk perjalanan mereka.",
+  "thirdOnboardTxt": "Kami memberi tahu Anda jika ada masalah di jalan.",
+  "btnOnboardTxt": "Lanjutkan",
+  "skipTxt": "Lewati informasi",
+  "noRouteToSave": "tidak ada rute untuk disimpan!",
+  "noPossibleRoute": "tidak ada rute yang memungkinkan!",
+  "nothingToDisplay": "Tidak ada yang ditampilkan!"
 }

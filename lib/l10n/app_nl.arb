@@ -109,7 +109,15 @@
   "description": "Beschrijving",
   "problemDetail": "probleemdetail",
   "notifyTrouble": "problemen melden",
-  "describeYourProblem": "beschrijf uw probleem"
-
-
+  "describeYourProblem": "beschrijf uw probleem",
+  "birthday": "verjaardag",
+  "rideOnTitle": "Rijden",
+  "firstOnboardTxt": "Welkom bij RideOn. Laten we uw weg vinden !",
+  "secndOnboardTxt": "Wij helpen mensen de beste weg te vinden voor hun ritten.",
+  "thirdOnboardTxt": "We verwittigen je als er problemen op de weg zijn.",
+  "btnOnboardTxt": "Ga verder",
+  "skipTxt": "Informatie overslaan",
+  "noRouteToSave": "geen route te redden!",
+  "noPossibleRoute": "geen mogelijke route !",
+  "nothingToDisplay": "Niets te zien !"
 }

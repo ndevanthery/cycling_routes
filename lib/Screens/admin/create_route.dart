@@ -22,7 +22,6 @@ class CreateRoute extends StatefulWidget {
 
 class _CreateRouteState extends State<CreateRoute> {
   Position? _position;
-  late LatLng _clicked;
   bool switchValue = false;
   List<LatLng> points = [];
   //List<LatLng> myRoute = [];
@@ -56,8 +55,6 @@ class _CreateRouteState extends State<CreateRoute> {
 
   @override
   void initState() {
-    _clicked = LatLng(0, 0);
-
     _getCurrentLocation();
     super.initState();
   }
@@ -84,7 +81,6 @@ class _CreateRouteState extends State<CreateRoute> {
           options: MapOptions(
               onTap: (tapPosition, point) {
                 setState(() {
-                  _clicked = point;
                   points.add(point);
                 });
               },
@@ -177,7 +173,8 @@ class _CreateRouteState extends State<CreateRoute> {
                 children: [
                   TextButton(
                     style: TextButton.styleFrom(
-                        foregroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                        foregroundColor:
+                            const Color.fromRGBO(100, 100, 100, 1)),
                     onPressed: () async {
                       RouteM getRoute = await _getRoute(points);
                       if (getRoute.routePoints!.isNotEmpty) {
@@ -187,9 +184,10 @@ class _CreateRouteState extends State<CreateRoute> {
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: Color.fromRGBO(100, 100, 100, 1),
+                            backgroundColor:
+                                const Color.fromRGBO(100, 100, 100, 1),
                             content: Text(
-                              "No Possible Route",
+                              AppLocalizations.of(context)!.noPossibleRoute,
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -213,7 +211,8 @@ class _CreateRouteState extends State<CreateRoute> {
                       });
                     },
                     style: TextButton.styleFrom(
-                        foregroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                        foregroundColor:
+                            const Color.fromRGBO(100, 100, 100, 1)),
                     child: Text(AppLocalizations.of(context)!.clear),
                   ),
                   TextButton(
@@ -221,9 +220,10 @@ class _CreateRouteState extends State<CreateRoute> {
                       if (myRouteM.routePoints!.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: Color.fromRGBO(100, 100, 100, 1),
+                            backgroundColor:
+                                const Color.fromRGBO(100, 100, 100, 1),
                             content: Text(
-                              "No route to Save",
+                              AppLocalizations.of(context)!.noRouteToSave,
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -240,7 +240,8 @@ class _CreateRouteState extends State<CreateRoute> {
                       }
                     },
                     style: TextButton.styleFrom(
-                        foregroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                        foregroundColor:
+                            const Color.fromRGBO(100, 100, 100, 1)),
                     child: Text(AppLocalizations.of(context)!.save),
                   ),
                 ],
@@ -292,7 +293,6 @@ class _CreateRouteState extends State<CreateRoute> {
 
   Future<List<double>> getAltitude(List<LatLng> myCoordinates) async {
     List<double> responseList = [];
-    print(myCoordinates.length);
     List<List<double>> myStrings =
         myCoordinates.map((e) => [e.latitude, e.longitude]).toList();
     var data = jsonEncode(myStrings);
@@ -311,8 +311,6 @@ class _CreateRouteState extends State<CreateRoute> {
             (e) => e * 1.0 as double,
           )
           .toList();
-
-      print(responseList);
     }
     return responseList;
   }

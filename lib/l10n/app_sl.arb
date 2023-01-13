@@ -109,7 +109,15 @@
   "description": "Opis",
   "problemDetail": "podrobnosti o težavi",
   "notifyTrouble": "obvestilo o težavah",
-  "describeYourProblem": "opišite svojo težavo."
-
-
+  "describeYourProblem": "opišite svojo težavo.",
+  "birthday": "rojstni dan",
+  "rideOnTitle": "Vožnja",
+  "firstOnboardTxt": "Dobrodošli v RideOn. Najdimo vašo pot!",
+  "secndOnboardTxt": "Ljudem pomagamo najti najboljšo cesto za njihovo vožnjo.",
+  "thirdOnboardTxt": "Obvestimo vas, če se na cesti pojavijo težave.",
+  "btnOnboardTxt": "Nadaljuj",
+  "skipTxt": "Preskoči informacije",
+  "noRouteToSave": "ni poti, ki bi jo bilo treba shraniti !",
+  "noPossibleRoute": "ni možne poti !",
+  "nothingToDisplay": "Nič za prikaz !"
 }

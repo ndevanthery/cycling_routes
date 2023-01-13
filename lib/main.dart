@@ -37,6 +37,7 @@ Future<void> main() async {
   final messaging = FirebaseMessaging.instance;
   messaging.subscribeToTopic("all");
 
+  // ignore: unused_local_variable
   final settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
@@ -50,7 +51,7 @@ Future<void> main() async {
 // used to pass messages from event handler to the UI
   final messageStreamController = BehaviorSubject<RemoteMessage>();
 
-  String? token = await messaging.getToken();
+  await messaging.getToken();
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
 /*     print('Handling a foreground message: ${message.messageId}');

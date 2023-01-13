@@ -109,7 +109,15 @@
   "description": "Kirjeldus",
   "problemDetail": "probleemi detail",
   "notifyTrouble": "teavitada hädaolukorrast",
-  "describeYourProblem": "kirjeldage oma probleemi"
-
-
+  "describeYourProblem": "kirjeldage oma probleemi",
+  "birthday": "sünnipäev",
+  "rideOnTitle": "Sõita",
+  "firstOnboardTxt": "Tere tulemast RideOnile. Leiame teie tee !",
+  "secndOnboardTxt": "Me aitame inimestel leida oma sõitudeks parima tee.",
+  "thirdOnboardTxt": "Me teavitame teid, kui teel on probleeme.",
+  "btnOnboardTxt": "Jätka",
+  "skipTxt": "Teabe vahelejätmine",
+  "noRouteToSave": "marsruuti ei saa salvestada !",
+  "noPossibleRoute": "ei ole võimalik marsruut !",
+  "nothingToDisplay": "Pole midagi näidata !"
 }

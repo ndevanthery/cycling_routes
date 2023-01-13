@@ -109,7 +109,15 @@
   "description": "Aprašymas",
   "problemDetail": "išsamiai aprašyta problema",
   "notifyTrouble": "pranešti apie bėdą",
-  "describeYourProblem": "aprašykite savo problemą"
-
-
+  "describeYourProblem": "aprašykite savo problemą",
+  "birthday": "gimtadienis",
+  "rideOnTitle": "Važiuokite",
+  "firstOnboardTxt": "Sveiki atvykę į \"RideOn\". Raskime savo kelią !",
+  "secndOnboardTxt": "Padedame žmonėms rasti geriausią kelią jų važiavimams.",
+  "thirdOnboardTxt": "Pranešame, jei kelyje kyla problemų.",
+  "btnOnboardTxt": "Tęsti",
+  "skipTxt": "Praleisti informaciją",
+  "noRouteToSave": "nėra maršruto, kurį būtų galima išsaugoti !",
+  "noPossibleRoute": "nėra galimo maršruto !",
+  "nothingToDisplay": "Nėra ką rodyti !"
 }

@@ -58,19 +58,10 @@ class _SearchPageState extends State<SearchPage> {
     super.didChangeDependencies();
   }
 
-  _resetList(List<RouteM> newRoutes) {
-    setState(() {
-      allRoutes = newRoutes;
-    });
-  }
-
   toggleShowFavs() {
     setState(() {
       showOnlyFavs = !showOnlyFavs;
     });
-
-    //TODO  make the list update
-    // runShowOnlyFavs(showOnlyFavs, _resetList);
   }
 
   @override

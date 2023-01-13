@@ -109,7 +109,15 @@
   "description": "Опис",
   "problemDetail": "деталізація проблеми",
   "notifyTrouble": "повідомити про несправність",
-  "describeYourProblem": "опишіть свою проблему"
-
-
+  "describeYourProblem": "опишіть свою проблему",
+  "birthday": "день народження",
+  "rideOnTitle": "Прогулянка",
+  "firstOnboardTxt": "Ласкаво просимо до RideOn. Давайте знайдемо ваш шлях!",
+  "secndOnboardTxt": "Ми допомагаємо людям знайти найкращу дорогу для їхніх поїздок.",
+  "thirdOnboardTxt": "Ми повідомляємо вас, якщо виникають проблеми на дорозі.",
+  "btnOnboardTxt": "Продовження",
+  "skipTxt": "Пропустити інформацію",
+  "noRouteToSave": "немає шляху до порятунку!",
+  "noPossibleRoute": "немає можливого маршруту!",
+  "nothingToDisplay": "Нічого виставляти!"
 }

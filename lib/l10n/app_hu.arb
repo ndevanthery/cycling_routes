@@ -109,7 +109,15 @@
   "description": "Leírás",
   "problemDetail": "probléma részletei",
   "notifyTrouble": "hiba bejelentése",
-  "describeYourProblem": "írja le a problémát"
-
-
+  "describeYourProblem": "írja le a problémát",
+  "birthday": "születésnap",
+  "rideOnTitle": "Lovaglás",
+  "firstOnboardTxt": "Üdvözöljük a RideOn-on. Találjuk meg az utat !",
+  "secndOnboardTxt": "Segítünk az embereknek megtalálni a legjobb utat a túrákhoz.",
+  "thirdOnboardTxt": "Értesítjük, ha baj van az úton.",
+  "btnOnboardTxt": "Folytatás",
+  "skipTxt": "Információ kihagyása",
+  "noRouteToSave": "nincs menthető útvonal !",
+  "noPossibleRoute": "nincs lehetséges útvonal !",
+  "nothingToDisplay": "Nincs mit megjeleníteni !"
 }

@@ -109,7 +109,15 @@
   "description": "Descripción",
   "problemDetail": "detalle del problema",
   "notifyTrouble": "notificar problemas",
-  "describeYourProblem": "describa su problema"
-
-
+  "describeYourProblem": "describa su problema",
+  "birthday": "cumpleaños",
+  "rideOnTitle": "Ride",
+  "firstOnboardTxt": "Bienvenido a RideOn. ¡Vamos a encontrar tu camino!",
+  "secndOnboardTxt": "Ayudamos a la gente a encontrar la mejor carretera para sus paseos.",
+  "thirdOnboardTxt": "Le avisamos si hay problemas en la carretera.",
+  "btnOnboardTxt": "Continúe en",
+  "skipTxt": "Saltar información",
+  "noRouteToSave": "¡no hay ruta que guardar !",
+  "noPossibleRoute": "¡no hay ruta posible !",
+  "nothingToDisplay": "No hay nada que mostrar."
 }

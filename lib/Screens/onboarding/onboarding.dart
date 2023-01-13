@@ -1,11 +1,9 @@
 import 'dart:developer';
 
-import 'package:cycling_routes/Shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'widgets/onboarding_content.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class Onboarding extends StatefulWidget {
   final Function setFirstLaunch;
@@ -19,7 +17,6 @@ class _OnboardingState extends State<Onboarding> {
   late PageController _pageController;
 
   int currentIndex = 0;
-  
 
   @override
   void initState() {
@@ -47,21 +44,20 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
-List<Map<String, String>> contents = [
-    {
-      "txt":  AppLocalizations.of(context)!.firstOnboardTxt,
-      "img": 'assets/img/Destination.png',
-    },
-    {
-      "txt": AppLocalizations.of(context)!.secndOnboardTxt,
-      "img": 'assets/img/bike_ride.png',
-    },
-    {
-      "txt": AppLocalizations.of(context)!.thirdOnboardTxt,
-      "img": 'assets/img/Posts.png',
-    }
-  ];
-
+    List<Map<String, String>> contents = [
+      {
+        "txt": AppLocalizations.of(context)!.firstOnboardTxt,
+        "img": 'assets/img/Destination.png',
+      },
+      {
+        "txt": AppLocalizations.of(context)!.secndOnboardTxt,
+        "img": 'assets/img/bike_ride.png',
+      },
+      {
+        "txt": AppLocalizations.of(context)!.thirdOnboardTxt,
+        "img": 'assets/img/Posts.png',
+      }
+    ];
 
     return Scaffold(
       body: SafeArea(
@@ -108,7 +104,7 @@ List<Map<String, String>> contents = [
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)),
-                                      primary: Colors.amber),
+                                      backgroundColor: Colors.amber),
                                   onPressed: () async {
                                     if (currentIndex == contents.length - 1) {
                                       await storeOnboardInfo();
@@ -120,10 +116,9 @@ List<Map<String, String>> contents = [
                                       curve: Curves.bounceIn,
                                     );
                                   },
-                                  child:  Text(
-                                     AppLocalizations.of(context)!
-                                                .btnOnboardTxt,
-                                    style: TextStyle(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.btnOnboardTxt,
+                                    style: const TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
@@ -133,10 +128,9 @@ List<Map<String, String>> contents = [
                                 onPressed: () async {
                                   await storeOnboardInfo();
                                 },
-                                child:  Text(
-                                  AppLocalizations.of(context)!
-                                                .skipTxt,
-                                  style: TextStyle(color: Colors.grey),
+                                child: Text(
+                                  AppLocalizations.of(context)!.skipTxt,
+                                  style: const TextStyle(color: Colors.grey),
                                 )),
                             const Spacer()
                           ],

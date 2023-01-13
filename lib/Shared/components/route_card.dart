@@ -2,7 +2,6 @@ import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:cycling_routes/Shared/components/route_details.dart';
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:text_scroll/text_scroll.dart';
@@ -46,98 +45,95 @@ class _RouteCardState extends State<RouteCard> {
     DatabaseService dbManager =
         DatabaseService(uid: loginManager.getUser()!.uid);
 
-    return Container(
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => RouteDetails(
-                  route: widget.route,
-                  isAdmin: widget.isAdmin,
-                ),
-              )).then((value) {
-            if (widget.update != null) {
-              widget.update!();
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RouteDetails(
+                route: widget.route,
+                isAdmin: widget.isAdmin,
+              ),
+            )).then((value) {
+          if (widget.update != null) {
+            widget.update!();
+          }
+        });
+      },
+      onLongPress: widget.isAdmin
+          ? () {
+              _dialDeleteRoute();
             }
-          });
-        },
-        onLongPress: widget.isAdmin
-            ? () {
-                _dialDeleteRoute();
-              }
-            : null,
-        child: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image(
-                  fit: BoxFit.fitHeight,
-                  height: 120,
-                  image: AssetImage(
-                      "assets/velo_tour${(widget.route.distance!.toInt() % 10 + 1).toString()}.jpg"),
-                ),
+          : null,
+      child: Container(
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image(
+                fit: BoxFit.fitHeight,
+                height: 120,
+                image: AssetImage(
+                    "assets/velo_tour${(widget.route.distance!.toInt() % 10 + 1).toString()}.jpg"),
               ),
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: widget.isAdmin ? 8 : 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: widget.isAdmin ? 0 : 1,
-                      child: widget.isAdmin
-                          ? Container()
-                          : InkWell(
-                              onTap: () {
-                                dbManager.manageFavs(
-                                    widget.route, loginManager.getUser()!);
-                                widget.onFavClick();
-                                widget.isFav = !widget.isFav;
-                                setState(() {});
-                              },
-                              child: Icon(
-                                widget.isFav
-                                    ? Icons.favorite_rounded
-                                    : Icons.favorite_outline_rounded,
-                                size: 15,
-                              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: widget.isAdmin ? 8 : 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: widget.isAdmin ? 0 : 1,
+                    child: widget.isAdmin
+                        ? Container()
+                        : InkWell(
+                            onTap: () {
+                              dbManager.manageFavs(
+                                  widget.route, loginManager.getUser()!);
+                              widget.onFavClick();
+                              widget.isFav = !widget.isFav;
+                              setState(() {});
+                            },
+                            child: Icon(
+                              widget.isFav
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_outline_rounded,
+                              size: 15,
                             ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "${widget.route.name}",
-                            style: const TextStyle(fontWeight: FontWeight.w800),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
                           ),
-                          TextScroll(
-                            "Dist: ${(widget.route.distance! / 1000).toInt()}km   ${AppLocalizations.of(context)!.time}: ${(widget.route.duration! / 60).toInt()}min        ",
-                            delayBefore: Duration(seconds: 2),
-                            pauseBetween: Duration(seconds: 5),
-                          ),
-                        ],
-                      ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "${widget.route.name}",
+                          style: const TextStyle(fontWeight: FontWeight.w800),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        TextScroll(
+                          "Dist: ${widget.route.distance! ~/ 1000}km   ${AppLocalizations.of(context)!.time}: ${widget.route.duration! ~/ 60}min        ",
+                          delayBefore: const Duration(seconds: 2),
+                          pauseBetween: const Duration(seconds: 5),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

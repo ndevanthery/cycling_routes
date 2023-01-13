@@ -109,7 +109,15 @@
   "description": "Описание",
   "problemDetail": "подробности за проблема",
   "notifyTrouble": "уведомяване за проблеми",
-  "describeYourProblem": "опишете проблема си"
-
-
+  "describeYourProblem": "опишете проблема си",
+  "birthday": "рожден ден",
+  "rideOnTitle": "Ride",
+  "firstOnboardTxt": "Добре дошли в RideOn. Нека намерим вашия път !",
+  "secndOnboardTxt": "Помагаме на хората да намерят най-добрия път за своите пътувания.",
+  "thirdOnboardTxt": "Уведомяваме ви, ако на пътя има проблем.",
+  "btnOnboardTxt": "Продължи",
+  "skipTxt": "Пропускане на информация",
+  "noRouteToSave": "няма маршрут за запазване!",
+  "noPossibleRoute": "няма възможен маршрут !",
+  "nothingToDisplay": "Няма нищо за показване !"
 }

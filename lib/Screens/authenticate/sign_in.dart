@@ -195,17 +195,12 @@ class _SignInState extends State<SignIn> {
                                                 },
                                               ),
                                             ),
-
                                             validator: (value) => value!
                                                         .length <
                                                     6
                                                 ? AppLocalizations.of(context)!
                                                     .passwordValidation
                                                 : null,
-                                            //TODO : Update the validation of the Pwd  with this code below in Comments!!
-                                            // // validator: (value) => !isPasswordValid(value!)
-                                            // //     ? 'Must contain : +6 characters, Capital, small letter & Number & Special'
-                                            // //     : null,
                                             obscureText: !_pwdVisible,
                                             onChanged: ((value) {
                                               setState(() => pwd = value);

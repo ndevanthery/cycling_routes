@@ -109,7 +109,15 @@
   "description": "描述",
   "problemDetail": "问题细节",
   "notifyTrouble": "通知麻烦",
-  "describeYourProblem": "描述你的问题"
-
-
+  "describeYourProblem": "描述你的问题",
+  "birthday": "生日",
+  "rideOnTitle": "乘坐",
+  "firstOnboardTxt": "欢迎来到RideOn。让我们找到你的路!",
+  "secndOnboardTxt": "我们帮助人们找到适合他们骑行的最佳道路。",
+  "thirdOnboardTxt": "如果道路上有麻烦，我们会通知你。",
+  "btnOnboardTxt": "继续",
+  "skipTxt": "跳过信息",
+  "noRouteToSave": "没有路线可以保存 !",
+  "noPossibleRoute": "没有可能的路线 !",
+  "nothingToDisplay": "没有什么可显示的 !"
 }

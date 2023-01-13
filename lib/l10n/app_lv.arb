@@ -109,7 +109,15 @@
   "description": "Apraksts",
   "problemDetail": "detalizēts problēmas apraksts",
   "notifyTrouble": "paziņot par nepatikšanām",
-  "describeYourProblem": "aprakstiet savu problēmu."
-
-
+  "describeYourProblem": "aprakstiet savu problēmu.",
+  "birthday": "dzimšanas diena",
+  "rideOnTitle": "Braukt",
+  "firstOnboardTxt": "Laipni lūdzam RideOn. Atklāsim jūsu ceļu!",
+  "secndOnboardTxt": "Mēs palīdzam cilvēkiem atrast labāko ceļu viņu braucieniem.",
+  "thirdOnboardTxt": "Mēs jums ziņojam, ja uz ceļa rodas problēmas.",
+  "btnOnboardTxt": "Turpināt",
+  "skipTxt": "Izlaist informāciju",
+  "noRouteToSave": "nav maršruta, ko saglabāt !",
+  "noPossibleRoute": "nav iespējama maršruta !",
+  "nothingToDisplay": "Nav ko rādīt !"
 }

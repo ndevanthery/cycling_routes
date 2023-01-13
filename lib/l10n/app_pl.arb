@@ -109,7 +109,15 @@
   "description": "Opis",
   "problemDetail": "szczegół problemu",
   "notifyTrouble": "powiadomić o problemie",
-  "describeYourProblem": "opisz swój problem"
-
-
+  "describeYourProblem": "opisz swój problem",
+  "birthday": "urodziny",
+  "rideOnTitle": "Jazda",
+  "firstOnboardTxt": "Witamy w RideOn. Znajdźmy swoją drogę!",
+  "secndOnboardTxt": "Pomagamy ludziom znaleźć najlepszą drogę dla ich przejazdów.",
+  "thirdOnboardTxt": "Powiadamiamy, gdy na drodze pojawią się kłopoty.",
+  "btnOnboardTxt": "Kontynuuj",
+  "skipTxt": "Informacje o pominięciu",
+  "noRouteToSave": "nie ma trasy do zapisania!",
+  "noPossibleRoute": "brak możliwej trasy !",
+  "nothingToDisplay": "Nic do wyświetlania!"
 }

@@ -109,7 +109,15 @@
   "description": "Περιγραφή",
   "problemDetail": "λεπτομέρεια του προβλήματος",
   "notifyTrouble": "ειδοποίηση προβλήματος",
-  "describeYourProblem": "περιγράψτε το πρόβλημά σας"
-
-
+  "describeYourProblem": "περιγράψτε το πρόβλημά σας",
+  "birthday": "γενέθλια",
+  "rideOnTitle": "Βόλτα",
+  "firstOnboardTxt": "Καλώς ήρθατε στη RideOn. Ας βρούμε το δρόμο σας!",
+  "secndOnboardTxt": "Βοηθάμε τους ανθρώπους να βρουν τον καλύτερο δρόμο για τις βόλτες τους.",
+  "thirdOnboardTxt": "Σας ειδοποιούμε αν υπάρχει πρόβλημα στο δρόμο.",
+  "btnOnboardTxt": "Συνεχίστε",
+  "skipTxt": "Παράλειψη πληροφοριών",
+  "noRouteToSave": "Δεν υπάρχει διαδρομή για αποθήκευση !",
+  "noPossibleRoute": "δεν υπάρχει πιθανή διαδρομή !",
+  "nothingToDisplay": "Τίποτα δεν εμφανίζεται !"
 }

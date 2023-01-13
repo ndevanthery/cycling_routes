@@ -2,17 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-//______
-//TODO Add for Traduction
-// const String rideOnTitle = 'Ride';
-// const String firstOnboardTxt = "Welcome to RideOn. Let's find your way !";
-// const String secndOnboardTxt =
-//     "We help people finding the best road for their rides. ";
-// const String thirdOnboardTxt = "We notify you if there's trouble in the road.";
-// const String btnOnboardTxt = "Continue";
-// const String skipTxt = 'Skip information';
-//______
-
 //Constants Used accross app
 //Routes names
 const String baseRoute = '/';
@@ -26,7 +15,6 @@ const String openAboutBoxFull = "openAboutBox";
 const String openChangeEmailBoxSmall = "openChangeEmailBoxSmall";
 const String openChangePwdBoxSmall = "openChangePwdBoxSmall";
 const String openDeleteBoxSmall = "openDeleteBoxSmall";
-
 
 final RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 

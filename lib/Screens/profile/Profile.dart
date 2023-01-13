@@ -291,7 +291,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                      backgroundColor: const Color.fromRGBO(100, 100, 100, 1)),
                   icon: const Icon(Icons.camera),
                   onPressed: () {
                     takePhoto(ImageSource.camera);
@@ -300,7 +300,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                      backgroundColor: const Color.fromRGBO(100, 100, 100, 1)),
                   icon: const Icon(Icons.image),
                   onPressed: () {
                     takePhoto(ImageSource.gallery);

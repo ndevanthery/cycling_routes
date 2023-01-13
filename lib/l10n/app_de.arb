@@ -110,7 +110,14 @@
   "problemDetail": "Problem-Detail",
   "notifyTrouble": "Probleme melden",
   "describeYourProblem": "Ihr Problem beschreiben",
-  "birthday": "Geburtstag"
-
-
+  "birthday": "Geburtstag",
+  "rideOnTitle": "Reiten Sie",
+  "firstOnboardTxt": "Willkommen bei RideOn. Lassen Sie uns Ihren Weg finden!",
+  "secndOnboardTxt": "Wir helfen Menschen dabei, die beste Straße für ihre Fahrten zu finden.",
+  "thirdOnboardTxt": "Wir benachrichtigen Sie, wenn es Probleme auf der Straße gibt.",
+  "btnOnboardTxt": "Weiter",
+  "skipTxt": "Informationen überspringen",
+  "noRouteToSave": "keine Route zu speichern !",
+  "noPossibleRoute": "keine mögliche Route !",
+  "nothingToDisplay": "Nichts zu sehen!"
 }

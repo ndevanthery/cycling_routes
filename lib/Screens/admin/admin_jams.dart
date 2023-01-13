@@ -1,4 +1,3 @@
-import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Models/trafficjam_m.dart';
 import 'package:cycling_routes/Services/database.dart';
 import 'package:cycling_routes/Shared/components/loading.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:latlong2/latlong.dart';
 
 import '../map/mapView.dart';
 
@@ -54,7 +52,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
               AppLocalizations.of(context)!.toVerify,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ..._getJamsToVerify(),
@@ -74,17 +72,16 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
 
   _getJamsToVerify() {
     if (myJams
-            .where(((TrafficJamM element) => element.isValidated == false))
-            .length ==
-        0) {
+        .where(((TrafficJamM element) => element.isValidated == false))
+        .isEmpty) {
       return [
-        Container(
+        SizedBox(
           width: double.infinity,
           height: 200,
           child: Center(
               child: Text(
-            "Nothing to display",
-            style: TextStyle(fontStyle: FontStyle.italic),
+            AppLocalizations.of(context)!.nothingToDisplay,
+            style: const TextStyle(fontStyle: FontStyle.italic),
           )),
         )
       ];
@@ -136,7 +133,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 child: ListTile(
                   title: Text(
                     _checkLenghtDescription(e.description.toString()),
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                       "${DateFormat.yMMMMd(Get.locale!.languageCode).format(e.date!)}${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
@@ -164,17 +161,16 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
 
   _getJamsDisplayed() {
     if (myJams
-            .where(((TrafficJamM element) => element.isValidated == true))
-            .length ==
-        0) {
+        .where(((TrafficJamM element) => element.isValidated == true))
+        .isEmpty) {
       return [
-        Container(
+        SizedBox(
           width: double.infinity,
           height: 200,
           child: Center(
               child: Text(
-            "Nothing to display",
-            style: TextStyle(fontStyle: FontStyle.italic),
+            AppLocalizations.of(context)!.nothingToDisplay,
+            style: const TextStyle(fontStyle: FontStyle.italic),
           )),
         )
       ];
@@ -211,7 +207,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
                 child: ListTile(
                   title: Text(
                     _checkLenghtDescription(e.description.toString()),
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                       "${DateFormat.yMMMMd(Get.locale!.languageCode).format(e.date!)} ${AppLocalizations.of(context)!.at} ${e.date!.hour.toString().padLeft(2, '0')} ${e.date!.minute.toString().padLeft(2, '0')}"),
@@ -225,7 +221,7 @@ class _AdminJamsPageState extends State<AdminJamsPage> {
 
   _checkLenghtDescription(String descr) {
     String truncatedString =
-        descr.length > 50 ? descr.substring(0, 50) + '...' : descr;
+        descr.length > 50 ? '${descr.substring(0, 50)}...' : descr;
     return truncatedString;
   }
 }

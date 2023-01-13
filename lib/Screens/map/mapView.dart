@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:cycling_routes/Models/route_m.dart';
 import 'package:cycling_routes/Models/trafficjam_m.dart';
@@ -9,7 +8,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MapPage extends StatefulWidget {
@@ -26,7 +24,7 @@ class _MapPageState extends State<MapPage> {
   bool switchValue = false;
   bool isUnmount = false;
   List<LatLng> myRoute = [];
-  LatLng? _clicked = null;
+  LatLng? _clicked;
   List<TrafficJamM> jams = [];
 
   void _getCurrentLocation() async {
@@ -96,11 +94,10 @@ class _MapPageState extends State<MapPage> {
               minZoom: 9,
               maxZoom: 18,
               zoom: 9,
-              center: widget.focusPoint == null
-                  ? myRoute.isEmpty
+              center: widget.focusPoint ??
+                  (myRoute.isEmpty
                       ? LatLng(46.5480234, 6.4022017)
-                      : myRoute.first
-                  : widget.focusPoint,
+                      : myRoute.first),
               maxBounds: LatLngBounds(
                   LatLng(45.398181, 5.140242), LatLng(48.230651, 11.47757))),
           layers: [
@@ -149,7 +146,7 @@ class _MapPageState extends State<MapPage> {
               if (widget.focusPoint != null)
                 Marker(
                   point: widget.focusPoint!,
-                  builder: (context) => Icon(
+                  builder: (context) => const Icon(
                     Icons.warning,
                     size: 30,
                     color: Colors.red,
@@ -231,42 +228,6 @@ class _MapPageState extends State<MapPage> {
     );
   }
 
-  Future<List<LatLng>> _getRoute(List<LatLng> myRoute) async {
-    List<LatLng> myReturn = [];
-    if (myRoute == []) {
-      return myReturn;
-    }
-    List<String> myCoordinates =
-        myRoute.map((e) => '[ ${e.longitude} , ${e.latitude}]').toList();
-
-    log(myCoordinates.join(','));
-    var response = await http.post(
-        Uri.parse(
-            "https://api.openrouteservice.org/v2/directions/cycling-regular/geojson"),
-        headers: {
-          "Accept":
-              'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
-          "Content-Type": "application/json",
-          'Authorization':
-              '5b3ce3597851110001cf6248a744e0e2eadf4594b08f961125b1131d'
-        },
-        body: '{"coordinates":[ ${myCoordinates.join(',')}]}',
-        encoding: Encoding.getByName("utf-8"));
-
-    log('${response.statusCode}');
-    if (response.statusCode == 200) {
-      var jsonParsed = jsonDecode(response.body);
-      var feature = jsonParsed['features']!;
-
-      var coordinates = feature[0]['geometry']!['coordinates'];
-
-      for (int i = 0; i < coordinates.length; i++) {
-        myReturn.add(LatLng(coordinates[i][1], coordinates[i][0]));
-      }
-    }
-    return myReturn;
-  }
-
   Future<void> _dialNotifyProblem(uid) {
     TextEditingController myController = TextEditingController();
     return showDialog<void>(
@@ -327,7 +288,6 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> _dialProblem(TrafficJamM jam) {
-    TextEditingController myController = TextEditingController();
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {

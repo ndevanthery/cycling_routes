@@ -109,7 +109,15 @@
   "description": "Описание",
   "problemDetail": "детализация проблемы",
   "notifyTrouble": "уведомлять о проблемах",
-  "describeYourProblem": "опишите свою проблему"
-
-
+  "describeYourProblem": "опишите свою проблему",
+  "birthday": "день рождения",
+  "rideOnTitle": "Поездка",
+  "firstOnboardTxt": "Добро пожаловать на RideOn. Давайте найдем ваш путь!",
+  "secndOnboardTxt": "Мы помогаем людям найти лучшую дорогу для их поездок.",
+  "thirdOnboardTxt": "Мы оповещаем вас, если на дороге возникают проблемы.",
+  "btnOnboardTxt": "Продолжить",
+  "skipTxt": "Информация о пропуске",
+  "noRouteToSave": "нет маршрута для спасения!",
+  "noPossibleRoute": "нет возможного маршрута!",
+  "nothingToDisplay": "Нечего показывать!"
 }

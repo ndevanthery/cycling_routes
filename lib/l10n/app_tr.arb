@@ -109,7 +109,15 @@
   "description": "Açıklama",
   "problemDetail": "sorun detayı",
   "notifyTrouble": "sorun bi̇ldi̇ri̇n",
-  "describeYourProblem": "sorununuzu tanımlayın"
-
-
+  "describeYourProblem": "sorununuzu tanımlayın",
+  "birthday": "doğum günü",
+  "rideOnTitle": "Sürüş",
+  "firstOnboardTxt": "RideOn'a hoş geldiniz. Hadi yolunu bulalım!",
+  "secndOnboardTxt": "İnsanların sürüşleri için en iyi yolu bulmalarına yardımcı oluyoruz.",
+  "thirdOnboardTxt": "Yolda bir sorun olduğunda sizi bilgilendiriyoruz.",
+  "btnOnboardTxt": "Devam et",
+  "skipTxt": "Bilgileri atla",
+  "noRouteToSave": "Kaydedilecek rota yok!",
+  "noPossibleRoute": "Olası bir rota yok!",
+  "nothingToDisplay": "Gösterilecek bir şey yok!"
 }

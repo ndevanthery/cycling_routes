@@ -109,7 +109,15 @@
   "description": "Descriere",
   "problemDetail": "Detaliile problemei",
   "notifyTrouble": "notifică probleme",
-  "describeYourProblem": "descrieți problema dvs."
-
-
+  "describeYourProblem": "descrieți problema dvs.",
+  "birthday": "ziua de naștere",
+  "rideOnTitle": "Plimbare",
+  "firstOnboardTxt": "Bine ați venit la RideOn. Să vă găsim drumul!",
+  "secndOnboardTxt": "Îi ajutăm pe oameni să găsească cel mai bun drum pentru plimbările lor.",
+  "thirdOnboardTxt": "Vă anunțăm dacă există probleme pe drum.",
+  "btnOnboardTxt": "Continuați",
+  "skipTxt": "Săriți informațiile",
+  "noRouteToSave": "nici o rută de salvat !",
+  "noPossibleRoute": "nici o rută posibilă !",
+  "nothingToDisplay": "Nimic de afișat !"
 }

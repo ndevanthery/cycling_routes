@@ -109,7 +109,15 @@
   "description": "Popis",
   "problemDetail": "detail problému",
   "notifyTrouble": "oznámit potíže",
-  "describeYourProblem": "popište svůj problém"
-
-
+  "describeYourProblem": "popište svůj problém",
+  "birthday": "narozeniny",
+  "rideOnTitle": "Jízda",
+  "firstOnboardTxt": "Vítejte ve službě RideOn. Pojďme najít vaši cestu!",
+  "secndOnboardTxt": "Pomáháme lidem najít nejlepší cestu pro jejich jízdu.",
+  "thirdOnboardTxt": "Upozorníme vás, pokud se na silnici vyskytnou potíže.",
+  "btnOnboardTxt": "Pokračovat",
+  "skipTxt": "Přeskočit informace",
+  "noRouteToSave": "žádná trasa k uložení !",
+  "noPossibleRoute": "žádná možná trasa !",
+  "nothingToDisplay": "Není co zobrazit !"
 }

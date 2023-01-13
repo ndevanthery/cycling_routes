@@ -109,7 +109,15 @@
   "description": "Beskrivning",
   "problemDetail": "problemdetaljering",
   "notifyTrouble": "anmäla problem",
-  "describeYourProblem": "Beskriv ditt problem."
-
-
+  "describeYourProblem": "Beskriv ditt problem.",
+  "birthday": "födelsedag",
+  "rideOnTitle": "Ridning",
+  "firstOnboardTxt": "Välkommen till RideOn. Låt oss hitta din väg!",
+  "secndOnboardTxt": "Vi hjälper människor att hitta den bästa vägen för sina åk.",
+  "thirdOnboardTxt": "Vi meddelar dig om det finns problem på vägen.",
+  "btnOnboardTxt": "Fortsätt",
+  "skipTxt": "Hoppa över information",
+  "noRouteToSave": "ingen väg att spara !",
+  "noPossibleRoute": "ingen möjlig väg !",
+  "nothingToDisplay": "Inget att visa!"
 }

@@ -109,7 +109,15 @@
   "description": "Kuvaus",
   "problemDetail": "ongelman yksityiskohta",
   "notifyTrouble": "ilmoittaa ongelmista",
-  "describeYourProblem": "kuvaile ongelmasi"
-
-
+  "describeYourProblem": "kuvaile ongelmasi",
+  "birthday": "syntymäpäivä",
+  "rideOnTitle": "Ratsastaa",
+  "firstOnboardTxt": "Tervetuloa RideOniin. Etsitään tiesi !",
+  "secndOnboardTxt": "Autamme ihmisiä löytämään parhaan tien heidän kyydissään.",
+  "thirdOnboardTxt": "Ilmoitamme, jos tiellä on ongelmia.",
+  "btnOnboardTxt": "Jatka",
+  "skipTxt": "Ohita tiedot",
+  "noRouteToSave": "ei tallennettavaa reittiä !",
+  "noPossibleRoute": "ei mahdollista reittiä !",
+  "nothingToDisplay": "Ei mitään näytettävää !"
 }

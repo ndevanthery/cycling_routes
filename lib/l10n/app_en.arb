@@ -117,7 +117,10 @@
     "We help people finding the best road for their rides. ",
     "thirdOnboardTxt" : "We notify you if there's trouble in the road.",
     "btnOnboardTxt" : "Continue",
-    "skipTxt" : "Skip information"
+    "skipTxt" : "Skip information",
+    "noRouteToSave":"no route to save !",
+    "noPossibleRoute":"no possible route !",
+    "nothingToDisplay":"Nothing to display !"
 
 
 

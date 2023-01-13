@@ -109,7 +109,15 @@
   "description": "Beskrivelse",
   "problemDetail": "problemdetalje",
   "notifyTrouble": "anmelde problemer",
-  "describeYourProblem": "beskrive dit problem"
-
-
+  "describeYourProblem": "beskrive dit problem",
+  "birthday": "fødselsdag",
+  "rideOnTitle": "Tur",
+  "firstOnboardTxt": "Velkommen til RideOn. Lad os finde din vej!",
+  "secndOnboardTxt": "Vi hjælper folk med at finde den bedste vej til deres cykelture.",
+  "thirdOnboardTxt": "Vi giver dig besked, hvis der er problemer på vejen.",
+  "btnOnboardTxt": "Fortsæt",
+  "skipTxt": "Spring oplysninger over",
+  "noRouteToSave": "ingen rute at gemme !",
+  "noPossibleRoute": "ingen mulig rute !",
+  "nothingToDisplay": "Intet at vise !"
 }

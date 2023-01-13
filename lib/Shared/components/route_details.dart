@@ -68,7 +68,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                       ? Text(AppLocalizations.of(context)!.saveName)
                       : Text(AppLocalizations.of(context)!.editName),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                      backgroundColor: const Color.fromRGBO(100, 100, 100, 1)),
                 )
               : Container(),
           Padding(
@@ -185,7 +185,7 @@ class _RouteDetailsState extends State<RouteDetails> {
                             )));
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(100, 100, 100, 1)),
+                  backgroundColor: const Color.fromRGBO(100, 100, 100, 1)),
               child: Text(AppLocalizations.of(context)!.start)),
         ]),
       ),

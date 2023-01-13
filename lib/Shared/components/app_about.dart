@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppAbout extends StatefulWidget {
   const AppAbout({Key? key}) : super(key: key);
@@ -150,10 +151,26 @@ class _AppAboutState extends State<AppAbout> {
                   ),
                 ),
               ),
-              _buildPuce(mytext: 'rideon.hesso@gmail.com'),
+              /* _buildPuce(mytext: 'rideon.hesso@gmail.com'),
               const SizedBox(
                 height: 35,
-              ),
+              ), */
+              TextButton(
+                  onPressed: () async {
+                    String email =
+                        Uri.encodeComponent("rideon.hesso@gmail.com");
+                    String subject = Uri.encodeComponent("");
+                    String body = Uri.encodeComponent("Hello Rideon , \n");
+                    print(subject); //output: Hello%20Flutter
+                    Uri mail =
+                        Uri.parse("mailto:$email?subject=$subject&body=$body");
+                    if (await launchUrl(mail)) {
+                      //email app opened
+                    } else {
+                      //email app is not opened
+                    }
+                  },
+                  child: Text(AppLocalizations.of(context)!.contactUs)),
               Center(
                 child: Text(
                   AppLocalizations.of(context)!.thankYou,
@@ -191,7 +208,7 @@ class _AppAboutState extends State<AppAbout> {
           children: [
             const TextSpan(
               text: "• ",
-              style:  TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
               ),
             ),

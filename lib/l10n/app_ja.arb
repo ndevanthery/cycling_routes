@@ -109,7 +109,15 @@
   "description": "商品説明",
   "problemDetail": "もんだいじょうほう",
   "notifyTrouble": "とりしらべる",
-  "describeYourProblem": "問題を説明する"
-
-
+  "describeYourProblem": "問題を説明する",
+  "birthday": "誕生日",
+  "rideOnTitle": "ライド",
+  "firstOnboardTxt": "RideOnへようこそ。あなたの道を探そう !",
+  "secndOnboardTxt": "ライディングに最適な道を探すお手伝いをします。",
+  "thirdOnboardTxt": "道路にトラブルが発生した場合、お知らせします。",
+  "btnOnboardTxt": "継続",
+  "skipTxt": "情報をスキップする",
+  "noRouteToSave": "保存するルートがない！？",
+  "noPossibleRoute": "ルートがない",
+  "nothingToDisplay": "表示するものがない！？"
 }
