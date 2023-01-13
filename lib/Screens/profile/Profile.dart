@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Shared/constants.dart';
 
@@ -17,8 +18,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  PickedFile? imageFile;
+  String? imageFileUrl;
   final ImagePicker _picker = ImagePicker();
+
+  @override
+  void initState() {
+    SharedPreferences.getInstance().then((value) => setState(() {
+          imageFileUrl = value.getString('profilePic');
+        }));
+
+    super.initState();
+  }
 
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
@@ -250,9 +260,9 @@ class _ProfilePageState extends State<ProfilePage> {
       CircleAvatar(
           radius: 90,
           // ignore: unnecessary_null_comparison
-          backgroundImage: imageFile == null
+          backgroundImage: imageFileUrl == null
               ? const AssetImage("assets/profile_pic.png") as ImageProvider
-              : FileImage(File(imageFile!.path))),
+              : FileImage(File(imageFileUrl!))),
       Positioned(
         bottom: 30.0,
         right: 30.0,
@@ -314,12 +324,15 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void takePhoto(ImageSource source) async {
+    var sharedPrefs = await SharedPreferences.getInstance();
+
     // ignore: deprecated_member_use
     final pickedFile = await _picker.getImage(
       source: source,
     );
     setState(() {
-      imageFile = pickedFile!;
+      imageFileUrl = pickedFile!.path;
+      sharedPrefs.setString('profilePic', imageFileUrl!);
     });
   }
 }
