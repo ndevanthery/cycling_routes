@@ -123,7 +123,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                               fillColor: widget.isDelete
                                   ? Colors.grey[350]
                                   : Colors.white,
-                              hintText: loginManager.getUser()!.email,
+                              hintText: loginManager.getUser()?.email ?? '',
                               prefixIcon: const Icon(
                                 Icons.mail_outline,
                                 color: Colors.black,
@@ -161,7 +161,7 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                                 color: Colors.black,
                               ),
                               onPressed: () {
-                                // Update the state i.e. toogle the state of passwordVisible variable
+                                // toogle the state of passwordVisible variable
                                 setState(() {
                                   _oldpwdVisible = !_oldpwdVisible;
                                 });
@@ -188,8 +188,6 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                         const SizedBox(
                           height: 3.0,
                         ),
-
-                        //Update of User
                       ],
                     ),
                   ),
@@ -200,7 +198,8 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500), backgroundColor: Colors.grey[400],
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                  backgroundColor: Colors.grey[400],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -216,7 +215,9 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600), backgroundColor: widget.isDelete ? Colors.red[300] : Colors.grey[500],
+                      color: Colors.white, fontWeight: FontWeight.w600),
+                  backgroundColor:
+                      widget.isDelete ? Colors.red[300] : Colors.grey[500],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -236,12 +237,13 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
 
                     final ExceptionStatus status;
 
-                    //Call function to sign in the user into firebase Authentication
-                    //AND Creating its document into firestore
+                    
                     if (widget.isDelete) {
+                      //Delete the account and the user's document
                       status = await loginManager.deleteAccount(
                           user: myUser, password: _oldPwdController.text);
                     } else {
+                      //Update Credentials
                       status = await loginManager.updateCredentials(
                           user: myUser,
                           password: _oldPwdController.text,
@@ -264,16 +266,20 @@ class _DialogChangeEmailState extends State<DialogChangeEmail> {
                           });
                           Future.delayed(const Duration(seconds: 5), () {
                             log('back to settings after 5 seconds');
-                            context.pop();
+                            Navigator.of(context).pop();
                           });
                         } else {
+                          setState(() {
+                            isLoading = false;
+                          });
                           log('User Deleted');
+                          Navigator.of(context).pop();
                           context.goNamed(baseRoute);
                         }
                       });
                     } else {
-                      final newError =
-                          ExceptionHandler.generateErrorMessage(context,status);
+                      final newError = ExceptionHandler.generateErrorMessage(
+                          context, status);
                       updateError(newError, true);
                       setState(() {
                         isLoading = false;

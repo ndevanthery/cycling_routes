@@ -124,9 +124,6 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        // SizedBox(
-        //   height: 10,
-        // ),
         Expanded(
           flex: 5,
           child: GridView.count(
@@ -170,21 +167,6 @@ class _SearchPageState extends State<SearchPage> {
           .allRoutes
           .where((routes) =>
               routes.name!.toLowerCase().contains(inputText.toLowerCase()))
-          .toList();
-    }
-
-    resetList(results);
-  }
-
-  void runShowOnlyFavs(bool showFavs, Function resetList) {
-    List<RouteM> results = [];
-
-    if (!showFavs) {
-      results = _SearchPageState().allRoutes;
-    } else {
-      results = _SearchPageState()
-          .allRoutes
-          .where((routes) => routes.isFav == true)
           .toList();
     }
 

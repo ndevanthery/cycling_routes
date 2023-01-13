@@ -45,7 +45,7 @@ class _WrapperState extends State<Wrapper> {
     Auth loginManager = Provider.of<Auth>(context, listen: true);
     if (firstLaunch != 0) {
       log('Show Onboarding');
-      //Otherwise it shows the onboarding pages
+      //then it shows the onboarding pages
       return Onboarding(
         setFirstLaunch: (value) {
           setState(() {
